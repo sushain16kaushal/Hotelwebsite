@@ -1,0 +1,33 @@
+{
+    "hero":{
+        "title":"Euphoria Hotel",
+        "subtitle":"Collect Moments,not things",
+        "navbar":{
+            "home":"Home",
+            "room":"Rooms",
+            "Dining":"Dining",
+            "booking":"Booking",
+            "contact":"Contact"
+        }
+    },
+    "gallery":[{
+        "id":1,
+        "url":"https://images.pexels.com/photos/29649745/pexels-photo-29649745.jpeg"
+    },
+{
+        "id":2,
+        "url":"https://images.pexels.com/photos/6466295/pexels-photo-6466295.jpeg"
+    },
+{
+        "id":3,
+        "url":"https://images.pexels.com/photos/5371582/pexels-photo-5371582.jpeg"
+    },
+{
+        "id":4,
+        "url":"https://images.pexels.com/photos/34618647/pexels-photo-34618647.jpeg"
+    },
+{
+        "id":5,
+        "url":"https://images.pexels.com/photos/29532567/pexels-photo-29532567.jpeg"
+    }]
+}
