@@ -12,7 +12,7 @@ if (loading) return <p>Loading content...</p>;
 if (error) return <p>its an error:- {error}</p>;
 if(!data || !data.gallery) return <p>no images</p>
 return(
-    <div className="w-150 h-50 m-auto pt-10 mySwiper">
+    <div className="w-125 h-50 m-auto pt-10 mySwiper">
         <Swiper
         effect={"cards"}
         grabCursor={true}
@@ -31,8 +31,8 @@ return(
       ))}
      </Swiper>
 <div className="flex gap-4 justify-center mt-5">
-<button className="prev-btn bg-gray-200 p-2">Prev</button>
-<button className="next-btn bg-gray-200 p-2">Next</button>
+<button className="prev-btn px-8 py-3 rounded-full font-semibold text-slate-900 bg-linear-to-r from-[#bfa76a] to-[#d4af37] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden cursor-pointer">Prev</button>
+<button className="next-btn px-8 py-3 rounded-full font-semibold text-slate-900 bg-linear-to-r from-[#bfa76a] to-[#d4af37] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden cursor-pointer">Next</button>
 </div>
     </div>
 );
@@ -41,7 +41,7 @@ return(
 function Homepage() {
     return (
         <>
-        <h1>Homepage</h1>
+        <h2 className="text-center text-2xl text-amber-700 mt-9">Every corner whispers elegance</h2>
         <CascadeSlider />
         </>
     )

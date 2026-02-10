@@ -3,3 +3,6 @@
 @import "swiper/css/navigation";
 @import "tailwindcss";
 
+body{
+    background:linear-gradient(135deg, #fffaf0, #f5efe6);
+}
