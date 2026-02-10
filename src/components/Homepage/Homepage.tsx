@@ -12,7 +12,7 @@ if (loading) return <p>Loading content...</p>;
 if (error) return <p>its an error:- {error}</p>;
 if(!data || !data.gallery) return <p>no images</p>
 return(
-    <div className="w-200 h-100 m-auto pt-10 mySwiper">
+    <div className="w-150 h-50 m-auto pt-10 mySwiper">
         <Swiper
         effect={"cards"}
         grabCursor={true}
@@ -23,11 +23,10 @@ return(
       }}
      >
       {data?.gallery.map((item)=>(
-        <SwiperSlide key={item.id} className="border-r-20 overflow-hidden w-75 h-100 ">
+        <SwiperSlide key={item.id} className=" aspect-square rounded-2xl overflow-hidden  ">
             <img
-            src={item.url} alt="Hotel Gallery" className="w-full h-100 object-contain " 
-            onLoad={() => console.log("Image Loaded")} // Debugging line
-      onError={(e) => console.log("Image Error", e)}/>
+            src={item.url} alt="Hotel Gallery" className="w-full h-full object-cover " 
+           />
         </SwiperSlide>
       ))}
      </Swiper>
