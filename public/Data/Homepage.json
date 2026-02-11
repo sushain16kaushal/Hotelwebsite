@@ -1,7 +1,7 @@
 {
     "hero":{
         "title":"Euphoria Hotel",
-        "subtitle":"Collect Moments,not things",
+        "subtitle":"Collect Moments,Not Things",
         "navbar":{
             "home":"Home",
             "room":"Rooms",
@@ -41,5 +41,19 @@
 {
     "id":8,
     "url":"https://images.pexels.com/photos/14011101/pexels-photo-14011101.jpeg"
-}]
+}],
+  "Offers":[{
+    "id":"1",
+  "title":"valentine's day",
+  "url":"",
+  "description":"fjkkjfkjkfskjdfkdskfhskfh",
+  "price":"$150"
+  },
+{
+    "id":"2",
+  "title":"valentine's day",
+  "url":"",
+  "description":"fjkkjfkjkfskjdfkdskfhskfh",
+  "price":"$150"
+  }]  
 }

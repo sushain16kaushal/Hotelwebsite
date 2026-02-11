@@ -3,7 +3,13 @@ export interface photos{
     url:string;
   
 }
-
+export interface offer{
+    id:number,
+    title:string,
+  url:string,
+  description:string,
+  price:number
+}
 
 
 export interface ContentData{
@@ -20,7 +26,7 @@ navbar:{
 }
   },
   gallery: photos[];
+  Offers:offer[];
 }
-
 
 
