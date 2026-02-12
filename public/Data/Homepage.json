@@ -43,17 +43,38 @@
     "url":"https://images.pexels.com/photos/14011101/pexels-photo-14011101.jpeg"
 }],
   "Offers":[{
-    "id":"1",
-  "title":"valentine's day",
-  "url":"",
-  "description":"fjkkjfkjkfskjdfkdskfhskfh",
-  "price":"$150"
+    "id": "1",
+    "title": "Romantic Escape",
+    "url": "https://images.pexels.com/photos/262882/pexels-photo-262882.jpeg",
+    "description": "Indulge in a candle-lit dinner, rose petal room decor, and a bottle of premium champagne on arrival.",
+    "price": "$299"
   },
-{
-    "id":"2",
-  "title":"valentine's day",
-  "url":"",
-  "description":"fjkkjfkjkfskjdfkdskfhskfh",
-  "price":"$150"
+  {
+    "id": "2",
+    "title": "Weekend Wellness Retrat",
+    "url": "https://images.pexels.com/photos/3997995/pexels-photo-3997995.jpeg",
+    "description": "Rejuvenate your soul with unlimited spa access, guided yoga sessions, and organic gourmet breakfast.",
+    "price": "$180"
+  },
+  {
+    "id": "3",
+    "title": "Business Traveller Plus",
+    "url": "https://images.pexels.com/photos/35568870/pexels-photo-35568870.jpeg",
+    "description": "Enjoy high-speed Wi-Fi, complimentary airport transfers, and express laundry services for a seamless stay.",
+    "price": "$150"
+  },
+  {
+    "id": "4",
+    "title": "Family Fun Vacation",
+    "url": "https://images.pexels.com/photos/3807332/pexels-photo-3807332.jpeg",
+    "description": "Kids stay and eat for free! Includes access to the water park, kids' club activities, and family suites.",
+    "price": "$450"
+  },
+  {
+    "id": "5",
+    "title": "Summer Early Bird",
+    "url": "https://images.pexels.com/photos/9119759/pexels-photo-9119759.jpeg",
+    "description": "Book 30 days in advance to unlock exclusive discounts on luxury suites and rooftop pool access.",
+    "price": "$120"
   }]  
 }

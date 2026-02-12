@@ -46,15 +46,18 @@ return(
 function Homepage() {
     return (
         <>
-        <div className="flex flex-col gap-2 min-h-screen">
+        <div className="min-h-screen">
         <div>
         <h2 className="text-center text-2xl text-amber-700 mt-9">Every corner whispers elegance</h2>
         </div>
-        <div className="w-full relative z-10 overflow-visible">
+        <div className="w-full relative! z-10 overflow-visible">
         <CascadeSlider />
         </div>
-        <div className="w-full relative z-0 mt-20">
+        <div className="w-full relative! z-0 mt-65">
+          <h2 className="text-3xl text-center text-amber-700">Our offers</h2>
+          <div className="flex m-3">
         <OfferCard/>
+        </div>
         </div>
         </div>
         
