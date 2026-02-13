@@ -13,7 +13,7 @@ if (loading) return <p>Loading content...</p>;
 if (error) return <p>its an error:- {error}</p>;
 if(!data || !data.gallery) return <p>no images</p>
 return(
-    <div className="relative z-10 w-125 h-100 m-auto pt-10 pb-40 mySwiper">
+    <div className="relative z-10 w-125 h-100 m-auto pt-10 pb-40 mySwiper  ">
         <Swiper
         effect={"cards"}
         grabCursor={true}
@@ -28,7 +28,7 @@ return(
       }}
      >
       {data?.gallery.map((item)=>(
-        <SwiperSlide key={item.id} className=" aspect-square rounded-2xl overflow-visible  ">
+        <SwiperSlide key={item.id} className=" aspect-square rounded-2xl overflow-hidden">
             <img
             src={item.url} alt="Hotel Gallery" className="w-full h-full object-cover " 
            />
@@ -50,12 +50,12 @@ function Homepage() {
         <div>
         <h2 className="text-center text-2xl text-amber-700 mt-9">Every corner whispers elegance</h2>
         </div>
-        <div className="w-full relative! z-10 overflow-visible">
+        <div className="w-full  z-10 overflow-visible">
         <CascadeSlider />
         </div>
-        <div className="w-full relative! z-0 mt-65">
+        <div className="w-full  z-0 mt-65">
           <h2 className="text-3xl text-center text-amber-700">Our offers</h2>
-          <div className="flex m-3">
+          <div className="flex m-3 w-full">
         <OfferCard/>
         </div>
         </div>
