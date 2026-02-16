@@ -8,7 +8,9 @@ const useFetchcontent=(url: string)=>{
     const [error,setError]=useState<string | null>(null);
 
     useEffect(()=>{
+        const controller=new AbortController();
         const fetchdata = async ()=>{
+            setLoading(true);
             try{const response =await fetch(url);
             if(!response.ok){
                 throw new Error('network response is not ok');
@@ -21,7 +23,9 @@ const useFetchcontent=(url: string)=>{
             setLoading(false);
         }};
         fetchdata();
-      
+      return ()=>{
+controller.abort();
+      };
     }, [url]);
     return{data,loading,error};
 };

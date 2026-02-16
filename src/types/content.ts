@@ -10,7 +10,12 @@ export interface offer{
   description:string,
   price:number
 }
-
+export interface reviews{
+  id:number,
+  name:string,
+  text:string,
+  rating:number,
+}
 
 export interface ContentData{
     
@@ -27,6 +32,7 @@ navbar:{
   },
   gallery: photos[];
   Offers:offer[];
+  Reviews:reviews[];
 }
 
 

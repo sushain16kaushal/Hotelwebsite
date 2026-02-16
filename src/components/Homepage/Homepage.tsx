@@ -5,7 +5,8 @@ import type React from "react"
 import { EffectCards, Navigation } from "swiper/modules"
 import { Swiper, SwiperSlide  } from "swiper/react"
 import OfferCard from "./OfferCard";
-
+import Review from "./Review";
+import {motion} from "framer-motion"
 
 export const CascadeSlider:React.FC=()=>{
      const{data,loading,error}=useFetchcontent("public/Data/Homepage.json")
@@ -30,8 +31,7 @@ return(
       {data?.gallery.map((item)=>(
         <SwiperSlide key={item.id} className=" aspect-square rounded-2xl overflow-hidden">
             <img
-            src={item.url} alt="Hotel Gallery" className="w-full h-full object-cover " 
-           />
+            src={item.url} alt="Hotel Gallery" className="w-full h-full object-cover" />
         </SwiperSlide>
       ))}
      </Swiper>
@@ -42,25 +42,41 @@ return(
     </div>
 );
 };
+const scrollReveal:object = {
+    initial: { opacity: 0, y: 50 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.8, ease: "easeOut" },
+    viewport: { once: true, amount: 0.8 }
+  };
 
-function Homepage() {
+const Homepage=()=>{
     return (
+      
         <>
+    
         <div className="min-h-screen">
+             <motion.div {...scrollReveal}>
         <div>
-        <h2 className="text-center text-2xl text-amber-700 mt-9">Every corner whispers elegance</h2>
+        <h2 className="text-center text-2xl text-gray-700 mt-9">Every corner whispers elegance</h2>
         </div>
         <div className="w-full  z-10 overflow-visible">
         <CascadeSlider />
         </div>
+        </motion.div>
+        <motion.div {...scrollReveal}>
         <div className="w-full  z-0 mt-65">
-          <h2 className="text-3xl text-center text-amber-700">Our offers</h2>
+          <h2 className="text-3xl text-center text-gray-700">Our offers</h2>
           <div className="flex m-3 w-full">
         <OfferCard/>
         </div>
         </div>
+        </motion.div>
+         <motion.div {...scrollReveal}>
+        <div>
+          <Review/>
         </div>
-        
+        </motion.div>
+        </div>
         </>
     )
 }
