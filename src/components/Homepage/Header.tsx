@@ -2,7 +2,7 @@ import useFetchcontent from "../../Hooks/useFetchcontent"
 import { NavLink } from "react-router-dom";
 
 function Header() {
-    const{data,loading,error}=useFetchcontent("public/Data/Homepage.json")
+    const{data,loading,error}=useFetchcontent("/Data/Homepage.json")
 if (loading) return <p>Loading content...</p>;
 if (error) return <p>its an error:- {error}</p>;
 

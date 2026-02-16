@@ -11,14 +11,20 @@ const useFetchcontent=(url: string)=>{
         const controller=new AbortController();
         const fetchdata = async ()=>{
             setLoading(true);
-            try{const response =await fetch(url);
+            try{const response =await fetch(url,{signal:controller.signal});
             if(!response.ok){
                 throw new Error('network response is not ok');
             }
             const result=await response.json();
             setData(result);
+            setError(null);
         } catch(err:any){
-            setError(err.message);
+            if(err.name ==='AbortError')
+            {
+                console.log("Fetch Aborted");
+            }else{
+                setError(err.message);
+            }
         }finally{
             setLoading(false);
         }};

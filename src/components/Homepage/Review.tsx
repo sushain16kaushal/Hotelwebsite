@@ -30,7 +30,7 @@ transition:{duration:0.3}
 
 
 const Review=()=>{
- const{data,loading,error}=useFetchcontent("public/Data/Homepage.json")
+ const{data,loading,error}=useFetchcontent("/Data/Homepage.json")
 if (loading) return <p>Loading content...</p>;
 if (error) return <p>its an error:- {error}</p>;
 if(!data || !data.Offers) return <p>no offers</p>

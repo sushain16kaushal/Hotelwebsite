@@ -12,68 +12,65 @@
     },
     "gallery":[{
         "id":1,
-        "url":"Images/Hero Section/pexels-photo-167533-compressed.jpg"
+        "url":"/Images/HeroSection/pexels-photo-5371582-compressed.webp"
     },
+
 {
         "id":2,
-        "url":"Images/Hero Section/pexels-photo-5371582-compressed.jpg"
+        "url":"/Images/HeroSection/pexels-photo-6466295-compressed.webp"
     },
 {
         "id":3,
-        "url":"Images/Hero Section/pexels-photo-6466295-compressed.jpg"
+        "url":"/Images/HeroSection/pexels-photo-6474527-compressed.webp"
     },
 {
         "id":4,
-        "url":"Images/Hero Section/pexels-photo-6474527-compressed.jpg"
+        "url":"/Images/HeroSection/pexels-photo-14011101-compressed.jpg"
     },
 {
-        "id":5,
-        "url":"Images/Hero Section/pexels-photo-14011101-compressed.jpg"
-    },
+    "id":5,
+    "url":"/Images/HeroSection/pexels-photo-29532567-compressed.jpg"
+},
 {
     "id":6,
-    "url":"Images/Hero Section/pexels-photo-29532567-compressed.jpg"
+    "url":"/Images/HeroSection/pexels-photo-29649745-compressed.webp"
 },
 {
     "id":7,
-    "url":"Images/Hero Section/pexels-photo-29649745-compressed.jpg"
-},
-{
-    "id":8,
-    "url":"Images/Hero Section/pexels-photo-34618647-compressed.jpg"
+    "url":"/Images/HeroSection/pexels-photo-34618647-compressed.jpg"
 }],
   "Offers":[{
     "id": "1",
     "title": "Romantic Escape",
-    "url": "Images/Offers/pexels-photo-262882-compressed.jpg",
+    "url": "/Images/Offers/pexels-photo-262882-compressed.webp",
     "description": "Indulge in a candle-lit dinner, rose petal room decor, and a bottle of premium champagne on arrival.",
     "price": "$299"
   },
   {
     "id": "2",
     "title": "Weekend Wellness Retrat",
-    "url": "Images/Offers/pexels-photo-3997995-compressed.jpg",
+    "url": "/Images/Offers/pexels-photo-3997995-compressed.webp",
     "description": "Rejuvenate your soul with unlimited spa access, guided yoga sessions, and organic gourmet breakfast.",
     "price": "$180"
   },
   {
     "id": "3",
     "title": "Business Traveller Plus",
-    "url": "Images/Offers/pexels-photo-35568870-compressed.jpg",
+    "url": "/Images/Offers/pexels-photo-35568870-compressed.webp",
     "description": "Enjoy high-speed Wi-Fi, complimentary airport transfers, and express laundry services for a seamless stay.",
     "price": "$150"
   },
   {
     "id": "4",
     "title": "Family Fun Vacation",
-    "url": "Images/Offers/pexels-photo-3807332-compressed.jpg",
+    "url": "/Images/Offers/pexels-photo-3807332-compressed.webp",
     "description": "Kids stay and eat for free! Includes access to the water park, kids' club activities, and family suites.",
     "price": "$450"
   },
   {
     "id": "5",
     "title": "Summer Early Bird",
-    "url": "Images/Offers/pexels-photo-9119759-compressed.jpg",
+    "url": "/Images/Offers/pexels-photo-9119759-compressed.webp",
     "description": "Book 30 days in advance to unlock exclusive discounts on luxury suites and rooftop pool access.",
     "price": "$120"
   }] ,
