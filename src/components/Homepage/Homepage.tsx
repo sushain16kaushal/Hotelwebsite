@@ -24,10 +24,7 @@ return(
         loop={false}
         rewind={false}
         lazyPreloadPrevNext={1}
-      navigation={{
-        nextEl:'.next-btn',
-        prevEl:'.prev-btn'
-      }}
+      navigation={true}
       cardsEffect={{
         slideShadows:false,
         rotate:true,
@@ -36,14 +33,11 @@ return(
       {data?.gallery.filter(item=>item.url).map((item,index)=>(
         <SwiperSlide key={item.id} className=" aspect-square rounded-2xl overflow-hidden">
             <img
-            src={item.url} alt="Hotel Gallery" width="400" height="400" className="w-full h-full object-cover" loading={index === 0 ? "eager":"lazy" } />
+            src={item.url} alt="Hotel Gallery" width="400" height="400" className="w-full h-full object-cover" loading={index < 2 ? "eager":"lazy" } {...(index < 2 ? { fetchPriority: "high" } : {})}/>
         </SwiperSlide>
       ))}
      </Swiper>
-<div className="flex gap-4 justify-center mt-8">
-<button className="prev-btn px-8 py-3 rounded-full font-semibold text-slate-900 bg-linear-to-r from-[#bfa76a] to-[#d4af37] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden cursor-pointer">Prev</button>
-<button className="next-btn px-8 py-3 rounded-full font-semibold text-slate-900 bg-linear-to-r from-[#bfa76a] to-[#d4af37] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden cursor-pointer">Next</button>
-</div>
+
     </div>
 );
 };
@@ -63,7 +57,7 @@ const Homepage=()=>{
         </div>
         <div className="w-full  z-0 mt-65">
           <h2 className="text-3xl text-center text-gray-700">Our offers</h2>
-          <div className="flex m-3 w-full">
+          <div className="flex my-3 w-full p-10">
         <OfferCard/>
         </div>
         </div>
