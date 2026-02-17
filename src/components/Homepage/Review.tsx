@@ -1,7 +1,7 @@
 
 import type{ Variants } from 'framer-motion';
 import { motion} from 'framer-motion';
-import useFetchcontent from '../../Hooks/useFetchcontent';
+import type{ reviews } from '../../types/content';
 import type { JSX } from 'react';
 const containerVariants:Variants={
     hidden:{opacity:0},
@@ -30,11 +30,8 @@ transition:{duration:0.3}
 
 
 
-const Review=():JSX.Element=>{
- const{data,loading,error}=useFetchcontent("/Data/Homepage.json")
-if (loading) return <p>Loading content...</p>;
-if (error) return <p>its an error:- {error}</p>;
-if(!data || !data.Offers) return <p>no offers</p>
+const Review=({reviews}:{reviews:reviews[]}):JSX.Element=>{
+ 
     return(
         <>
         <section className='p-6 md:p-10 h-auto m-4 md:m-10 rounded-3xl hover:translate-y-1 bg-emerald-100 overflow-hidden shadow-inner'>
@@ -46,7 +43,7 @@ if(!data || !data.Offers) return <p>no offers</p>
         whileInView="visible" 
         viewport={{ once: true }} 
       >
-        {data.Reviews.map((review) => (
+        {reviews.map((review) => (
           <motion.div 
             key={review.id}
             variants={cardVariants}

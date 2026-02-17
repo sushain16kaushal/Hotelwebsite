@@ -1,6 +1,6 @@
 
 
-import useFetchcontent from '../../Hooks/useFetchcontent';
+import type{ offer } from '../../types/content';
 import {Swiper} from 'swiper/react';
 import { Autoplay, Navigation,Pagination } from 'swiper/modules';
 import { SwiperSlide } from 'swiper/react';
@@ -10,14 +10,11 @@ import type { JSX } from 'react';
 
 
 
-const OfferCard=():JSX.Element=>{
-     const{data,loading,error}=useFetchcontent("/Data/Homepage.json")
-if (loading) return <p>Loading content...</p>;
-if (error) return <p>its an error:- {error}</p>;
-if(!data || !data.Offers) return <p>no offers</p>
+const OfferCard=({offers}:{offers:offer[]}):JSX.Element=>{
+
 return(
 <>
-<div className='w-screen my-2 h-auto p-10 bg-[#fdfaf5] overflow-hidden  '>
+<div className='w-screen my-2 h-auto p-10 bg-[#fdfaf5] overflow-hidden rounded-2xl '>
      <Swiper modules={[Navigation,Pagination,Autoplay]}
      centeredSlides={true}
      loop={true}
@@ -43,12 +40,12 @@ return(
           }
      }
      className="mySwiper pb-16 px-5">
-{data?.Offers.map((item)=>(
+{offers.map((item)=>(
      <SwiperSlide key={item.id} className='transition-all duration-500'>
    {({ isActive }) => (
      
               <div className={`
-                relative flex flex-col border border-[#eaddca] rounded-2xl p-6 
+                relative flex flex-col border border-[#eaddca]  p-6 
                 transition-all duration-700 ease-in-out
                 ${isActive 
                   ? 'bg-white scale-105 shadow-[0_20px_50px_rgba(180,150,100,0.4)] opacity-100 blur-0 z-10' 

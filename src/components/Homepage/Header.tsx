@@ -1,33 +1,30 @@
-import useFetchcontent from "../../Hooks/useFetchcontent"
+import type{ Herodata } from "../../types/content";
 import { NavLink } from "react-router-dom";
 
-function Header() {
-    const{data,loading,error}=useFetchcontent("/Data/Homepage.json")
-if (loading) return <p>Loading content...</p>;
-if (error) return <p>its an error:- {error}</p>;
-
+function Header({hero}:{hero:Herodata}) {
+   
     return (
      <div>
-        {data && (
+        {hero && (
      <section>
-        <h1 className="text-3xl text-neutral-900 text-center mt-1">{data.hero.title}</h1>
-        <h2 className="text-2xl text-neutral-700 text-center mt-1.5">{data.hero.subtitle}</h2>
+        <h1 className="text-3xl text-neutral-900 text-center mt-1">{hero.title}</h1>
+        <h2 className="text-2xl text-neutral-700 text-center mt-1.5">{hero.subtitle}</h2>
         <div className="flex justify-evenly mt-4">
          <NavLink to={"/"} className={({isActive})=>
          `duration-200 ${isActive ? "text-amber-700" : "text-gray-400"} hover:bg-transparent hover:text-orange`
-         }>{data.hero.navbar.home}</NavLink>
+         }>{hero.navbar.home}</NavLink>
           <NavLink to={"/room"} className={({isActive})=>
          `duration-200 ${isActive ? "text-amber-700" : "text-gray-400"} hover:bg-transparent hover:text-orange`
-         }>{data.hero.navbar.room}</NavLink>
+         }>{hero.navbar.room}</NavLink>
             <NavLink to={"/dining"} className={({isActive})=>
          `duration-200 ${isActive ? "text-amber-700" : "text-gray-400"} hover:bg-transparent hover:text-orange`
-         }>{data.hero.navbar.Dining}</NavLink>
+         }>{hero.navbar.Dining}</NavLink>
              <NavLink to={"/booking"} className={({isActive})=>
          `duration-200 ${isActive ? "text-amber-700" : "text-gray-400"} hover:bg-transparent hover:text-orange`
-         }>{data.hero.navbar.booking}</NavLink>
+         }>{hero.navbar.booking}</NavLink>
              <NavLink to={"/contact"} className={({isActive})=>
          `duration-200 ${isActive ? "text-amber-700" : "text-gray-400"} hover:bg-transparent hover:text-orange`
-         }>{data.hero.navbar.contact}</NavLink>
+         }>{hero.navbar.contact}</NavLink>
         </div>
      </section>
         )}
