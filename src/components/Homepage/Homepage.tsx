@@ -16,7 +16,7 @@ if (loading) return <p>Loading content...</p>;
 if (error) return <p>its an error:- {error}</p>;
 if(!data || !data.gallery) return <p>no images</p>
 return(
-    <div className="relative z-10 w-125 h-100 min-h-100 m-auto pt-10 pb-40 mySwiper  ">
+    <div className="relative z-10 w-[85%] sm:w-100 aspect-square min-h-100 m-auto  mb-10 mySwiper  ">
         <Swiper
         effect={"cards"}
         grabCursor={true}
@@ -28,7 +28,10 @@ return(
       cardsEffect={{
         slideShadows:false,
         rotate:true,
+        perSlideOffset:8,
+        perSlideRotate:2,
       }}
+      className="mySwiper h-full w-full"
      >
       {data?.gallery.filter(item=>item.url).map((item,index)=>(
         <SwiperSlide key={item.id} className=" aspect-square rounded-2xl overflow-hidden">
@@ -49,20 +52,19 @@ const Homepage=()=>{
         <>
     
         <div className="min-h-screen">
-        <div>
-        <h2 className="text-center text-2xl text-gray-700 mt-9">Every corner whispers elegance</h2>
+        <div className="py-10">
+        <h2 className="text-center text-xl md:text-2xl text-gray-700 px-4 ">Every corner whispers elegance</h2>
         </div>
-        <div className="w-full  z-10 overflow-visible min-h-100">
+        <div className="w-full  z-10 overflow-hidden px-4">
         <CascadeSlider />
         </div>
-        <div className="w-full  z-0 mt-65">
-          <h2 className="text-3xl text-center text-gray-700">Our offers</h2>
-          <div className="flex my-3 w-full p-10">
+        <div className="w-full  z-0 mt-10 md:mt-24">
+          <h2 className="text-2xl md:text-3xl text-center text-gray-800 font-serif">Our offers</h2>
+          <div className="flex my-3 w-full p-4 md:p-10">
         <OfferCard/>
         </div>
         </div>
-       
-        <div>
+        <div className="pb-10">
           <Review/>
         </div>
         </div>
