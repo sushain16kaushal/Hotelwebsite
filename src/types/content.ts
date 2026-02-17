@@ -33,6 +33,10 @@ navbar:{
   gallery: photos[];
   Offers:offer[];
   Reviews:reviews[];
+  Footer:{
+    text1:string,
+    text2:string
+  }
 }
 
 

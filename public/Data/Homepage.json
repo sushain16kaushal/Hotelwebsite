@@ -91,4 +91,9 @@
   { "id": 14, "name": "Nisha", "text": "Clean rooms and tasty food. Enjoyed a lot.", "rating": 4 },
   { "id": 15, "name": "Manish", "text": "One of the best hotels I’ve stayed in. Superb service!", "rating": 5 }
 ]
+,
+"Footer":{
+    "text1":"Designed for comfort,Crafted for luxury",
+    "text2":"Euphoria Hotel London W1K 1PN United Kingdom"
+}
 }
