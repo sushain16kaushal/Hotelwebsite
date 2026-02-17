@@ -1,15 +1,16 @@
 import useFetchcontent from "../../Hooks/useFetchcontent"
-import type React from "react"
+
 
 
 import { EffectCards, Navigation } from "swiper/modules"
 import { Swiper, SwiperSlide  } from "swiper/react"
 import OfferCard from "./OfferCard";
 import Review from "./Review";
+import type { JSX } from "react";
 
 
 
-export const CascadeSlider:React.FC=()=>{
+export const CascadeSlider=():JSX.Element=>{
      const{data,loading,error}=useFetchcontent("/Data/Homepage.json")
 if (loading) return <p>Loading content...</p>;
 if (error) return <p>its an error:- {error}</p>;

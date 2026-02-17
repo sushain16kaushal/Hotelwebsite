@@ -2,6 +2,7 @@
 import type{ Variants } from 'framer-motion';
 import { motion} from 'framer-motion';
 import useFetchcontent from '../../Hooks/useFetchcontent';
+import type { JSX } from 'react';
 const containerVariants:Variants={
     hidden:{opacity:0},
     visible:{
@@ -29,7 +30,7 @@ transition:{duration:0.3}
 
 
 
-const Review=()=>{
+const Review=():JSX.Element=>{
  const{data,loading,error}=useFetchcontent("/Data/Homepage.json")
 if (loading) return <p>Loading content...</p>;
 if (error) return <p>its an error:- {error}</p>;

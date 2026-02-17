@@ -1,15 +1,16 @@
 
-import type React from 'react';
+
 import useFetchcontent from '../../Hooks/useFetchcontent';
 import {Swiper} from 'swiper/react';
 import { Navigation,Pagination } from 'swiper/modules';
 import { SwiperSlide } from 'swiper/react';
+import type { JSX } from 'react';
 
 
 
 
 
-const OfferCard:React.FC<any> =()=>{
+const OfferCard=():JSX.Element=>{
      const{data,loading,error}=useFetchcontent("/Data/Homepage.json")
 if (loading) return <p>Loading content...</p>;
 if (error) return <p>its an error:- {error}</p>;
