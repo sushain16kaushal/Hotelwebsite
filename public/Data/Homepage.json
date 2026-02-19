@@ -21,24 +21,8 @@
     },
 {
         "id":3,
-        "url":"/Images/HeroSection/pexels-photo-6474527-compressed.webp"
-    },
-{
-        "id":4,
         "url":"/Images/HeroSection/pexels-photo-14011101-compressed.jpg"
-    },
-{
-    "id":5,
-    "url":"/Images/HeroSection/pexels-photo-29532567-compressed.jpg"
-},
-{
-    "id":6,
-    "url":"/Images/HeroSection/pexels-photo-29649745-compressed.webp"
-},
-{
-    "id":7,
-    "url":"/Images/HeroSection/pexels-photo-34618647-compressed.jpg"
-}],
+    }],
   "Offers":[{
     "id": "1",
     "title": "Romantic Escape",

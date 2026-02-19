@@ -9,3 +9,21 @@ body {
  
 }
 
+.carousel-grid{
+    display:grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap:20px;
+    overflow:hidden
+}
+.large-div{
+    grid-row: span 2;
+    position:relative;
+    overflow:hidden;
+    border-radius: 20px;
+}
+.small-div{
+    position:relative;
+    overflow:hidden;
+    border-radius: 20px;
+}
