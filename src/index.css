@@ -5,15 +5,19 @@
 
 
 body {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background: #f5f1ea;
  
+}
+* {
+  overflow-anchor: none;
 }
 
 .carousel-grid{
     display:grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap:20px;
+    row-gap: 10px;
+    column-gap: 20px;
     overflow:hidden
 }
 .large-div{
@@ -26,4 +30,19 @@ body {
     position:relative;
     overflow:hidden;
     border-radius: 20px;
+}
+.content-overlay{
+    position: absolute;
+    bottom: 0;
+    left:0;
+    width:100%;
+    z-index:10;
+    pointer-events: none;
+}
+.nav-btn {
+  outline: none;
+}
+
+.nav-btn:focus {
+  outline: none;
 }

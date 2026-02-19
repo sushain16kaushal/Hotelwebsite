@@ -7,7 +7,7 @@ function Footer({footer}:{footer:FooterData}) {
         <>
         <div className="m-6">
         <div className="text-2xl text-center " >
-      <p className="text-2xl text-blue-50 mt-8">{footer.text1}</p>
+      <p className="text-2xl  mt-8">{footer.text1}</p>
         </div>
         <div className="address mt-1 text-center">
             <p>{footer.text2}</p>

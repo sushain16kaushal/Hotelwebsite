@@ -9,42 +9,53 @@ export const HeroSection =({gallery}:{gallery:photos[]})=>{
     const{items,next,prev}=useCarousel(gallery);
     return(
         <>
-        <div className="carousel-container">
-            <div className="carousel-grid">
-{
-    items.map((item,index)=>(
+        <div className="carousel-container relative">
+            <div className="carousel-grid relative">
+{items.map((item,index)=>(
         <motion.div
         key={item.id}
-        layoutId={String(item.id)}
-        className={`grid-item ${index===0 ?'large-div':'small-div'} overflow-hidden`}
+        layout="position"
+        layoutScroll={false}
+        className={`grid-item ${index===0 ?'large-div':'small-div'} overflow-hidden relative`}
         transition={{
             type:'spring',
-            stiffness:200,
-            damping:25,
-            mass:1.2
+            stiffness:180,
+            damping:24,
+            mass:1.1
         }}>
             <motion.img
             layout
             src={item.url}
-            className="w-full h-full object-cover"  />
-              {index ===0 &&(
+            alt="hero"
+            loading={index ===0 ? "eager" : "lazy"}
+            className="w-full h-full object-contain pointer-events-none"  />
+                
             <motion.div
-            className="content-overlay"
+            key={item.id}
+            className="content-overlay absolute top-0 left z-50 pointer-events-none h-full"
             initial={{opacity:0,y:20}}
             animate={{opacity:1,y:0}}
             exit={{opacity:0}}
             transition={{delay:0.2}}
             >
-
         </motion.div>
-        )}
+        
+        
+        
         </motion.div>
       
     ))
 }
             </div>
-            <div className="controls">
-<button onClick={prev} className="nav-btn" aria-label="Previous">
+            <div className="controls mt-2">
+<button type="button"
+onMouseDown={(e)=>
+    e.preventDefault()
+} 
+onClick={(e)=>{
+     e.currentTarget.blur();
+    prev();
+}} className="nav-btn" aria-label="Previous">
     <ChevronLeft 
       size={24} 
       strokeWidth={2.5} 
@@ -52,7 +63,10 @@ export const HeroSection =({gallery}:{gallery:photos[]})=>{
     />
   </button>
 
-  <button onClick={next} className="nav-btn" aria-label="Next">
+  <button type="button"
+  onMouseDown={(e)=>e.preventDefault()} onClick={(e)=>{
+     e.currentTarget.blur();
+  next(); }} className="nav-btn" aria-label="Next">
     <ChevronRight 
       size={24} 
       strokeWidth={2.5} 
