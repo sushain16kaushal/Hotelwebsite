@@ -30,8 +30,8 @@ return(
                },
          
             768:{
-               slidesPerView:2,
-               spaceBetween:40,
+               slidesPerView:1.8,
+               spaceBetween:30,
             },
             1024:{
                slidesPerView:3,
@@ -39,13 +39,13 @@ return(
             }
           }
      }
-     className="mySwiper pb-16 px-5">
+     className="mySwiper pb-16 px-10">
 {offers.map((item)=>(
-     <SwiperSlide key={item.id} className='transition-all duration-500'>
+     <SwiperSlide key={item.id} className='transition-all duration-500 py-10 '>
    {({ isActive }) => (
      
               <div className={`
-                relative flex flex-col border border-[#eaddca]  p-6 
+                relative flex flex-col border border-[#eaddca]  p-6 rounded-2xl 
                 transition-all duration-700 ease-in-out
                 ${isActive 
                   ? 'bg-white scale-105 shadow-[0_20px_50px_rgba(180,150,100,0.4)] opacity-100 blur-0 z-10' 

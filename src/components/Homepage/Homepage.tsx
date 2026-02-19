@@ -53,11 +53,11 @@ const Homepage=()=>{
       
         <>
     
-        <div className="min-h-screen">
+        <div className="min-h-screen mt-10">
         <div className="py-10">
         <h2 className="text-center text-xl md:text-2xl text-gray-700 px-4 ">Every corner whispers elegance</h2>
         </div>
-        <div className="w-full  z-10 overflow-hidden px-4">
+        <div className="w-full z-10 overflow-hidden px-4">
         <CascadeSlider gallery={data?.gallery ?? []} />
         </div>
         <div className="w-full  z-0 mt-10 md:mt-24">
