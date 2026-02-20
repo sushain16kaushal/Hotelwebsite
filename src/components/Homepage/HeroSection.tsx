@@ -59,7 +59,7 @@ onClick={(e)=>{
     <ChevronLeft 
       size={24} 
       strokeWidth={2.5} 
-      color="white" 
+      color="black" 
     />
   </button>
 
@@ -70,7 +70,7 @@ onClick={(e)=>{
     <ChevronRight 
       size={24} 
       strokeWidth={2.5} 
-      color="white" 
+      color="black" 
     />
   </button>
             </div>

@@ -34,7 +34,7 @@ const Review=({reviews}:{reviews:reviews[]}):JSX.Element=>{
  
     return(
         <>
-        <section className='p-6 md:p-10 h-auto m-4 md:m-10 rounded-3xl hover:translate-y-1 bg-emerald-100 overflow-hidden shadow-inner'>
+        <section className='p-6 md:p-10 h-auto m-4 md:m-10 rounded-3xl hover:translate-y-1 bg-[#ece5d8] overflow-hidden shadow-inner'>
           <h2 className="text-3xl text-center text-black font-serif mb-8">Customer Reviews</h2>
       <motion.div 
         className="review-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
