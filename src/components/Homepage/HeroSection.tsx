@@ -27,7 +27,9 @@ export const HeroSection =({gallery}:{gallery:photos[]})=>{
             layout
             src={item.url}
             alt="hero"
+            fetchPriority={index === 0 ? "high" : "auto"}
             loading={index ===0 ? "eager" : "lazy"}
+            decoding={index === 0 ? "sync" : "async"}
             className="w-full h-full object-contain pointer-events-none"  />
                 
             <motion.div
