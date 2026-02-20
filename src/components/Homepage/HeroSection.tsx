@@ -31,18 +31,6 @@ export const HeroSection =({gallery}:{gallery:photos[]})=>{
             loading={index ===0 ? "eager" : "lazy"}
             decoding={index === 0 ? "sync" : "async"}
             className="w-full h-full object-contain pointer-events-none"  />
-                
-            <motion.div
-            key={item.id}
-            className="content-overlay absolute top-0 left z-50 pointer-events-none h-full"
-            initial={{opacity:0,y:20}}
-            animate={{opacity:1,y:0}}
-            exit={{opacity:0}}
-            transition={{delay:0.2}}
-            >
-        </motion.div>
-        
-        
         
         </motion.div>
       
