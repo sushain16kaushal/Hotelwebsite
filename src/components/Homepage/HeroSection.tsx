@@ -39,8 +39,8 @@ export const HeroSection =({gallery}:{gallery:photos[]})=>{
     
     return(
         <>
-        <div className="carousel-container relative">
-            <div className="carousel-grid relative">
+        <div className="carousel-container relative h-full w-full">
+            <div className="carousel-grid relative h-full w-full overflow-hidden">
 {items.map((item,index)=>(
         <motion.div
         key={item.id}
