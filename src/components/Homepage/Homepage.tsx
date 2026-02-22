@@ -17,12 +17,12 @@ const Homepage=()=>{
       
         <>
     
-        <div className="min-h-screen mt-10">
+        <div className="min-h-screen mt-10 ">
         <div className="py-10">
         <h2 className="text-center text-xl md:text-2xl text-gray-700 px-4 ">Every corner whispers elegance</h2>
         </div>
      <div className="w-full min-h-screen flex items-center justify-center px-4">
-  <div className="w-full max-w-xl aspect-video">
+  <div className="w-full max-w-3xl ">
         <HeroSection gallery={data?.gallery ?? []} />
         </div>
         </div>

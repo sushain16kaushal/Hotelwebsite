@@ -1,7 +1,7 @@
 export interface photos{
     id:number;
     url:string;
-  
+    text:string;
 }
 export interface Navbar{
   home:string;

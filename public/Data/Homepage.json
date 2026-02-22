@@ -12,16 +12,19 @@
     },
     "gallery":[{
         "id":1,
-        "url":"/Images/HeroSection/pexels-mikhail-nilov-7820321_800x1200.webp"
+        "url":"/Images/HeroSection/pexels-mikhail-nilov-7820321_800x1200.webp",
+        "text":"Warm Welcomes Always"
     },
 
 {
         "id":2,
-        "url":"/Images/HeroSection/pexels-photo-6466295-compressed.webp"
+        "url":"/Images/HeroSection/pexels-cottonbro-6466299.jpg",
+        "text":"Service With Excellence"
     },
 {
         "id":3,
-        "url":"/Images/HeroSection/pexels-photo-14011101-compressed.jpg"
+        "url":"/Images/HeroSection/pexels-photo-14011101-compressed.jpg",
+        "text":"Relax Your Senses"
     }],
   "Offers":[{
     "id": "1",
