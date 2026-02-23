@@ -83,4 +83,154 @@
     "text1":"Designed for comfort,Crafted for luxury",
     "text2":"Euphoria Hotel London W1K 1PN United Kingdom"
 }
+,
+  "rooms": [
+    {
+      "id": 1,
+      "category": "Single Bed",
+      "guests": 1,
+      "type": "Economy",
+      "pricePerNight": 999,
+      "features": ["Free Wi-Fi", "TV", "Room Service"]
+    },
+    {
+      "id": 2,
+      "category": "Single Bed",
+      "guests": 1,
+      "type": "Standard",
+      "pricePerNight": 1799,
+      "features": ["Free Wi-Fi", "Smart TV", "Room Service", "Free Complimentary Breakfast", "Spa Access (One Time)", "Gaming Zone Access (One Time)"]
+    },
+    {
+      "id": 3,
+      "category": "Single Bed",
+      "guests": 1,
+      "type": "Premium",
+      "pricePerNight": 2999,
+      "features": ["Free Wi-Fi", "Smart TV", "Room Service", "Free Breakfast, Lunch & Dinner", "Unlimited Spa Access", "Swimming Pool Access", "Unlimited Gaming Zone Access"]
+    },
+
+    {
+      "id": 4,
+      "category": "Double Bed",
+      "guests": 2,
+      "type": "Economy",
+      "pricePerNight": 1599,
+      "features": ["Free Wi-Fi", "TV", "Room Service"]
+    },
+    {
+      "id": 5,
+      "category": "Double Bed",
+      "guests": 2,
+      "type": "Standard",
+      "pricePerNight": 2599,
+      "features": ["Free Wi-Fi", "Smart TV", "Room Service", "Free Complimentary Breakfast", "Spa Access (One Time)", "Gaming Zone Access (One Time)"]
+    },
+    {
+      "id": 6,
+      "category": "Double Bed",
+      "guests": 2,
+      "type": "Premium",
+      "pricePerNight": 3999,
+      "features": ["Free Wi-Fi", "Smart TV", "Room Service", "Free Breakfast, Lunch & Dinner", "Unlimited Spa Access", "Swimming Pool Access", "Unlimited Gaming Zone Access"]
+    },
+
+    {
+      "id": 7,
+      "category": "Family Room",
+      "guests": 4,
+      "type": "Economy",
+      "pricePerNight": 2499,
+      "features": ["Free Wi-Fi", "TV", "Room Service"]
+    },
+    {
+      "id": 8,
+      "category": "Family Room",
+      "guests": 4,
+      "type": "Standard",
+      "pricePerNight": 3799,
+      "features": ["Free Wi-Fi", "Smart TV", "Room Service", "Free Complimentary Breakfast", "Spa Access (One Time)", "Gaming Zone Access (One Time)"]
+    },
+    {
+      "id": 9,
+      "category": "Family Room",
+      "guests": 5,
+      "type": "Premium",
+      "pricePerNight": 5999,
+      "features": ["Free Wi-Fi", "Smart TV", "Room Service", "Free Breakfast, Lunch & Dinner", "Unlimited Spa Access", "Swimming Pool Access", "Unlimited Gaming Zone Access"]
+    },
+
+    {
+      "id": 10,
+      "category": "Valentine Couple",
+      "guests": 2,
+      "type": "Standard",
+      "pricePerNight": 4499,
+      "features": [
+        "Romantic Room Decor",
+        "Candle Light Dinner Setup",
+        "Smart TV",
+        "Free Complimentary Breakfast",
+        "Jacuzzi Access",
+        "Spa Access (One Time)",
+        "Late Night Room Service",
+        "Rose Petal Bed Decoration"
+      ]
+    },
+    {
+      "id": 11,
+      "category": "Valentine Couple",
+      "guests": 2,
+      "type": "Premium",
+      "pricePerNight": 7499,
+      "features": [
+        "Luxury Romantic Decor",
+        "Private Candle Light Dinner",
+        "4K Smart TV",
+        "Free Breakfast, Lunch & Dinner",
+        "Private Jacuzzi",
+        "Unlimited Spa Access",
+        "Swimming Pool Access",
+        "Private Balcony",
+        "Surprise Gift Hamper",
+        "24x7 Butler Service"
+      ]
+    },
+
+    {
+      "id": 12,
+      "category": "Family Fun Vacation",
+      "guests": 5,
+      "type": "Standard",
+      "pricePerNight": 5299,
+      "features": [
+        "Smart TV",
+        "Free Complimentary Breakfast",
+        "Kids Play Zone Access",
+        "Gaming Zone Access (One Time)",
+        "Mini Water Park Access",
+        "Family Movie Night Setup",
+        "Board Games Kit"
+      ]
+    },
+    {
+      "id": 13,
+      "category": "Family Fun Vacation",
+      "guests": 6,
+      "type": "Premium",
+      "pricePerNight": 8499,
+      "features": [
+        "4K Smart TV",
+        "Free Breakfast, Lunch & Dinner",
+        "Unlimited Gaming Zone Access",
+        "Unlimited Water Park Access",
+        "Kids Activity Manager",
+        "Family Spa Session",
+        "Swimming Pool Access",
+        "Private Family Lounge",
+        "Indoor & Outdoor Games",
+        "Complimentary Photography Session"
+      ]
+    }
+  ]
 }

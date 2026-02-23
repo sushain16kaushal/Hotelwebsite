@@ -33,13 +33,21 @@ export interface FooterData{
   text2:string;
 }
 
+export interface Rooms{
+  id:number,
+  category:string,
+  guests:number,
+  type:string,
+  pricePerNight:number,
+  Features:string[]
+}
 export interface ContentData{
-    
   hero:Herodata;
   gallery: photos[];
   Offers:offer[];
   Reviews:reviews[];
   Footer:FooterData;
+  rooms:Rooms[];
 }
 
 
