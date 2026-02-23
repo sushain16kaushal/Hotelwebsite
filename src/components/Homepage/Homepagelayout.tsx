@@ -14,7 +14,7 @@ function Homepagelayout() {
         if(!loading && data){
             const timer=setTimeout(()=>{
                 setisready(true);
-            },1300)
+            },1200)
             return ()=>clearTimeout(timer);
         }
       },[loading,data])
