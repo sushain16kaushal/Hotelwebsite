@@ -6,7 +6,8 @@
 
 body {
     background: #f5f1ea;
- 
+ margin:0;
+ padding:0;
 }
 * {
   overflow-anchor: none;

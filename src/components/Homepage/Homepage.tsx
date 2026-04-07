@@ -21,9 +21,9 @@ const Homepage=()=>{
         <div className="py-10">
         <h2 className="text-center text-xl md:text-2xl text-gray-700 px-4 ">Every corner whispers elegance</h2>
         </div>
-     <div className="w-full flex items-center justify-center px-4">
-  <div className="w-full h-screen max-w-6xl flex flex-col justify-center">
-        <HeroSection gallery={data?.gallery ?? []} />
+     <div className="w-full flex items-center justify-center">
+  <div className="w-full ">
+        <HeroSection  />
         </div>
         </div>
         <div className="w-full  z-0 mt-3 md:mt-6">

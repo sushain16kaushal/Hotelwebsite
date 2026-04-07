@@ -1,8 +1,4 @@
-export interface photos{
-    id:number;
-    url:string;
-    text:string;
-}
+
 export interface Navbar{
   home:string;
   Hotels:string;
@@ -45,7 +41,6 @@ export interface Hotels {
 }
 export interface ContentData{
   hero:Herodata;
-  gallery: photos[];
   Offers:offer[];
   Reviews:reviews[];
   Footer:FooterData;
