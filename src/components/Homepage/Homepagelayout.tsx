@@ -8,7 +8,7 @@ import FullScreenLoader from "../FullScreenLoader"
 
 
 function Homepagelayout() {
-      const{data,loading,error}=useFetchcontent("/Data/Homepage.json")
+      const{data,loading,error}=useFetchcontent(`http://localhost:4000/api/data`)
       const[isready,setisready]=useState(false)
       useEffect(()=>{
         if(!loading && data){

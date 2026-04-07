@@ -59,7 +59,7 @@ return(
 <p className='text-stone-600 text-lg leading-relaxed italic'>{item.description}</p>
 </div>
 <div className=' flex justify-center mt-auto mb-8 gap-3 items-center px-4'>
-<span className='text-2xl font-bold text-amber-800'>{item.price}</span>
+<span className='text-2xl font-bold text-amber-800'>₹{item.price}</span>
 <button className="px-6 py-2 bg-stone-900 text-[#f5efe6] rounded-full text-sm hover:bg-amber-900 transition-colors hover:cursor-pointer">
          Reserve Now
        </button>

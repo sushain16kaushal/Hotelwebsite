@@ -5,9 +5,6 @@ import type{ photos } from "../../types/content";
 import { useEffect } from "react";
 
 
-
-
-
 export const HeroSection =({gallery}:{gallery:photos[]})=>{
 
     const{items,next}=useCarousel(gallery);

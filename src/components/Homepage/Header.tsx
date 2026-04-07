@@ -50,7 +50,7 @@ const Header=({hero}:{hero:Herodata}):JSX.Element=>{
          }>{hero.navbar.home}</NavLink>
           <NavLink to={"/room"} className={({isActive})=>
          `duration-200 ${isActive ? "text-amber-700" : "text-gray-400"} hover:bg-transparent hover:text-orange`
-         }>{hero.navbar.room}</NavLink>
+         }>{hero.navbar.Hotels}</NavLink>
             <NavLink to={"/dining"} className={({isActive})=>
          `duration-200 ${isActive ? "text-amber-700" : "text-gray-400"} hover:bg-transparent hover:text-orange`
          }>{hero.navbar.Dining}</NavLink>
@@ -70,7 +70,7 @@ const Header=({hero}:{hero:Herodata}):JSX.Element=>{
          }>{hero.navbar.home}</NavLink>
           <NavLink to={"/room"} className={({isActive})=>
          `duration-200 ${isActive ? "text-amber-700" : "text-gray-400"} hover:bg-transparent hover:text-orange`
-         }>{hero.navbar.room}</NavLink>
+         }>{hero.navbar.Hotels}</NavLink>
             <NavLink to={"/dining"} className={({isActive})=>
          `duration-200 ${isActive ? "text-amber-700" : "text-gray-400"} hover:bg-transparent hover:text-orange`
          }>{hero.navbar.Dining}</NavLink>

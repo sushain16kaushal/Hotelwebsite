@@ -5,7 +5,7 @@ export interface photos{
 }
 export interface Navbar{
   home:string;
-  room:string;
+  Hotels:string;
   Dining:string;
   booking:string;
   contact:string;
@@ -33,7 +33,9 @@ export interface FooterData{
   text2:string;
 }
 
-export interface Rooms{
+export interface Hotels {
+  hotelName:string,
+  address:string,
   id:number,
   category:string,
   guests:number,
@@ -47,7 +49,7 @@ export interface ContentData{
   Offers:offer[];
   Reviews:reviews[];
   Footer:FooterData;
-  rooms:Rooms[];
+  hotels:Hotels[];
 }
 
 

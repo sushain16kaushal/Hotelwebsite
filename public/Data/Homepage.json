@@ -1,10 +1,10 @@
 {
     "hero":{
-        "title":"Euphoria Hotel",
+        "title":"Euphoria Hotels Of Shimla",
         "subtitle":"Collect Moments,Not Things",
         "navbar":{
             "home":"Home",
-            "room":"Rooms",
+            "Hotels":"Hotels",
             "Dining":"Dining",
             "booking":"Booking",
             "contact":"Contact"
@@ -31,35 +31,35 @@
     "title": "Romantic Escape",
     "url": "/Images/Offers/pexels-photo-262882-compressed.webp",
     "description": "Indulge in a candle-lit dinner, rose petal room decor, and a bottle of premium champagne on arrival.",
-    "price": "$299"
+    "price": "19,999"
   },
   {
     "id": "2",
     "title": "Weekend Wellness Retrat",
     "url": "/Images/Offers/pexels-photo-3997995-compressed.webp",
     "description": "Rejuvenate your soul with unlimited spa access, guided yoga sessions, and organic gourmet breakfast.",
-    "price": "$180"
+    "price": "18,000"
   },
   {
     "id": "3",
     "title": "Business Traveller Plus",
     "url": "/Images/Offers/pexels-photo-35568870-compressed.webp",
     "description": "Enjoy high-speed Wi-Fi, complimentary airport transfers, and express laundry services for a seamless stay.",
-    "price": "$150"
+    "price": "15,000"
   },
   {
     "id": "4",
     "title": "Family Fun Vacation",
     "url": "/Images/Offers/pexels-photo-3807332-compressed.webp",
     "description": "Kids stay and eat for free! Includes access to the water park, kids' club activities, and family suites.",
-    "price": "$450"
+    "price": "45,000"
   },
   {
     "id": "5",
     "title": "Summer Early Bird",
     "url": "/Images/Offers/pexels-photo-9119759-compressed.webp",
     "description": "Book 30 days in advance to unlock exclusive discounts on luxury suites and rooftop pool access.",
-    "price": "$120"
+    "price": "12,000"
   }] ,
   "Reviews":[
   { "id": 1, "name": "Amit", "text": "Excellent stay! Staff was very polite and helpful.", "rating": 5 },
@@ -81,155 +81,116 @@
 ,
 "Footer":{
     "text1":"Designed for comfort,Crafted for luxury",
-    "text2":"Euphoria Hotel London W1K 1PN United Kingdom"
+    "text2":"Main Branch :- Sunset View Point Road,Summer Hill, Shimla – 171005,Himachal Pradesh, India"
 }
 ,
-  "rooms": [
-    {
-      "id": 1,
-      "category": "Single Bed",
-      "guests": 1,
-      "type": "Economy",
-      "pricePerNight": 999,
-      "features": ["Free Wi-Fi", "TV", "Room Service"]
-    },
-    {
-      "id": 2,
-      "category": "Single Bed",
-      "guests": 1,
-      "type": "Standard",
-      "pricePerNight": 1799,
-      "features": ["Free Wi-Fi", "Smart TV", "Room Service", "Free Complimentary Breakfast", "Spa Access (One Time)", "Gaming Zone Access (One Time)"]
-    },
-    {
-      "id": 3,
-      "category": "Single Bed",
-      "guests": 1,
-      "type": "Premium",
-      "pricePerNight": 2999,
-      "features": ["Free Wi-Fi", "Smart TV", "Room Service", "Free Breakfast, Lunch & Dinner", "Unlimited Spa Access", "Swimming Pool Access", "Unlimited Gaming Zone Access"]
-    },
 
+  "hotels": [
     {
-      "id": 4,
-      "category": "Double Bed",
-      "guests": 2,
-      "type": "Economy",
-      "pricePerNight": 1599,
-      "features": ["Free Wi-Fi", "TV", "Room Service"]
-    },
-    {
-      "id": 5,
-      "category": "Double Bed",
-      "guests": 2,
-      "type": "Standard",
-      "pricePerNight": 2599,
-      "features": ["Free Wi-Fi", "Smart TV", "Room Service", "Free Complimentary Breakfast", "Spa Access (One Time)", "Gaming Zone Access (One Time)"]
-    },
-    {
-      "id": 6,
-      "category": "Double Bed",
-      "guests": 2,
-      "type": "Premium",
-      "pricePerNight": 3999,
-      "features": ["Free Wi-Fi", "Smart TV", "Room Service", "Free Breakfast, Lunch & Dinner", "Unlimited Spa Access", "Swimming Pool Access", "Unlimited Gaming Zone Access"]
-    },
-
-    {
-      "id": 7,
-      "category": "Family Room",
-      "guests": 4,
-      "type": "Economy",
-      "pricePerNight": 2499,
-      "features": ["Free Wi-Fi", "TV", "Room Service"]
-    },
-    {
-      "id": 8,
-      "category": "Family Room",
-      "guests": 4,
-      "type": "Standard",
-      "pricePerNight": 3799,
-      "features": ["Free Wi-Fi", "Smart TV", "Room Service", "Free Complimentary Breakfast", "Spa Access (One Time)", "Gaming Zone Access (One Time)"]
-    },
-    {
-      "id": 9,
-      "category": "Family Room",
-      "guests": 5,
-      "type": "Premium",
-      "pricePerNight": 5999,
-      "features": ["Free Wi-Fi", "Smart TV", "Room Service", "Free Breakfast, Lunch & Dinner", "Unlimited Spa Access", "Swimming Pool Access", "Unlimited Gaming Zone Access"]
-    },
-
-    {
-      "id": 10,
-      "category": "Valentine Couple",
-      "guests": 2,
-      "type": "Standard",
-      "pricePerNight": 4499,
-      "features": [
-        "Romantic Room Decor",
-        "Candle Light Dinner Setup",
-        "Smart TV",
-        "Free Complimentary Breakfast",
-        "Jacuzzi Access",
-        "Spa Access (One Time)",
-        "Late Night Room Service",
-        "Rose Petal Bed Decoration"
+      "hotelId": 101,
+      "hotelName": "Euphoria Grand Residency – Summer Hill",
+      "address": "Sunset View Point Road, Summer Hill, Shimla – 171005",
+      "roomCategories": [
+        {
+          "categoryName": "Single Bed",
+          "guests": "1 Guest",
+          "options": [
+            { "type": "Standard", "pricePerNight": 1500, "features": ["Free Wi-Fi", "TV", "Room Service"] },
+            { "type": "Premium", "pricePerNight": 2200, "features": ["Free Wi-Fi", "TV", "Room Service", "Smart TV upgrade", "Complimentary Breakfast", "Tea/Coffee Maker"] },
+            { "type": "Luxury", "pricePerNight": 3500, "features": ["Free Wi-Fi", "TV", "Room Service", "Smart TV upgrade", "Complimentary Breakfast", "Tea/Coffee Maker", "4K Netflix Access", "Mini Bar", "All Meals Included", "Room Heater"] }
+          ]
+        },
+        {
+          "categoryName": "Double Bed",
+          "guests": "2 Guests",
+          "options": [
+            { "type": "Standard", "pricePerNight": 2500, "features": ["Free Wi-Fi", "Smart TV", "Intercom"] },
+            { "type": "Premium", "pricePerNight": 3800, "features": ["Free Wi-Fi", "Smart TV", "Intercom", "Balcony View", "Breakfast Buffet", "Gaming Zone (1 Time)"] },
+            { "type": "Luxury", "pricePerNight": 5500, "features": ["Free Wi-Fi", "Smart TV", "Intercom", "Balcony View", "Breakfast Buffet", "Gaming Zone (1 Time)", "Private Jacuzzi", "Bottle of Wine", "All Meals", "Late Check-out"] }
+          ]
+        },
+        {
+          "categoryName": "Family Size",
+          "guests": "Multiple Guests",
+          "options": [
+            { "type": "Standard", "pricePerNight": 4500, "features": ["Extra Bed", "Free Wi-Fi", "TV"] },
+            { "type": "Premium", "pricePerNight": 7000, "features": ["Extra Bed", "Free Wi-Fi", "TV", "Kids Play Area Access", "Family Breakfast", "Movie Night Setup"] },
+            { "type": "Luxury", "pricePerNight": 11000, "features": ["Extra Bed", "Free Wi-Fi", "TV", "Kids Play Area Access", "Family Breakfast", "Movie Night Setup", "Connecting Suite", "Private Lounge", "All Inclusive Meals", "Personal Butler"] }
+          ]
+        }
       ]
     },
     {
-      "id": 11,
-      "category": "Valentine Couple",
-      "guests": 2,
-      "type": "Premium",
-      "pricePerNight": 7499,
-      "features": [
-        "Luxury Romantic Decor",
-        "Private Candle Light Dinner",
-        "4K Smart TV",
-        "Free Breakfast, Lunch & Dinner",
-        "Private Jacuzzi",
-        "Unlimited Spa Access",
-        "Swimming Pool Access",
-        "Private Balcony",
-        "Surprise Gift Hamper",
-        "24x7 Butler Service"
-      ]
-    },
-
-    {
-      "id": 12,
-      "category": "Family Fun Vacation",
-      "guests": 5,
-      "type": "Standard",
-      "pricePerNight": 5299,
-      "features": [
-        "Smart TV",
-        "Free Complimentary Breakfast",
-        "Kids Play Zone Access",
-        "Gaming Zone Access (One Time)",
-        "Mini Water Park Access",
-        "Family Movie Night Setup",
-        "Board Games Kit"
+      "hotelId": 102,
+      "hotelName": "Euphoria Heritage Palace – Mashobra",
+      "address": "Near Forest Sanctuary, Mashobra, Shimla – 171007",
+      "roomCategories": [
+        {
+          "categoryName": "Single Bed", "guests": "1 Guest",
+          "options": [
+            { "type": "Standard", "pricePerNight": 1400, "features": ["Basic Wi-Fi", "Housekeeping"] },
+            { "type": "Premium", "pricePerNight": 2000, "features": ["Basic Wi-Fi", "Housekeeping", "Mountain View Window", "Breakfast"] },
+            { "type": "Luxury", "pricePerNight": 3200, "features": ["Basic Wi-Fi", "Housekeeping", "Mountain View Window", "Breakfast", "Organic Farm Meals", "Yoga Session"] }
+          ]
+        },
+        {
+          "categoryName": "Double Bed", "guests": "2 Guests",
+          "options": [
+            { "type": "Standard", "pricePerNight": 2400, "features": ["Wi-Fi", "TV", "Hot Water"] },
+            { "type": "Premium", "pricePerNight": 3600, "features": ["Wi-Fi", "TV", "Hot Water", "Fireplace", "Breakfast & Dinner"] },
+            { "type": "Luxury", "pricePerNight": 5200, "features": ["Wi-Fi", "TV", "Hot Water", "Fireplace", "Breakfast & Dinner", "Open Air Bathtub", "Guided Trekking"] }
+          ]
+        },
+        {
+          "categoryName": "Family Size", "guests": "Multiple Guests",
+          "options": [
+            { "type": "Standard", "pricePerNight": 4200, "features": ["Spacious Room", "TV"] },
+            { "type": "Premium", "pricePerNight": 6800, "features": ["Spacious Room", "TV", "Bonfire Setup", "Breakfast"] },
+            { "type": "Luxury", "pricePerNight": 10500, "features": ["Spacious Room", "TV", "Bonfire Setup", "Breakfast", "Private Garden", "Full Board Meals", "Luxury Car Transfer"] }
+          ]
+        }
       ]
     },
     {
-      "id": 13,
-      "category": "Family Fun Vacation",
-      "guests": 6,
-      "type": "Premium",
-      "pricePerNight": 8499,
-      "features": [
-        "4K Smart TV",
-        "Free Breakfast, Lunch & Dinner",
-        "Unlimited Gaming Zone Access",
-        "Unlimited Water Park Access",
-        "Kids Activity Manager",
-        "Family Spa Session",
-        "Swimming Pool Access",
-        "Private Family Lounge",
-        "Indoor & Outdoor Games",
-        "Complimentary Photography Session"
+      "hotelId": 103, "hotelName": "Euphoria Mountain View – Shoghi", "address": "Tara Devi Temple Road, Shoghi – 171219", "roomCategories": [
+        { "categoryName": "Single Bed", "guests": "1 Guest", "options": [{ "type": "Standard", "pricePerNight": 1300, "features": ["Wi-Fi", "TV"] }, { "type": "Premium", "pricePerNight": 1900, "features": ["Wi-Fi", "TV", "Hill View", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 2800, "features": ["Wi-Fi", "TV", "Hill View", "Breakfast", "Luxury Bedding", "Room Heater"] }] },
+        { "categoryName": "Double Bed", "guests": "2 Guests", "options": [{ "type": "Standard", "pricePerNight": 2200, "features": ["Wi-Fi", "TV"] }, { "type": "Premium", "pricePerNight": 3400, "features": ["Wi-Fi", "TV", "Private Balcony", "Smart TV"] }, { "type": "Luxury", "pricePerNight": 4900, "features": ["Wi-Fi", "TV", "Private Balcony", "Smart TV", "Sky View Ceiling", "Spa Session"] }] },
+        { "categoryName": "Family Size", "guests": "Multiple Guests", "options": [{ "type": "Standard", "pricePerNight": 4000, "features": ["Wi-Fi", "TV"] }, { "type": "Premium", "pricePerNight": 6200, "features": ["Wi-Fi", "TV", "Breakfast", "Indoor Games"] }, { "type": "Luxury", "pricePerNight": 9800, "features": ["Wi-Fi", "TV", "Breakfast", "Indoor Games", "Private BBQ", "All Meals"] }] }
+      ]
+    },
+    {
+      "hotelId": 104, "hotelName": "Euphoria Pine Forest – Kufri", "address": "Main Road, Kufri – 171012", "roomCategories": [
+        { "categoryName": "Single Bed", "guests": "1 Guest", "options": [{ "type": "Standard", "pricePerNight": 1200, "features": ["Wi-Fi"] }, { "type": "Premium", "pricePerNight": 1800, "features": ["Wi-Fi", "Heater", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 2600, "features": ["Wi-Fi", "Heater", "Breakfast", "Electric Blanket", "Forest View"] }] },
+        { "categoryName": "Double Bed", "guests": "2 Guests", "options": [{ "type": "Standard", "pricePerNight": 2100, "features": ["Wi-Fi", "TV"] }, { "type": "Premium", "pricePerNight": 3200, "features": ["Wi-Fi", "TV", "Snow View Balcony", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 4600, "features": ["Wi-Fi", "TV", "Snow View Balcony", "Breakfast", "Private Fireplace", "Dinner"] }] },
+        { "categoryName": "Family Size", "guests": "Multiple Guests", "options": [{ "type": "Standard", "pricePerNight": 3900, "features": ["Wi-Fi", "Extra Bed"] }, { "type": "Premium", "pricePerNight": 6000, "features": ["Wi-Fi", "Extra Bed", "Play Zone Access", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 9500, "features": ["Wi-Fi", "Extra Bed", "Play Zone Access", "Breakfast", "Horse Riding Session", "All Meals"] }] }
+      ]
+    },
+    {
+      "hotelId": 105, "hotelName": "Euphoria City Center – Mall Road", "address": "Mall Road, Shimla – 171001", "roomCategories": [
+        { "categoryName": "Single Bed", "guests": "1 Guest", "options": [{ "type": "Standard", "pricePerNight": 2000, "features": ["Prime Location", "Wi-Fi"] }, { "type": "Premium", "pricePerNight": 2800, "features": ["Prime Location", "Wi-Fi", "Coffee Maker", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 4000, "features": ["Prime Location", "Wi-Fi", "Coffee Maker", "Breakfast", "4K TV", "Soundproof Room"] }] },
+        { "categoryName": "Double Bed", "guests": "2 Guests", "options": [{ "type": "Standard", "pricePerNight": 3500, "features": ["Heritage Decor", "Wi-Fi"] }, { "type": "Premium", "pricePerNight": 5000, "features": ["Heritage Decor", "Wi-Fi", "Ridge View", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 7500, "features": ["Heritage Decor", "Wi-Fi", "Ridge View", "Breakfast", "Butler Service", "Mini Bar"] }] },
+        { "categoryName": "Family Size", "guests": "Multiple Guests", "options": [{ "type": "Standard", "pricePerNight": 6000, "features": ["Connecting Room", "Wi-Fi"] }, { "type": "Premium", "pricePerNight": 9000, "features": ["Connecting Room", "Wi-Fi", "VIP Lounge", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 14000, "features": ["Connecting Room", "Wi-Fi", "VIP Lounge", "Breakfast", "Private Tour Guide", "All Meals"] }] }
+      ]
+    },
+    {
+      "hotelId": 106, "hotelName": "Euphoria Valley Retreat – Sanjauli", "address": "Near Hanuman Mandir, Sanjauli – 171006", "roomCategories": [
+        { "categoryName": "Single Bed", "guests": "1 Guest", "options": [{ "type": "Standard", "pricePerNight": 1100, "features": ["Clean Bedding", "Wi-Fi"] }, { "type": "Premium", "pricePerNight": 1600, "features": ["Clean Bedding", "Wi-Fi", "City View", "TV"] }, { "type": "Luxury", "pricePerNight": 2400, "features": ["Clean Bedding", "Wi-Fi", "City View", "TV", "Smart TV", "Dinner Included"] }] },
+        { "categoryName": "Double Bed", "guests": "2 Guests", "options": [{ "type": "Standard", "pricePerNight": 1900, "features": ["Wi-Fi", "TV"] }, { "type": "Premium", "pricePerNight": 2900, "features": ["Wi-Fi", "TV", "Breakfast", "Evening Snacks"] }, { "type": "Luxury", "pricePerNight": 4200, "features": ["Wi-Fi", "TV", "Breakfast", "Evening Snacks", "Candlelight Dinner", "Flower Decor"] }] },
+        { "categoryName": "Family Size", "guests": "Multiple Guests", "options": [{ "type": "Standard", "pricePerNight": 3500, "features": ["Wi-Fi", "Hot Water"] }, { "type": "Premium", "pricePerNight": 5500, "features": ["Wi-Fi", "Hot Water", "Breakfast", "Board Games"] }, { "type": "Luxury", "pricePerNight": 8500, "features": ["Wi-Fi", "Hot Water", "Breakfast", "Board Games", "Unlimited Tea/Coffee", "Private Cab Service"] }] }
+      ]
+    },
+    {
+      "hotelId": 107, "hotelName": "Euphoria Clouds Inn – Fagu", "address": "Apple Orchard Hills, Fagu – 171209", "roomCategories": [
+        { "categoryName": "Single Bed", "guests": "1 Guest", "options": [{ "type": "Standard", "pricePerNight": 1250, "features": ["Wi-Fi", "Electric Kettle"] }, { "type": "Premium", "pricePerNight": 1850, "features": ["Wi-Fi", "Electric Kettle", "Cloud View", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 2700, "features": ["Wi-Fi", "Electric Kettle", "Cloud View", "Breakfast", "Private Heater", "Dry Cleaning"] }] },
+        { "categoryName": "Double Bed", "guests": "2 Guests", "options": [{ "type": "Standard", "pricePerNight": 2300, "features": ["Wi-Fi", "TV"] }, { "type": "Premium", "pricePerNight": 3400, "features": ["Wi-Fi", "TV", "Orchard View", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 5000, "features": ["Wi-Fi", "TV", "Orchard View", "Breakfast", "Hammock on Balcony", "Pick & Drop"] }] },
+        { "categoryName": "Family Size", "guests": "Multiple Guests", "options": [{ "type": "Standard", "pricePerNight": 4100, "features": ["Wi-Fi", "Big Balcony"] }, { "type": "Premium", "pricePerNight": 6300, "features": ["Wi-Fi", "Big Balcony", "Breakfast", "Trekking Gear"] }, { "type": "Luxury", "pricePerNight": 9900, "features": ["Wi-Fi", "Big Balcony", "Breakfast", "Trekking Gear", "Personal Photographer", "All Meals"] }] }
+      ]
+    },
+    {
+      "hotelId": 108, "hotelName": "Euphoria Golf Greens – Naldehra", "address": "Near Golf Course, Naldehra – 171007", "roomCategories": [
+        { "categoryName": "Single Bed", "guests": "1 Guest", "options": [{ "type": "Standard", "pricePerNight": 1600, "features": ["Wi-Fi", "Golf View"] }, { "type": "Premium", "pricePerNight": 2300, "features": ["Wi-Fi", "Golf View", "Club Entry", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 3600, "features": ["Wi-Fi", "Golf View", "Club Entry", "Breakfast", "Golf Lesson", "Spa access"] }] },
+        { "categoryName": "Double Bed", "guests": "2 Guests", "options": [{ "type": "Standard", "pricePerNight": 3000, "features": ["Wi-Fi", "Smart TV"] }, { "type": "Premium", "pricePerNight": 4500, "features": ["Wi-Fi", "Smart TV", "Breakfast Buffet", "Evening Snacks"] }, { "type": "Luxury", "pricePerNight": 6800, "features": ["Wi-Fi", "Smart TV", "Breakfast Buffet", "Evening Snacks", "Private Fireplace", "Steam Room Access"] }] },
+        { "categoryName": "Family Size", "guests": "Multiple Guests", "options": [{ "type": "Standard", "pricePerNight": 5500, "features": ["Spacious Suite", "Wi-Fi"] }, { "type": "Premium", "pricePerNight": 8500, "features": ["Spacious Suite", "Wi-Fi", "Unlimited Gaming", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 13000, "features": ["Spacious Suite", "Wi-Fi", "Unlimited Gaming", "Breakfast", "Infinity Pool Access", "All Meals"] }] }
       ]
     }
   ]
