@@ -40,12 +40,23 @@ export interface Hotels {
   pricePerNight:number,
   Features:string[]
 }
+export interface Dining {
+  id: number;
+  name: string;
+  cuisine: string;
+  description: string;
+  timing: string;
+  address: string;
+  image: string;
+  topItems: string[];
+}
 export interface ContentData{
   hero:Herodata;
   Offers:offer[];
   Reviews:reviews[];
   Footer:FooterData;
   hotels:Hotels[];
+  dinings:Dining[];
 }
 
 
