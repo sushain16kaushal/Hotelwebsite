@@ -34,6 +34,7 @@ export interface Hotels {
   address:string,
   id:number,
   category:string,
+  image:string,
   guests:number,
   type:string,
   pricePerNight:number,
