@@ -45,7 +45,7 @@ const DiningComponent = (): JSX.Element => {
               
               <div className="mt-6">
                 <button className="w-full lg:w-auto px-10 py-2.5 bg-[#bc9a7c] text-white rounded-full transition-all duration-300 cursor-pointer hover:bg-[#a67c52] hover:shadow-lg active:scale-95 text-sm font-bold shadow-md uppercase tracking-wider">
-                  Choose Us
+                  Book Here
                 </button>
               </div>
             </div>

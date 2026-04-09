@@ -10,12 +10,14 @@ import Dining from './components/Dining'
 import Bookingpage from './components/Bookingpage'
 import Contact from './components/Contact'
 import Errorpage from './Errorpage'
+import Details from './components/Roompage/Details'
 
 const router=createBrowserRouter(
   createRoutesFromElements(
     <Route path='' element={<Homepagelayout />} errorElement={<Errorpage />} >
     <Route path='/' element={<Homepage />} />
     <Route path='/room' element={<Roompage />} />
+    <Route path='/room/:id' element={<Details />} />
     <Route path='/dining' element={<Dining />} />
     <Route path='/booking' element={<Bookingpage />} />
     <Route path='/contact' element={<Contact />} />

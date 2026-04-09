@@ -28,12 +28,23 @@ export interface FooterData{
   text1:string;
   text2:string;
 }
-
+export interface Option {
+  type: string;
+  pricePerNight: number;
+  features: string[];
+}
+export interface RoomCategory {
+  categoryName: string;
+  guests: string;
+  options: Option[];
+  categoryImages:string[];
+}
 export interface Hotels {
   hotelName:string,
   address:string,
-  id:number,
+  hotelId:number,
   category:string,
+  roomCategories:RoomCategory[];
   image:string,
   guests:number,
   type:string,

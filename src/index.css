@@ -61,3 +61,26 @@ body {
 .animate-fadeUp {
  animation: fadeUp 8s cubic-bezier(0.19, 1, 0.22, 1) infinite;
 }
+.carousel-wrapper {
+    height: 70vh;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.main-stage {
+    width: 80%;
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.featured-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.details-container {
+  overflow-anchor: none; /* Ya fir 'auto' try karke dekho browser compatibility ke hisaab se */
+}
