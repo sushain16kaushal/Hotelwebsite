@@ -21,7 +21,7 @@ const Room = ({ hotels }: { hotels: Hotels[] }): JSX.Element => {
           <div className="group relative flex flex-col lg:flex-row border border-[#dcd0c0] p-6 rounded-[2.5rem] bg-[#faf9f6] shadow-sm transition-all duration-500 hover:shadow-2xl hover:border-[#bc9a7c]/40 hover:-translate-y-1 h-full overflow-hidden">
             
             {/* Portrait Image */}
-            <div className="w-full lg:w-64 lg:h-[22rem] h-72 shrink-0 rounded-[2rem] bg-[#fdfcfb] overflow-hidden relative shadow-md">
+            <div className="w-full lg:w-64 lg:h-88 h-72 shrink-0 rounded-4xl bg-[#fdfcfb] overflow-hidden relative shadow-md">
               <img
                 src={`https://ik.imagekit.io/y4ytihgqk/${item.image}?tr=w-500,h-800,fo-auto,q-80`}
                 alt={item.hotelName}

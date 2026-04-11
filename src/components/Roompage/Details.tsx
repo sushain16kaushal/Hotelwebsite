@@ -124,7 +124,7 @@ toast.success(`Success! ${planType} added to your bookings`, {
                 onClick={(e) =>{
                   e.preventDefault();
                    setSelectedCatIndex(idx)}}
-                className={`px-8 py-4 rounded-2xl border-2 transition-all duration-300 text-left min-w-[160px] ${
+                className={`px-8 py-4 rounded-2xl cursor-pointer border-2 transition-all duration-300 text-left min-w-40 ${
                   selectedCatIndex === idx
                     ? "bg-[#bc9a7c] border-[#bc9a7c] text-white shadow-lg scale-105"
                     : "bg-white border-[#eaddca] text-[#4a3f35] hover:border-[#bc9a7c]"
@@ -152,7 +152,7 @@ toast.success(`Success! ${planType} added to your bookings`, {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: idx * 0.6 }}
   
-          className="bg-white/90 backdrop-blur-sm p-7 rounded-[35px] border border-[#eaddca] shadow-sm flex flex-col h-full hover:shadow-xl hover:border-[#bc9a7c]/50 transition-all duration-300 border-t-[5px] border-[#bc9a7c]"
+          className="bg-white/90 backdrop-blur-sm p-7 rounded-[35px] border shadow-sm flex flex-col h-full hover:shadow-xl hover:border-[#bc9a7c]/50 transition-all duration-300 border-t-[5px] border-[#bc9a7c]"
         >
           {/* Header */}
           <div className="mb-4">
@@ -195,7 +195,7 @@ toast.success(`Success! ${planType} added to your bookings`, {
 
           {/* Button */}
           <button onClick={() => handleReserve(opt.type, opt.pricePerNight)}
-          className="w-full py-4 bg-[#4a3f35] text-white rounded-2xl text-sm font-bold hover:bg-[#bc9a7c] transition-all shadow-md active:scale-95 mt-auto">
+          className="w-full  py-4 bg-[#4a3f35] text-white rounded-2xl cursor-pointer text-sm font-bold hover:bg-[#bc9a7c] transition-all shadow-md active:scale-95 mt-auto">
             Reserve {opt.type}
           </button>
         </motion.div>

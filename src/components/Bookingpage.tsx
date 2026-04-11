@@ -133,7 +133,7 @@ const BookingPage = () => {
 <section>
   <div className="flex items-center gap-4 mb-10">
     <h2 className="text-xl font-bold text-[#4a3f35] uppercase tracking-[3px]">Special Packages</h2>
-    <div className="h-[1px] bg-[#eaddca] grow"></div>
+    <div className="h-px bg-[#eaddca] grow"></div>
     <span className="bg-amber-700 text-white text-[10px] px-3 py-1 rounded-full font-bold shadow-sm">
       {offerBookings.length}
     </span>

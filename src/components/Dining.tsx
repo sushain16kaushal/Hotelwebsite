@@ -51,7 +51,7 @@ const DiningComponent = (): JSX.Element => {
           <div className="group relative flex flex-col lg:flex-row border border-[#dcd0c0] p-6 rounded-[2.5rem] bg-[#faf9f6] shadow-sm transition-all duration-500 hover:shadow-2xl hover:border-[#bc9a7c]/40 hover:-translate-y-1 h-full overflow-hidden">
             
             {/* Image Box */}
-            <div className="w-full lg:w-64 lg:h-[22rem] h-72 shrink-0 rounded-[2rem] bg-[#fdfcfb] overflow-hidden relative shadow-md">
+            <div className="w-full lg:w-64 lg:h-88 h-72 shrink-0 rounded-4xl bg-[#fdfcfb] overflow-hidden relative shadow-md">
               <img
                 src={item.image ? `https://ik.imagekit.io/y4ytihgqk/${item.image}?tr=w-500,h-800,fo-auto,q-80` : 'https://via.placeholder.com/500x800?text=Euphoria+Dining'}
                 alt={item.name}
@@ -130,11 +130,11 @@ const DiningComponent = (): JSX.Element => {
             <motion.div 
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setSelectedMenu(null)}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-100 flex items-center justify-center p-4"
             />
             <motion.div 
               initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-[#faf9f6] rounded-[2.5rem] shadow-2xl z-[101] overflow-hidden border border-[#dcd0c0]"
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-[#faf9f6] rounded-[2.5rem] shadow-2xl z-101 overflow-hidden border border-[#dcd0c0]"
             >
               <div className="p-6 border-b border-[#eaddca] flex justify-between items-center bg-white">
                 <div>

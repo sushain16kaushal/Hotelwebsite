@@ -67,7 +67,7 @@ const Header=({hero}:{hero:Herodata}):JSX.Element=>{
   absolute top-16 right-0 w-64 
   bg-white/90 backdrop-blur-xl 
   border border-amber-100/50 
-  rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] 
+  rounded-4xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] 
   p-5 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
   flex flex-col gap-1 z-50
   ${isOpen && isScrolled 

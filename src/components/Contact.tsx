@@ -89,19 +89,19 @@ const ContactPage = () => {
           >
             {/* Quick Links */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <a href="mailto:concierge@euphoriahotels.com" className="group p-6 bg-amber-50 rounded-[2rem] border border-amber-100 transition-all hover:bg-amber-100">
+              <a href="mailto:concierge@euphoriahotels.com" className="group p-6 bg-amber-50 rounded-4xl border border-amber-100 transition-all hover:bg-amber-100">
                 <p className="text-[10px] uppercase font-bold text-amber-800 mb-2 tracking-widest">Email Us</p>
                 <p className="text-sm font-bold text-[#4a3f35] break-all group-hover:underline">stay@euphoriahotels.com</p>
               </a>
 
-              <a href="tel:+919876543210" className="group p-6 bg-stone-900 rounded-[2rem] transition-all hover:bg-stone-800">
+              <a href="tel:+919876543210" className="group p-6 bg-stone-900 rounded-4xl transition-all hover:bg-stone-800">
                 <p className="text-[10px] uppercase font-bold text-amber-200 mb-2 tracking-widest">Call Concierge</p>
                 <p className="text-sm font-bold text-white group-hover:underline">+91 98765 43210</p>
               </a>
             </div>
 
             {/* Google Map Frame */}
-            <div className="rounded-[3rem] overflow-hidden border border-stone-200 shadow-inner h-[350px] relative">
+            <div className="rounded-[3rem] overflow-hidden border border-stone-200 shadow-inner h-87.5 relative">
               <iframe 
                 title="Euphoria Hotels Location"
                 width="100%" 
