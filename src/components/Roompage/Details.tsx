@@ -3,19 +3,18 @@ import { useOutletContext } from "react-router-dom";
 import type { ContentData } from "../../types/content";
 import { useState,useEffect } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
+import { useDispatch } from 'react-redux';
+import { addRoomBooking } from "../../store/bookingSlice";
+import toast, { Toaster } from 'react-hot-toast';
 const Details = () => {
   const data = useOutletContext<ContentData>();
   const { id } = useParams<{ id: string }>();
   const hotelData = data?.hotels ?? [];
-  
-
-
   const [selectedCatIndex, setSelectedCatIndex] = useState(0);
   const [activeImgIndex, setActiveImgIndex] = useState(0);
   const hotel = hotelData.find((h) => h.hotelId === Number(id));
 useEffect(() => {
     setActiveImgIndex(0);
-    window.scrollTo(0, 0);
   }, [selectedCatIndex]);
   if (!hotel) return (
     <div className="h-screen flex items-center justify-center bg-[#f5f1ea]">
@@ -26,8 +25,36 @@ useEffect(() => {
   const category = hotel.roomCategories[selectedCatIndex];
 const nextSlide = () => setActiveImgIndex((prev) => (prev + 1) % category.categoryImages.length);
 const prevSlide = () => setActiveImgIndex((prev) => (prev - 1 + category.categoryImages.length) % category.categoryImages.length);
+const dispatch = useDispatch();
+const handleReserve = (planType: string, price: number) => {
+  const bookingData = {
+    id: Date.now(), // Unique ID for each booking
+    hotelName: hotel.hotelName,
+    roomCategory: category.categoryName,
+    planType: planType,
+    price: price,
+    image: category.categoryImages[0] 
+  };
+dispatch(addRoomBooking(bookingData));
+toast.success(`Success! ${planType} added to your bookings`, {
+    duration: 2000,
+    position: 'bottom-right',
+    style: {
+      background: '#4a3f35',
+      color: '#fff',
+      borderRadius: '15px',
+      fontSize: '14px',
+      padding: '16px'
+    },
+    iconTheme: {
+      primary: '#bc9a7c',
+      secondary: '#fff',
+    },
+  });
+}
   return (
     <div className="min-h-screen bg-[#f5f1ea] pb-20">
+      <Toaster />
       {/* --- HERO IMAGE SECTION (No Text Overlay) --- */}
       <section className="px-4 pt-6">
         <div className="relative w-full h-[70vh] md:h-[80vh] min-h-125 max-h-212.5 rounded-[30px] md:rounded-[40px] overflow-hidden shadow-2xl border border-[#eaddca] bg-[#1a1a1a] group">
@@ -68,16 +95,19 @@ const prevSlide = () => setActiveImgIndex((prev) => (prev - 1 + category.categor
       <div className="max-w-6xl mx-auto px-6 mt-10">
         <header className="mb-12">
           <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+           initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.5 }}
+  transition={{ duration: 1 }}
             className="text-4xl md:text-5xl font-serif font-bold text-[#4a3f35]"
           >
             {hotel.hotelName}
           </motion.h1>
           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+              initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.5 }}
+  transition={{ duration: 1 }}
             className="text-[#8c7e6d] italic mt-3 text-lg"
           >
             {hotel.address}
@@ -111,7 +141,7 @@ const prevSlide = () => setActiveImgIndex((prev) => (prev - 1 + category.categor
 
         {/* --- PRICING GRID --- */}
         <section className="max-w-6xl mx-auto px-6 mb-16">
-  {/* Gap ko gap-8 rakha hai jo ki balanced dikhta hai */}
+  
   <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
     <AnimatePresence mode="popLayout">
       {category?.options.map((opt, idx) => (
@@ -120,8 +150,8 @@ const prevSlide = () => setActiveImgIndex((prev) => (prev - 1 + category.categor
           key={opt.type}
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: idx * 0.1 }}
-          // padding p-7 rakhi hai jo compact bhi hai aur spacious bhi
+          transition={{ delay: idx * 0.6 }}
+  
           className="bg-white/90 backdrop-blur-sm p-7 rounded-[35px] border border-[#eaddca] shadow-sm flex flex-col h-full hover:shadow-xl hover:border-[#bc9a7c]/50 transition-all duration-300 border-t-[5px] border-[#bc9a7c]"
         >
           {/* Header */}
@@ -131,14 +161,29 @@ const prevSlide = () => setActiveImgIndex((prev) => (prev - 1 + category.categor
           </div>
           
           {/* Pricing */}
-          <div className="mb-6 pb-5 border-b border-[#eaddca]/60">
-            <div className="flex items-baseline">
-              <span className="text-3xl font-bold text-[#4a3f35]">₹{opt.pricePerNight}</span>
-              <span className="text-[#8c7e6d] text-xs ml-1 font-medium">/ night</span>
-            </div>
-          </div>
+       <div className="mb-6 pb-6 border-b border-[#eaddca]/50">
+  <p className="text-[10px] tracking-[2px] uppercase text-[#bc9a7c] font-bold mb-1">
+    Best Available Rate
+  </p>
 
-          {/* Features - Spacing adjusted */}
+  <div className="flex items-baseline gap-3">
+
+    <span className="text-4xl font-medium text-[#4a3f35]">
+      ₹{opt.pricePerNight.toLocaleString('en-IN')}
+    </span>
+
+
+    <span className="text-base text-[#8c7e6d]/50 line-through font-light">
+      ₹{Math.round(opt.pricePerNight * 1.1)}
+    </span>
+  </div>
+
+  <p className="text-[12px] text-[#8c7e6d] mt-1 font-light">
+    per night / excluding taxes
+  </p>
+</div>
+
+          {/* Features  */}
           <ul className="space-y-3 mb-8 grow">
             {opt.features.map((f, i) => (
               <li key={i} className="flex items-start text-[#6d5f53] text-[13.5px] leading-snug">
@@ -149,7 +194,8 @@ const prevSlide = () => setActiveImgIndex((prev) => (prev - 1 + category.categor
           </ul>
 
           {/* Button */}
-          <button className="w-full py-4 bg-[#4a3f35] text-white rounded-2xl text-sm font-bold hover:bg-[#bc9a7c] transition-all shadow-md active:scale-95 mt-auto">
+          <button onClick={() => handleReserve(opt.type, opt.pricePerNight)}
+          className="w-full py-4 bg-[#4a3f35] text-white rounded-2xl text-sm font-bold hover:bg-[#bc9a7c] transition-all shadow-md active:scale-95 mt-auto">
             Reserve {opt.type}
           </button>
         </motion.div>

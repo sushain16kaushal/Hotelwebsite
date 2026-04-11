@@ -51,6 +51,11 @@ export interface Hotels {
   pricePerNight:number,
   Features:string[]
 }
+export interface FullMenuItem {
+  item: string;
+  price: number;
+  category: string;
+}
 export interface Dining {
   id: number;
   name: string;
@@ -60,6 +65,7 @@ export interface Dining {
   address: string;
   image: string;
   topItems: string[];
+  fullMenu: FullMenuItem[];
 }
 export interface ContentData{
   hero:Herodata;

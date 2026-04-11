@@ -11,6 +11,8 @@ import Bookingpage from './components/Bookingpage'
 import Contact from './components/Contact'
 import Errorpage from './Errorpage'
 import Details from './components/Roompage/Details'
+import { Provider } from 'react-redux'
+import { store } from './store/store'
 
 const router=createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +29,8 @@ const router=createBrowserRouter(
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <Provider store={store}>
    <RouterProvider router={router} />
+   </Provider>
   </StrictMode>
 )
