@@ -3,11 +3,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 interface BookingState {
   roomBookings: any[];
   diningBookings: any[];
+  offerBookings: any[];
 }
 
 const initialState: BookingState = {
   roomBookings: [],
   diningBookings: [],
+  offerBookings: [],
 };
 
 const bookingSlice = createSlice({
@@ -32,8 +34,21 @@ removeDiningBooking: (state, action: PayloadAction<number>) => {
         (dining) => dining.id !== action.payload
       );
     },
+    addOfferBooking: (state, action: PayloadAction<any>) => {
+    // Check karo ki offer pehle se toh nahi hai (Duplicate handle)
+    const exists = state.offerBookings.find(item => item.id === action.payload.id);
+    if (!exists) {
+      state.offerBookings.push(action.payload);
+    }
+  },
+  removeOfferBooking: (state, action: PayloadAction<number>) => {
+    state.offerBookings = state.offerBookings.filter(
+      (offer) => offer.id !== action.payload
+    );
+  },
   },
 });
 
-export const { addRoomBooking, addDiningBooking, clearBookings,removeRoomBooking,removeDiningBooking } = bookingSlice.actions;
+export const { addRoomBooking, addDiningBooking, clearBookings,removeRoomBooking,removeDiningBooking,addOfferBooking, 
+  removeOfferBooking } = bookingSlice.actions;
 export default bookingSlice.reducer;

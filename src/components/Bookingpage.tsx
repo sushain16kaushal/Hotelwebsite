@@ -5,9 +5,10 @@ import type { RootState } from '../store/store';
 import { removeDiningBooking, removeRoomBooking } from '../store/bookingSlice';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-
+import { removeOfferBooking } from '../store/bookingSlice';
+import toast from 'react-hot-toast';
 const BookingPage = () => {
-  const { roomBookings, diningBookings } = useSelector((state: RootState) => state.booking);
+  const { roomBookings, diningBookings,offerBookings } = useSelector((state: RootState) => state.booking);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [viewingDetails, setViewingDetails] = useState<any>(null);
@@ -45,7 +46,7 @@ const BookingPage = () => {
           <section>
             <div className="flex items-center gap-4 mb-10">
               <h2 className="text-xl font-bold text-[#4a3f35] uppercase tracking-[3px]">Reserved Rooms</h2>
-              <div className="h-[1px] bg-[#eaddca] grow"></div>
+              <div className="h-px bg-[#eaddca] grow"></div>
               <span className="bg-[#bc9a7c] text-white text-[10px] px-3 py-1 rounded-full font-bold shadow-sm">{roomBookings.length}</span>
             </div>
             {roomBookings.length > 0 ? (
@@ -85,7 +86,7 @@ const BookingPage = () => {
           <section>
             <div className="flex items-center gap-4 mb-10">
               <h2 className="text-xl font-bold text-[#4a3f35] uppercase tracking-[3px]">Table Reservations</h2>
-              <div className="h-[1px] bg-[#eaddca] grow"></div>
+              <div className="h-px bg-[#eaddca] grow"></div>
               <span className="bg-[#bc9a7c] text-white text-[10px] px-3 py-1 rounded-full font-bold">{diningBookings.length}</span>
             </div>
             {diningBookings.length > 0 ? (
@@ -128,18 +129,95 @@ const BookingPage = () => {
               </div>
             ) : <EmptyState title="No Tables Booked" type="dining" />}
           </section>
+          {/* --- SPECIAL OFFERS RESERVATIONS --- */}
+<section>
+  <div className="flex items-center gap-4 mb-10">
+    <h2 className="text-xl font-bold text-[#4a3f35] uppercase tracking-[3px]">Special Packages</h2>
+    <div className="h-[1px] bg-[#eaddca] grow"></div>
+    <span className="bg-amber-700 text-white text-[10px] px-3 py-1 rounded-full font-bold shadow-sm">
+      {offerBookings.length}
+    </span>
+  </div>
+
+  {offerBookings.length > 0 ? (
+    <div className="grid gap-6">
+      <AnimatePresence mode='popLayout'>
+        {offerBookings.map((offer) => (
+          <motion.div 
+            layout 
+            key={offer.id}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, x: 100 }}
+            className="group bg-[#faf9f6] border border-[#dcd0c0] rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-all duration-500"
+          >
+            {/* Offer Image Thumbnail */}
+            <div className="w-full md:w-48 h-40 md:h-auto shrink-0 overflow-hidden">
+             <img 
+  src={`https://ik.imagekit.io/y4ytihgqk/${offer.image}?tr=w-400,h-400`} 
+  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+  alt={offer.title} 
+  /* Image load na ho toh fallback ke liye */
+  onError={(e) => {
+    (e.target as HTMLImageElement).src = 'https://via.placeholder.com/400x400?text=Experience';
+  }}
+/>
+            </div>
+
+            {/* Offer Details */}
+            <div className="p-6 flex flex-col justify-between grow">
+              <div className="flex flex-col md:flex-row justify-between items-start gap-4">
+                <div>
+                  <span className="text-[9px] uppercase tracking-[2px] text-amber-700 font-bold bg-amber-50 px-2 py-0.5 rounded-md">Special Experience</span>
+                  <h3 className="text-xl font-serif font-bold text-[#4a3f35] mt-1">{offer.title}</h3>
+                  <p className="text-[11px] text-[#8c7e6d] mt-2 line-clamp-2 italic">{offer.description}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xl font-bold text-[#4a3f35]">₹{offer.price}</p>
+                </div>
+              </div>
+
+              <div className="mt-6 flex justify-between items-center pt-4 border-t border-[#eaddca]/40">
+                <button 
+                  onClick={() => {
+                    dispatch(removeOfferBooking(offer.id));
+                    
+                  }}
+                  className="text-[10px] font-bold text-red-400 uppercase tracking-widest hover:text-red-600 transition-colors cursor-pointer"
+                >
+                  Remove Package
+                </button>
+                
+                <button 
+                  onClick={() => toast.success(`Proceeding to pay for ${offer.title}`)}
+                  className="px-6 py-2.5 bg-amber-800 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-[#4a3f35] transition-all shadow-md active:scale-95"
+                >
+                  Pay For Package
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </div>
+  ) : (
+    <div className="text-center py-10 bg-white/30 rounded-4xl border-2 border-dashed border-[#eaddca]">
+       <p className="text-[#8c7e6d] italic text-sm">No special experiences claimed yet.</p>
+    </div>
+  )}
+</section>
         </div>
       </div>
 
       {/* --- RE-ADDED MODAL WINDOW --- */}
       <AnimatePresence>
         {viewingDetails && (
-          <div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-999 flex items-center justify-center p-4">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setViewingDetails(null)} className="absolute inset-0 bg-[#4a3f35]/60 backdrop-blur-md" />
             <motion.div initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.9, opacity: 0, y: 20 }} className="relative w-full max-w-lg bg-[#faf9f6] rounded-[3rem] shadow-2xl overflow-hidden border border-[#dcd0c0]">
               <div className="relative h-56 bg-[#4a3f35]">
                 <img src={`https://ik.imagekit.io/y4ytihgqk/${viewingDetails.image}?tr=w-800,h-500`} className="w-full h-full object-cover opacity-80" alt="" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#4a3f35] to-transparent"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-[#4a3f35] to-transparent"></div>
                 <button onClick={() => setViewingDetails(null)} className="absolute top-6 right-6 bg-white/20 backdrop-blur-lg p-2 rounded-full hover:bg-white/40 transition-colors cursor-pointer"><svg width="20" height="20" fill="none" stroke="white" strokeWidth="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
                 <div className="absolute bottom-6 left-8 text-white">
                   <p className="text-[10px] uppercase tracking-[3px] font-bold opacity-80 mb-1">Reservation Detail</p>
@@ -167,6 +245,7 @@ const BookingPage = () => {
           </div>
         )}
       </AnimatePresence>
+      
     </div>
   );
 };

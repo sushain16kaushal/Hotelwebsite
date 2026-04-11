@@ -16,7 +16,8 @@ export interface offer{
     title:string,
   url:string,
   description:string,
-  price:number
+  price:number,
+  image:string
 }
 export interface reviews{
   id:number,
