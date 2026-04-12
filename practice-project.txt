@@ -1,0 +1,189 @@
+LUXURY HOTEL WEBSITE
+React + TypeScript Frontend Project
+==================================
+
+PROJECT OVERVIEW
+----------------
+This is a luxury hotel frontend website built using React and TypeScript.
+The project focuses on modern UI/UX, animations, routing, lazy loading,
+and clean component architecture.
+
+Backend and payment logic are intentionally excluded.
+All booking and form interactions are UI-based for frontend practice.
+
+This project is designed for learning and interview demonstration.
+
+
+TECH STACK
+----------
+- React
+- TypeScript
+- React Router
+- Framer Motion (animations)
+- CSS / Tailwind / Styled Components (as preferred)
+- Lazy Loading (React.lazy, Intersection Observer)
+- Embedded iframe map
+
+
+CORE CONCEPTS PRACTICED
+----------------------
+- Component-based architecture
+- React Hooks:
+  - useState
+  - useEffect
+  - useRef
+  - useCallback
+- Client-side routing
+- Lazy loading pages and images
+- Scroll-based animations
+- Reusable UI components
+- UX-focused layout design
+
+
+PAGES & FEATURES
+================
+
+1. HOME PAGE
+------------
+- Header with hotel name
+- Navbar with navigation links
+- Navbar becomes compact on scroll
+- Side "Book Now" button navigates to booking page
+
+- Highlights carousel:
+  - Hotel building
+  - Staff at work
+  - Activities
+  - Auto slide + manual swipe
+  - Hover pause enabled
+  - Luxury tagline slider included
+
+- Special pricing offers section:
+  - Limited time offers
+  - Price reveal animation
+  - Book Now CTA
+
+- Reviews section:
+  - Auto-scrolling reviews
+  - Star rating visuals
+
+- Footer:
+  - Subtle background gradient
+  - Quote
+  - Hotel address text
+
+- Section fade-in animations on scroll
+
+
+2. ROOMS PAGE
+-------------
+- Four room categories:
+  - Single Bedroom
+  - Double Bedroom
+  - Luxury Deluxe Room
+  - VIP Room
+
+- Each section includes:
+  - 5–6 room images
+  - Smooth image slider
+  - Hover zoom on images
+  - Fade-in animation on scroll
+
+- No separate room detail page
+- Direct focus on visual experience
+
+
+3. DINING & EXPERIENCES PAGE
+----------------------------
+- Image slider with dining area visuals
+- Food menu section with smooth animations
+- Special dishes section:
+  - Category-based cards
+  - 2–3 special dishes per category
+  - Animated cards using Framer Motion
+
+- Lazy loading applied to images and cards
+- Hover and entry animations for premium feel
+
+
+4. BOOKING PAGE
+---------------
+- Three premium room cards
+- Each card includes:
+  - Room image
+  - Room name
+  - Two-line description
+  - Old price (strikethrough)
+  - New discounted price
+  - "Per Night" label
+  - Buy Now button (UI-only)
+
+- Animations:
+  - Fade-in on scroll
+  - Staggered card entry
+  - Hover lift with shadow
+  - Subtle price reveal animation
+
+- No backend or payment logic
+- Optional hover info (sample data only):
+  - Rooms booked
+  - Availability
+
+
+5. CONTACT & LOCATION PAGE
+--------------------------
+- Embedded iframe map with pinned location
+- Lazy loading applied to map
+- Subtle zoom-in animation on entry
+
+- Contact section:
+  - "Call Us" button
+  - Mobile: opens phone dialer
+  - Desktop: phone number shown as text
+
+- Email section:
+  - Gmail / mail button
+  - Opens mailbox using mailto
+  - Email shown as text fallback
+
+- Address displayed clearly
+
+- Social media handles:
+  - Facebook and Instagram
+  - Display only (no redirects)
+  - Hover animations
+
+- Feedback form:
+  - Name
+  - Email
+  - Message
+  - UI-only submit
+  - Success message animation
+  - Form reset after submit
+
+
+PERFORMANCE OPTIMIZATION
+------------------------
+- Lazy loading applied to:
+  - All pages except Home
+  - Images
+  - Cards
+  - Embedded map
+
+- Optimized animations for smooth UX
+
+
+PROJECT GOALS
+-------------
+- Practice real-world React concepts
+- Improve UI/UX and animation skills
+- Learn lazy loading and performance optimization
+- Build a resume-ready frontend project
+- Prepare for frontend interviews
+
+
+NOTE
+----
+This project is frontend-focused.
+All data, bookings, and forms are mock implementations.
+Backend integration can be added in future versions.
