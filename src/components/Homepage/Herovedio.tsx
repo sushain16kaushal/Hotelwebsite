@@ -31,7 +31,7 @@ const ReelCard = ({ reel }: { reel: Reeldata }) => {
         else handleMouseLeave();
       }}
       whileHover={{ y: -15, scale: 1.02 }}
-      className="relative group aspect-[9/16] w-full overflow-hidden rounded-[3rem] bg-stone-100 shadow-2xl border border-stone-200/50 cursor-pointer"
+      className="relative group aspect-9/16 w-full overflow-hidden rounded-[3rem] bg-stone-100 shadow-2xl border border-stone-200/50 cursor-pointer"
     >
       <video
         ref={videoRef}
@@ -59,7 +59,7 @@ const ReelCard = ({ reel }: { reel: Reeldata }) => {
         {!isHovered && (
           <div className="flex items-center gap-2 transition-all duration-500">
             <div className="w-8 h-8 rounded-full border border-white/40 flex items-center justify-center bg-white/10 backdrop-blur-sm">
-              <div className="w-0 h-0 border-t-[5px] border-t-transparent border-l-[8px] border-l-white border-b-[5px] border-b-transparent ml-1"></div>
+              <div className="w-0 h-0 border-t-[5px] border-t-transparent border-l-8px border-l-white border-b-[5px] border-b-transparent ml-1"></div>
             </div>
             <span className="text-[9px] text-white uppercase tracking-widest font-bold">Preview</span>
           </div>
