@@ -11,6 +11,13 @@ export interface Herodata{
   subtitle:string;
   navbar:Navbar;
 }
+export interface Reeldata{
+id:number;
+title:string;
+tag:string;
+videoUrl:string;
+posterUrl:string;
+}
 export interface offer{
     id:number,
     title:string,
@@ -70,6 +77,7 @@ export interface Dining {
 }
 export interface ContentData{
   hero:Herodata;
+  reeldata:Reeldata[];
   Offers:offer[];
   Reviews:reviews[];
   Footer:FooterData;

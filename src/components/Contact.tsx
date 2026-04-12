@@ -96,7 +96,7 @@ const ContactPage = () => {
 
               <a href="tel:+919876543210" className="group p-6 bg-stone-900 rounded-4xl transition-all hover:bg-stone-800">
                 <p className="text-[10px] uppercase font-bold text-amber-200 mb-2 tracking-widest">Call Concierge</p>
-                <p className="text-sm font-bold text-white group-hover:underline">+91 98765 43210</p>
+                <p className="text-sm font-bold text-white group-hover:underline">+91 98765 XXXXX</p>
               </a>
             </div>
 

@@ -6,6 +6,7 @@ import Review from "./Review";
 
 import { useOutletContext } from "react-router-dom";
 import  { HeroSection } from "./HeroSection";
+import Herovedio from "./Herovedio";
 
 
 
@@ -25,6 +26,9 @@ const Homepage=()=>{
   <div className="w-full ">
         <HeroSection  />
         </div>
+        </div>
+        <div>
+          <Herovedio reeldata={data?.reeldata ?? []} />
         </div>
         <div className="w-full  z-0 mt-3 md:mt-6">
           <h2 className="text-2xl md:text-3xl text-center text-gray-800 font-serif">Our offers</h2>
