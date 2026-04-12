@@ -1,0 +1,970 @@
+{
+    "hero":{
+        "title":"Euphoria Hotels Of Shimla",
+        "subtitle":"Collect Moments,Not Things",
+        "navbar":{
+            "home":"Home",
+            "Hotels":"Hotels",
+            "Dining":"Dining",
+            "booking":"Booking",
+            "contact":"Contact"
+        }
+    },
+ "reeldata":[
+  {
+    "id": 1,
+    "title": "Mountain Mystique",
+    "tag": "Nature",
+    "videoUrl": "https://ik.imagekit.io/y4ytihgqk/Shimla.mp4?tr=so-170,eo-180,q-40,f-webm",
+    "posterUrl": "https://ik.imagekit.io/y4ytihgqk/Shimla.mp4/ik-thumbnail.jpg?tr=so-5"
+  },
+  {
+    "id": 2,
+    "title": "Heritage Vibe",
+    "tag": "Architecture",
+    "videoUrl": "https://ik.imagekit.io/y4ytihgqk/Shimla.mp4?tr=so-35,eo-45,q-40,f-webm",
+    "posterUrl": "https://ik.imagekit.io/y4ytihgqk/Shimla.mp4/ik-thumbnail.jpg?tr=so-16"
+  },
+  {
+    "id": 3,
+    "title": "Sunset Peak",
+    "tag": "View",
+    "videoUrl": "https://ik.imagekit.io/y4ytihgqk/Shimla.mp4?tr=so-80,eo-90,q-40,f-webm",
+    "posterUrl": "https://ik.imagekit.io/y4ytihgqk/Shimla.mp4/ik-thumbnail.jpg?tr=so-27"
+  }
+],
+  "Offers":[{
+    "id": "1",
+    "title": "Romantic Escape",
+    "description": "Indulge in a candle-lit dinner, rose petal room decor, and a bottle of premium champagne on arrival.",
+    "price": "19999",
+    "image":"istockphoto-1904047787-612x612.jpg"
+  },
+  {
+    "id": "2",
+    "title": "Weekend Wellness Retrat",
+    "description": "Rejuvenate your soul with unlimited spa access, guided yoga sessions, and organic gourmet breakfast.",
+    "price": "18999",
+    "image":"pexels-rdne-6724383.jpg"
+  },
+  {
+    "id": "3",
+    "title": "Business Traveller Plus",
+    "description": "Enjoy high-speed Wi-Fi, complimentary airport transfers, and express laundry services for a seamless stay.",
+    "price": "15999",
+    "image":"pexels-channnsy-141446585-32309990.jpg"
+  },
+  {
+    "id": "4",
+    "title": "Family Fun Vacation",
+    "description": "Kids stay and eat for free! Includes access to the water park, kids' club activities, and family suites.",
+    "price": "45999",
+    "image":"pexels-kampus-7669127.jpg"
+  },
+  {
+    "id": "5",
+    "title": "Summer Early Bird",
+    "description": "Book 30 days in advance to unlock exclusive discounts on luxury suites and rooftop pool access.",
+    "price": "12999",
+    "image":"pexels-soc-nang-d-ng-2150345854-34810101.jpg"
+  }] ,
+  "Reviews":[
+  { "id": 1, "name": "Amit", "text": "Excellent stay! Staff was very polite and helpful.", "rating": 5 },
+  { "id": 2, "name": "Riya", "text": "Rooms were clean and very comfortable. Loved the ambience.", "rating": 4 },
+  { "id": 3, "name": "Karan", "text": "Food quality was amazing, especially breakfast buffet.", "rating": 5 },
+  { "id": 4, "name": "Neha", "text": "Great location and peaceful environment. Worth the price.", "rating": 4 },
+  { "id": 5, "name": "Rahul", "text": "Luxury feel and quick service. Highly recommended!", "rating": 5 },
+  { "id": 6, "name": "Pooja", "text": "Very cozy rooms and friendly staff. Will visit again.", "rating": 5 },
+  { "id": 7, "name": "Arjun", "text": "Good experience overall. Minor delay in room service.", "rating": 4 },
+  { "id": 8, "name": "Simran", "text": "Beautiful interiors and very hygienic place.", "rating": 5 },
+  { "id": 9, "name": "Vikas", "text": "Value for money. Comfortable stay.", "rating": 4 },
+  { "id": 10, "name": "Anjali", "text": "Loved the hospitality and warm welcome.", "rating": 5 },
+  { "id": 11, "name": "Rohit", "text": "Perfect for family stay. Safe and peaceful.", "rating": 5 },
+  { "id": 12, "name": "Megha", "text": "Good rooms, nice view, and great service.", "rating": 4 },
+  { "id": 13, "name": "Sandeep", "text": "Premium experience at a reasonable price.", "rating": 5 },
+  { "id": 14, "name": "Nisha", "text": "Clean rooms and tasty food. Enjoyed a lot.", "rating": 4 },
+  { "id": 15, "name": "Manish", "text": "One of the best hotels I’ve stayed in. Superb service!", "rating": 5 }
+]
+,
+"Footer":{
+    "text1":"Designed for comfort,Crafted for luxury",
+    "text2":"Main Branch :- Sunset View Point Road,Summer Hill, Shimla – 171005,Himachal Pradesh, India"
+}
+,
+
+  "hotels": [
+    {
+      "hotelId": 101,
+      "hotelName": "Euphoria Grand Residency – Summer Hill",
+      "address": "Sunset View Point Road, Summer Hill, Shimla – 171005",
+      "image": "pexels-kaipro-29534167.jpg",
+      "roomCategories": [
+      {
+      "categoryName": "Single Bed",
+      "guests": "1 Guest",
+      "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 1500, "features": ["Free Wi-Fi", "TV", "Room Service"] },
+        { "type": "Premium", "pricePerNight": 2200, "features": ["Free Wi-Fi", "TV", "Room Service", "Smart TV upgrade", "Complimentary Breakfast", "Tea/Coffee Maker"] },
+        { "type": "Luxury", "pricePerNight": 3500, "features": ["Free Wi-Fi", "TV", "Room Service", "Smart TV upgrade", "Complimentary Breakfast", "Tea/Coffee Maker", "4K Netflix Access", "Mini Bar", "All Meals Included", "Room Heater"] }
+      ]
+    },
+    {
+      "categoryName": "Double Bed",
+      "guests": "2 Guests",
+      "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 2500, "features": ["Free Wi-Fi", "Smart TV", "Intercom"] },
+        { "type": "Premium", "pricePerNight": 3800, "features": ["Free Wi-Fi", "Smart TV", "Intercom", "Balcony View", "Breakfast Buffet", "Gaming Zone (1 Time)"] },
+        { "type": "Luxury", "pricePerNight": 5500, "features": ["Free Wi-Fi", "Smart TV", "Intercom", "Balcony View", "Breakfast Buffet", "Gaming Zone (1 Time)", "Private Jacuzzi", "Bottle of Wine", "All Meals", "Late Check-out"] }
+      ]
+    },
+    {
+      "categoryName": "Family Size",
+      "guests": "Multiple Guests",
+      "categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 4500, "features": ["Extra Bed", "Free Wi-Fi", "TV"] },
+        { "type": "Premium", "pricePerNight": 7000, "features": ["Extra Bed", "Free Wi-Fi", "TV", "Kids Play Area Access", "Family Breakfast", "Movie Night Setup"] },
+        { "type": "Luxury", "pricePerNight": 11000, "features": ["Extra Bed", "Free Wi-Fi", "TV", "Kids Play Area Access", "Family Breakfast", "Movie Night Setup", "Connecting Suite", "Private Lounge", "All Inclusive Meals", "Personal Butler"] }
+      ]
+    }
+      ]
+    },
+    {
+      "hotelId": 102,
+      "hotelName": "Euphoria Heritage Palace – Mashobra",
+      "address": "Near Forest Sanctuary, Mashobra, Shimla – 171007",
+      "image": "pexels-gottapics-7201513.jpg",
+      "roomCategories": [
+        {
+          "categoryName": "Single Bed", "guests": "1 Guest",
+            "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ],
+          "options": [
+            { "type": "Standard", "pricePerNight": 1400, "features": ["Basic Wi-Fi", "Housekeeping"] },
+            { "type": "Premium", "pricePerNight": 2000, "features": ["Basic Wi-Fi", "Housekeeping", "Mountain View Window", "Breakfast"] },
+            { "type": "Luxury", "pricePerNight": 3200, "features": ["Basic Wi-Fi", "Housekeeping", "Mountain View Window", "Breakfast", "Organic Farm Meals", "Yoga Session"] }
+          ]
+        },
+        {
+          "categoryName": "Double Bed", "guests": "2 Guests",
+              "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ],
+          "options": [
+            { "type": "Standard", "pricePerNight": 2400, "features": ["Wi-Fi", "TV", "Hot Water"] },
+            { "type": "Premium", "pricePerNight": 3600, "features": ["Wi-Fi", "TV", "Hot Water", "Fireplace", "Breakfast & Dinner"] },
+            { "type": "Luxury", "pricePerNight": 5200, "features": ["Wi-Fi", "TV", "Hot Water", "Fireplace", "Breakfast & Dinner", "Open Air Bathtub", "Guided Trekking"] }
+          ]
+        },
+        {
+          "categoryName": "Family Size", "guests": "Multiple Guests",
+            "categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ],
+          "options": [
+            { "type": "Standard", "pricePerNight": 4200, "features": ["Spacious Room", "TV"] },
+            { "type": "Premium", "pricePerNight": 6800, "features": ["Spacious Room", "TV", "Bonfire Setup", "Breakfast"] },
+            { "type": "Luxury", "pricePerNight": 10500, "features": ["Spacious Room", "TV", "Bonfire Setup", "Breakfast", "Private Garden", "Full Board Meals", "Luxury Car Transfer"] }
+          ]
+        }
+      ]
+    },
+    {
+      "hotelId": 103, "hotelName": "Euphoria Mountain View – Shoghi", "address": "Tara Devi Temple Road, Shoghi – 171219","image": "pexels-nida-kurt-5079840-17836121.jpg", "roomCategories": [
+        { "categoryName": "Single Bed", "guests": "1 Guest",      "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 1300, "features": ["Wi-Fi", "TV"] }, { "type": "Premium", "pricePerNight": 1900, "features": ["Wi-Fi", "TV", "Hill View", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 2800, "features": ["Wi-Fi", "TV", "Hill View", "Breakfast", "Luxury Bedding", "Room Heater"] }] },
+        { "categoryName": "Double Bed", "guests": "2 Guests",        
+         "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 2200, "features": ["Wi-Fi", "TV"] }, { "type": "Premium", "pricePerNight": 3400, "features": ["Wi-Fi", "TV", "Private Balcony", "Smart TV"] }, { "type": "Luxury", "pricePerNight": 4900, "features": ["Wi-Fi", "TV", "Private Balcony", "Smart TV", "Sky View Ceiling", "Spa Session"] }] },
+        { "categoryName": "Family Size", "guests": "Multiple Guests",     
+         "categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ],"options": [{ "type": "Standard", "pricePerNight": 4000, "features": ["Wi-Fi", "TV"] }, { "type": "Premium", "pricePerNight": 6200, "features": ["Wi-Fi", "TV", "Breakfast", "Indoor Games"] }, { "type": "Luxury", "pricePerNight": 9800, "features": ["Wi-Fi", "TV", "Breakfast", "Indoor Games", "Private BBQ", "All Meals"] }] }
+      ]
+    },
+    {
+      "hotelId": 104, "hotelName": "Euphoria Pine Forest – Kufri", "address": "Main Road, Kufri – 171012","image": "pexels-richard-l-2150581203-31381516.jpg", "roomCategories": [
+        { "categoryName": "Single Bed", "guests": "1 Guest",
+          "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 1200, "features": ["Wi-Fi"] }, { "type": "Premium", "pricePerNight": 1800, "features": ["Wi-Fi", "Heater", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 2600, "features": ["Wi-Fi", "Heater", "Breakfast", "Electric Blanket", "Forest View"] }] },
+        { "categoryName": "Double Bed", "guests": "2 Guests", "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 2100, "features": ["Wi-Fi", "TV"] }, { "type": "Premium", "pricePerNight": 3200, "features": ["Wi-Fi", "TV", "Snow View Balcony", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 4600, "features": ["Wi-Fi", "TV", "Snow View Balcony", "Breakfast", "Private Fireplace", "Dinner"] }] },
+        { "categoryName": "Family Size", "guests": "Multiple Guests",   "categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 3900, "features": ["Wi-Fi", "Extra Bed"] }, { "type": "Premium", "pricePerNight": 6000, "features": ["Wi-Fi", "Extra Bed", "Play Zone Access", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 9500, "features": ["Wi-Fi", "Extra Bed", "Play Zone Access", "Breakfast", "Horse Riding Session", "All Meals"] }] }
+      ]
+    },
+    {
+      "hotelId": 105, "hotelName": "Euphoria City Center – Mall Road", "address": "Mall Road, Shimla – 171001","image": "pexels-trieu-kim-tran-489969244-17226324.jpg", "roomCategories": [
+        { "categoryName": "Single Bed", "guests": "1 Guest",
+          "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 2000, "features": ["Prime Location", "Wi-Fi"] }, { "type": "Premium", "pricePerNight": 2800, "features": ["Prime Location", "Wi-Fi", "Coffee Maker", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 4000, "features": ["Prime Location", "Wi-Fi", "Coffee Maker", "Breakfast", "4K TV", "Soundproof Room"] }] },
+        { "categoryName": "Double Bed", "guests": "2 Guests",
+         "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 3500, "features": ["Heritage Decor", "Wi-Fi"] }, { "type": "Premium", "pricePerNight": 5000, "features": ["Heritage Decor", "Wi-Fi", "Ridge View", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 7500, "features": ["Heritage Decor", "Wi-Fi", "Ridge View", "Breakfast", "Butler Service", "Mini Bar"] }] },
+        { "categoryName": "Family Size", "guests": "Multiple Guests", "categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 6000, "features": ["Connecting Room", "Wi-Fi"] }, { "type": "Premium", "pricePerNight": 9000, "features": ["Connecting Room", "Wi-Fi", "VIP Lounge", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 14000, "features": ["Connecting Room", "Wi-Fi", "VIP Lounge", "Breakfast", "Private Tour Guide", "All Meals"] }] }
+      ]
+    },
+    {
+      "hotelId": 106, "hotelName": "Euphoria Valley Retreat – Sanjauli", "address": "Near Hanuman Mandir, Sanjauli – 171006","image": "pexels-blackphant-21327974.jpg", "roomCategories": [
+        { "categoryName": "Single Bed", "guests": "1 Guest",
+           "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 1100, "features": ["Clean Bedding", "Wi-Fi"] }, { "type": "Premium", "pricePerNight": 1600, "features": ["Clean Bedding", "Wi-Fi", "City View", "TV"] }, { "type": "Luxury", "pricePerNight": 2400, "features": ["Clean Bedding", "Wi-Fi", "City View", "TV", "Smart TV", "Dinner Included"] }] },
+        { "categoryName": "Double Bed", "guests": "2 Guests",
+         "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 1900, "features": ["Wi-Fi", "TV"] }, { "type": "Premium", "pricePerNight": 2900, "features": ["Wi-Fi", "TV", "Breakfast", "Evening Snacks"] }, { "type": "Luxury", "pricePerNight": 4200, "features": ["Wi-Fi", "TV", "Breakfast", "Evening Snacks", "Candlelight Dinner", "Flower Decor"] }] },
+        { "categoryName": "Family Size", "guests": "Multiple Guests", "categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 3500, "features": ["Wi-Fi", "Hot Water"] }, { "type": "Premium", "pricePerNight": 5500, "features": ["Wi-Fi", "Hot Water", "Breakfast", "Board Games"] }, { "type": "Luxury", "pricePerNight": 8500, "features": ["Wi-Fi", "Hot Water", "Breakfast", "Board Games", "Unlimited Tea/Coffee", "Private Cab Service"] }] }
+      ]
+    },
+    {
+      "hotelId": 107, "hotelName": "Euphoria Clouds Inn – Fagu", "address": "Apple Orchard Hills, Fagu – 171209","image": "pexels-jasmin-borsig-2154982919-33487088.jpg", "roomCategories": [
+        { "categoryName": "Single Bed", "guests": "1 Guest",
+             "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 1250, "features": ["Wi-Fi", "Electric Kettle"] }, { "type": "Premium", "pricePerNight": 1850, "features": ["Wi-Fi", "Electric Kettle", "Cloud View", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 2700, "features": ["Wi-Fi", "Electric Kettle", "Cloud View", "Breakfast", "Private Heater", "Dry Cleaning"] }] },
+        { "categoryName": "Double Bed", "guests": "2 Guests",
+          "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 2300, "features": ["Wi-Fi", "TV"] }, { "type": "Premium", "pricePerNight": 3400, "features": ["Wi-Fi", "TV", "Orchard View", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 5000, "features": ["Wi-Fi", "TV", "Orchard View", "Breakfast", "Hammock on Balcony", "Pick & Drop"] }] },
+        { "categoryName": "Family Size", "guests": "Multiple Guests","categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 4100, "features": ["Wi-Fi", "Big Balcony"] }, { "type": "Premium", "pricePerNight": 6300, "features": ["Wi-Fi", "Big Balcony", "Breakfast", "Trekking Gear"] }, { "type": "Luxury", "pricePerNight": 9900, "features": ["Wi-Fi", "Big Balcony", "Breakfast", "Trekking Gear", "Personal Photographer", "All Meals"] }] }
+      ]
+    },
+    {
+      "hotelId": 108, "hotelName": "Euphoria Golf Greens – Naldehra", "address": "Near Golf Course, Naldehra – 171007","image": "pexels-han-798356342-35625501.jpg", "roomCategories": [
+        { "categoryName": "Single Bed", "guests": "1 Guest",
+          "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 1600, "features": ["Wi-Fi", "Golf View"] }, { "type": "Premium", "pricePerNight": 2300, "features": ["Wi-Fi", "Golf View", "Club Entry", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 3600, "features": ["Wi-Fi", "Golf View", "Club Entry", "Breakfast", "Golf Lesson", "Spa access"] }] },
+        { "categoryName": "Double Bed", "guests": "2 Guests", "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ],  "options": [{ "type": "Standard", "pricePerNight": 3000, "features": ["Wi-Fi", "Smart TV"] }, { "type": "Premium", "pricePerNight": 4500, "features": ["Wi-Fi", "Smart TV", "Breakfast Buffet", "Evening Snacks"] }, { "type": "Luxury", "pricePerNight": 6800, "features": ["Wi-Fi", "Smart TV", "Breakfast Buffet", "Evening Snacks", "Private Fireplace", "Steam Room Access"] }] },
+        { "categoryName": "Family Size", "guests": "Multiple Guests","categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ], "options": [{ "type": "Standard", "pricePerNight": 5500, "features": ["Spacious Suite", "Wi-Fi"] }, { "type": "Premium", "pricePerNight": 8500, "features": ["Spacious Suite", "Wi-Fi", "Unlimited Gaming", "Breakfast"] }, { "type": "Luxury", "pricePerNight": 13000, "features": ["Spacious Suite", "Wi-Fi", "Unlimited Gaming", "Breakfast", "Infinity Pool Access", "All Meals"] }] }
+      ]
+    },
+    {
+  "hotelId": 109,
+  "hotelName": "Euphoria Snow Peaks Resort – Chail",
+  "address": "Near Chail Palace, Chail – 173217",
+"image": "pexels-julio-lopez-75309646-16043584.jpg",
+  "roomCategories": [
+    {
+      "categoryName": "Single Bed",
+      "guests": "1 Guest",
+       "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 1500, "features": ["Wi-Fi", "TV"] },
+        { "type": "Premium", "pricePerNight": 2100, "features": ["Wi-Fi", "TV", "Balcony View", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 3200, "features": ["Wi-Fi", "TV", "Balcony View", "Breakfast", "Fireplace", "Dinner"] }
+      ]
+    },
+    {
+      "categoryName": "Double Bed",
+      "guests": "2 Guests",
+       "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 2600, "features": ["Wi-Fi", "TV"] },
+        { "type": "Premium", "pricePerNight": 3900, "features": ["Wi-Fi", "TV", "Breakfast", "Bonfire"] },
+        { "type": "Luxury", "pricePerNight": 5600, "features": ["Wi-Fi", "TV", "Breakfast", "Bonfire", "Jacuzzi", "Dinner"] }
+      ]
+    },
+    {
+      "categoryName": "Family Size",
+      "guests": "Multiple Guests",
+      "categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 4500, "features": ["Wi-Fi", "Extra Bed"] },
+        { "type": "Premium", "pricePerNight": 7000, "features": ["Wi-Fi", "Extra Bed", "Breakfast", "Games"] },
+        { "type": "Luxury", "pricePerNight": 10500, "features": ["Wi-Fi", "Extra Bed", "Breakfast", "Games", "Private Suite", "All Meals"] }
+      ]
+    }
+  ]
+},
+{
+  "hotelId": 110,
+  "hotelName": "Euphoria Riverside Stay – Tattapani",
+  "address": "Near Sutlej River, Tattapani – 171302",
+  "image": "pexels-lexi-lauwers-1431940-17895736.jpg",
+  "roomCategories": [
+    {
+      "categoryName": "Single Bed",
+      "guests": "1 Guest",
+         "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 1400, "features": ["Wi-Fi"] },
+        { "type": "Premium", "pricePerNight": 2000, "features": ["Wi-Fi", "River View", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 3100, "features": ["Wi-Fi", "River View", "Breakfast", "Hot Spring Access"] }
+      ]
+    },
+    {
+      "categoryName": "Double Bed",
+      "guests": "2 Guests",
+        "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 2500, "features": ["Wi-Fi", "TV"] },
+        { "type": "Premium", "pricePerNight": 3700, "features": ["Wi-Fi", "TV", "Breakfast", "River Rafting"] },
+        { "type": "Luxury", "pricePerNight": 5300, "features": ["Wi-Fi", "TV", "Breakfast", "River Rafting", "Spa"] }
+      ]
+    },
+    {
+      "categoryName": "Family Size",
+      "guests": "Multiple Guests",
+        "categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 4200, "features": ["Wi-Fi"] },
+        { "type": "Premium", "pricePerNight": 6800, "features": ["Wi-Fi", "Breakfast", "Campfire"] },
+        { "type": "Luxury", "pricePerNight": 10200, "features": ["Wi-Fi", "Breakfast", "Campfire", "Adventure Package"] }
+      ]
+    }
+  ]
+},
+{
+  "hotelId": 111,
+  "hotelName": "Euphoria Royal Heights – Solan",
+  "address": "Mall Road Extension, Solan – 173212",
+  "image": "pexels-khaled-damlakhi-337914115-16708972.jpg",
+  "roomCategories": [
+    {
+      "categoryName": "Single Bed",
+      "guests": "1 Guest",
+       "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 1300, "features": ["Wi-Fi"] },
+        { "type": "Premium", "pricePerNight": 1900, "features": ["Wi-Fi", "City View", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 2900, "features": ["Wi-Fi", "City View", "Breakfast", "Smart TV"] }
+      ]
+    },
+    {
+      "categoryName": "Double Bed",
+      "guests": "2 Guests",
+       "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 2300, "features": ["Wi-Fi", "TV"] },
+        { "type": "Premium", "pricePerNight": 3400, "features": ["Wi-Fi", "TV", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 4900, "features": ["Wi-Fi", "TV", "Breakfast", "Jacuzzi"] }
+      ]
+    },
+    {
+      "categoryName": "Family Size",
+      "guests": "Multiple Guests",
+        "categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 4000, "features": ["Wi-Fi"] },
+        { "type": "Premium", "pricePerNight": 6200, "features": ["Wi-Fi", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 9500, "features": ["Wi-Fi", "Breakfast", "Private Lounge"] }
+      ]
+    }
+  ]
+},
+{
+  "hotelId": 112,
+  "hotelName": "Euphoria Lake View – Renuka Ji",
+  "address": "Renuka Lake Road, Sirmaur – 173022",
+  "image": "pexels-nurs-raw-42373260-16696328.jpg",
+  "roomCategories": [
+    {
+      "categoryName": "Single Bed",
+      "guests": "1 Guest",
+      "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 1200, "features": ["Wi-Fi"] },
+        { "type": "Premium", "pricePerNight": 1800, "features": ["Wi-Fi", "Lake View", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 2600, "features": ["Wi-Fi", "Lake View", "Breakfast", "Boating Pass"] }
+      ]
+    },
+    {
+      "categoryName": "Double Bed",
+      "guests": "2 Guests",
+         "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 2100, "features": ["Wi-Fi", "TV"] },
+        { "type": "Premium", "pricePerNight": 3200, "features": ["Wi-Fi", "TV", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 4700, "features": ["Wi-Fi", "TV", "Breakfast", "Private Deck"] }
+      ]
+    },
+    {
+      "categoryName": "Family Size",
+      "guests": "Multiple Guests",
+       "categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 3900, "features": ["Wi-Fi"] },
+        { "type": "Premium", "pricePerNight": 6000, "features": ["Wi-Fi", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 9200, "features": ["Wi-Fi", "Breakfast", "Lake Tour"] }
+      ]
+    }
+  ]
+},
+{
+  "hotelId": 113,
+  "hotelName": "Euphoria Cliffside Resort – Kasauli",
+  "address": "Sunset Point Road, Kasauli – 173204",
+  "image": "pexels-umudicreative-19595216.jpg",
+  "roomCategories": [
+    {
+      "categoryName": "Single Bed",
+      "guests": "1 Guest",
+        "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 1700, "features": ["Wi-Fi"] },
+        { "type": "Premium", "pricePerNight": 2400, "features": ["Wi-Fi", "Cliff View", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 3600, "features": ["Wi-Fi", "Cliff View", "Breakfast", "Jacuzzi"] }
+      ]
+    },
+    {
+      "categoryName": "Double Bed",
+      "guests": "2 Guests",
+       "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 2800, "features": ["Wi-Fi", "TV"] },
+        { "type": "Premium", "pricePerNight": 4200, "features": ["Wi-Fi", "TV", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 6200, "features": ["Wi-Fi", "TV", "Breakfast", "Infinity View Balcony"] }
+      ]
+    },
+    {
+      "categoryName": "Family Size",
+      "guests": "Multiple Guests",
+      "categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 4800, "features": ["Wi-Fi"] },
+        { "type": "Premium", "pricePerNight": 7500, "features": ["Wi-Fi", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 11500, "features": ["Wi-Fi", "Breakfast", "Private Villa"] }
+      ]
+    }
+  ]
+},
+{
+  "hotelId": 114,
+  "hotelName": "Euphoria Sunrise Retreat – Narkanda",
+  "address": "Hatu Peak Road, Narkanda – 171213",
+  "image": "pexels-masoodaslami-17563212.jpg",
+  "roomCategories": [
+    {
+      "categoryName": "Single Bed",
+      "guests": "1 Guest",
+      "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 1350, "features": ["Wi-Fi"] },
+        { "type": "Premium", "pricePerNight": 1950, "features": ["Wi-Fi", "Sunrise View", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 2900, "features": ["Wi-Fi", "Sunrise View", "Breakfast", "Heater"] }
+      ]
+    },
+    {
+      "categoryName": "Double Bed",
+      "guests": "2 Guests",
+          "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 2400, "features": ["Wi-Fi", "TV"] },
+        { "type": "Premium", "pricePerNight": 3600, "features": ["Wi-Fi", "TV", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 5200, "features": ["Wi-Fi", "TV", "Breakfast", "Fireplace"] }
+      ]
+    },
+    {
+      "categoryName": "Family Size",
+      "guests": "Multiple Guests",
+          "categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 4200, "features": ["Wi-Fi"] },
+        { "type": "Premium", "pricePerNight": 6600, "features": ["Wi-Fi", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 10000, "features": ["Wi-Fi", "Breakfast", "Ski Package"] }
+      ]
+    }
+  ]
+},
+{
+  "hotelId": 115,
+  "hotelName": "Euphoria Green Valley – Barog",
+  "address": "Near Barog Tunnel, Barog – 173211",
+  "image": "pexels-ahmet-ciftci-1413580052-31369858.jpg",
+  "roomCategories": [
+    {
+      "categoryName": "Single Bed",
+      "guests": "1 Guest",
+          "categoryImages": [
+        "alex-tyson-zfafoI7q5u0-unsplash.jpg",
+        "point3d-commercial-imaging-ltd-ZVpPsz4tPds-unsplash.jpg",
+        "lisa-anna-j7vEAPTfx0w-unsplash.jpg",
+        "lisa-anna-jsVJ8fBJIaI-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 1250, "features": ["Wi-Fi"] },
+        { "type": "Premium", "pricePerNight": 1850, "features": ["Wi-Fi", "Valley View", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 2700, "features": ["Wi-Fi", "Valley View", "Breakfast", "Mini Bar"] }
+      ]
+    },
+    {
+      "categoryName": "Double Bed",
+      "guests": "2 Guests",
+        "categoryImages": [
+        "steven-ungermann-i_GR3zah59U-unsplash.jpg",
+        "pexels-mographe-34672503.jpg",
+        "pexels-artbovich-8135527.jpg",
+        "steven-ungermann-UcBsH2cRfko-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 2300, "features": ["Wi-Fi", "TV"] },
+        { "type": "Premium", "pricePerNight": 3500, "features": ["Wi-Fi", "TV", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 5100, "features": ["Wi-Fi", "TV", "Breakfast", "Private Balcony"] }
+      ]
+    },
+    {
+      "categoryName": "Family Size",
+      "guests": "Multiple Guests",
+        "categoryImages": [
+        "pexels-snappr-29851798.jpg",
+        "pexels-azli-nawawi-791168-34763215.jpg",
+        "pexels-quang-nguyen-vinh-222549-29000012.jpg",
+        "frugal-flyer-mo3FN80PATM-unsplash.jpg"
+      ],
+      "options": [
+        { "type": "Standard", "pricePerNight": 4100, "features": ["Wi-Fi"] },
+        { "type": "Premium", "pricePerNight": 6400, "features": ["Wi-Fi", "Breakfast"] },
+        { "type": "Luxury", "pricePerNight": 9800, "features": ["Wi-Fi", "Breakfast", "Private Garden"] }
+      ]
+    }
+  ]
+}
+  ],
+  "dinings":[
+   {
+      "id": 1,
+      "name": "Euphoria The Ridge Diner",
+      "cuisine": "Himachali & North Indian",
+      "description": "Authentic Siddu and Madra served with a view of the snow-capped mountains.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "The Ridge, Near Christ Church, Mall Road, Shimla, Himachal Pradesh 171001",
+      "image": "pexels-chipi1189-34056751.jpg",
+      "topItems": ["Traditional Siddu", "Chana Madra", "Pahari Chicken"],
+      "fullMenu": [
+        { "item": "Traditional Siddu with Ghee", "price": 280, "category": "Himachali Special" },
+        { "item": "Chana Madra", "price": 320, "category": "Himachali Special" },
+        { "item": "Pahari Chicken Curry", "price": 550, "category": "Main Course" },
+        { "item": "Dal Makhani", "price": 380, "category": "Main Course" },
+        { "item": "Paneer Tikka Masala", "price": 420, "category": "Main Course" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Euphoria Cedar Wood Cafe",
+      "cuisine": "Continental & Italian",
+      "description": "Nestled among the cedar trees, offering the best wood-fired pizzas in the valley.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "Lakkar Bazar, Near Skating Rink, Shimla, Himachal Pradesh 171001",
+      "image": "pexels-jonathan-valdes-286676880-29410668.jpg",
+      "topItems": ["Cedar Smoked Pizza", "Hot Garlic Maggi", "Apple Pie"],
+      "fullMenu": [
+        { "item": "Cedar Smoked Margherita", "price": 450, "category": "Wood-fired Pizza" },
+        { "item": "Wild Mushroom Risotto", "price": 480, "category": "Main Course" },
+        { "item": "Hot Garlic Butter Maggi", "price": 180, "category": "Quick Bites" },
+        { "item": "Warm Apple Pie", "price": 250, "category": "Dessert" },
+        { "item": "Creamy Alfredo Pasta", "price": 420, "category": "Pasta" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Euphoria Jakhu Terrace",
+      "cuisine": "Snacks & Refreshments",
+      "description": "Highest dining point in Shimla with a spiritual and serene atmosphere.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "Jakhu Temple Road, Near Hanuman Statue, Shimla, Himachal Pradesh 171001",
+      "image": "pexels-cheng-shi-song-427082720-33996082.jpg",
+      "topItems": ["Vegetable Pakoras", "Masala Chai", "Grilled Sandwiches"],
+      "fullMenu": [
+        { "item": "Assorted Veg Pakoras", "price": 180, "category": "Snacks" },
+        { "item": "Kulhad Masala Chai", "price": 80, "category": "Beverages" },
+        { "item": "Club Sandwich", "price": 240, "category": "Snacks" },
+        { "item": "Maggi (Veg/Cheese)", "price": 120, "category": "Quick Bites" },
+        { "item": "Bun Maska", "price": 90, "category": "Snacks" }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Euphoria Heritage Kitchen",
+      "cuisine": "Mughlai & Grill",
+      "description": "A colonial-style fine dining experience inside a restored British-era building.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "Viceregal Lodge Estate, Chaura Maidan, Shimla, Himachal Pradesh 171004",
+      "image": "chris-liverani-oCsaxvGCehM-unsplash.jpg",
+      "topItems": ["Mutton Rogan Josh", "Tandoori Trout", "Shahi Tukda"],
+      "fullMenu": [
+        { "item": "Mutton Rogan Josh", "price": 650, "category": "Main Course" },
+        { "item": "Tandoori River Trout", "price": 850, "category": "Grills" },
+        { "item": "Murgh Malai Tikka", "price": 480, "category": "Starters" },
+        { "item": "Shahi Tukda", "price": 280, "category": "Dessert" },
+        { "item": "Biryani (Chicken/Mutton)", "price": 550, "category": "Main Course" }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Euphoria Mall Road Bistro",
+      "cuisine": "Chinese & Pan-Asian",
+      "description": "Vibrant bistro overlooking the bustling Mall Road, perfect for people-watching.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "Scandal Point, Mall Road, Shimla, Himachal Pradesh 171001",
+      "image": "pexels-dwi2793-34961390.jpg",
+      "topItems": ["Thukpa", "Himachali Momos", "Hakka Noodles"],
+      "fullMenu": [
+        { "item": "Chicken Thukpa", "price": 280, "category": "Soups" },
+        { "item": "Steamed Veg Momos", "price": 180, "category": "Starters" },
+        { "item": "Chilli Garlic Noodles", "price": 320, "category": "Main Course" },
+        { "item": "Manchurian (Dry/Gravy)", "price": 350, "category": "Main Course" },
+        { "item": "Honey Chilli Potato", "price": 260, "category": "Starters" }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Euphoria Pine View Grill",
+      "cuisine": "BBQ & Tandoor",
+      "description": "Outdoor grilling experience surrounded by thick pine forests.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "Summer Hill, Near HP University, Shimla, Himachal Pradesh 171005",
+      "image": "pexels-monxyo-7900468.jpg",
+      "topItems": ["Barbeque Chicken Wings", "Paneer Shashlik", "Corn Roast"],
+      "fullMenu": [
+        { "item": "BBQ Chicken Wings", "price": 420, "category": "Grills" },
+        { "item": "Paneer Shashlik", "price": 380, "category": "Grills" },
+        { "item": "Roasted Masala Corn", "price": 150, "category": "Starters" },
+        { "item": "Grilled Lamb Chops", "price": 750, "category": "Main Course" },
+        { "item": "Tandoori Soya Chaap", "price": 320, "category": "Starters" }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Euphoria Glen Garden",
+      "cuisine": "Healthy & Organic",
+      "description": "Fresh meals prepared with ingredients sourced from local Shimla farms.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "Annandale Road, Near Glen Waterfall, Shimla, Himachal Pradesh 171003",
+      "image": "adrien-olichon-ZgREXhl8ER0-unsplash.jpg",
+      "topItems": ["Organic Fruit Salad", "Honey Lemon Tea", "Buckwheat Pancakes"],
+      "fullMenu": [
+        { "item": "Organic Fruit Bowl", "price": 220, "category": "Salads" },
+        { "item": "Buckwheat Pancakes", "price": 320, "category": "Breakfast" },
+        { "item": "Quinoa Veggie Salad", "price": 350, "category": "Salads" },
+        { "item": "Fresh Avocado Toast", "price": 380, "category": "Breakfast" },
+        { "item": "Honey Lemon Ginger Tea", "price": 110, "category": "Beverages" }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Euphoria Kufri Clouds",
+      "cuisine": "Fast Food & Shakes",
+      "description": "A cozy stop for travelers visiting the high-altitude slopes of Kufri.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "Main Bazar Kufri, National Highway 22, Shimla, Himachal Pradesh 171012",
+      "image": "pexels-prateekjaiswal-13537756.jpg",
+      "topItems": ["Thick Chocolate Shake", "Cheese Burgers", "French Fries"],
+      "fullMenu": [
+        { "item": "Double Cheese Burger", "price": 190, "category": "Fast Food" },
+        { "item": "Loaded French Fries", "price": 160, "category": "Fast Food" },
+        { "item": "Chocolate Overload Shake", "price": 220, "category": "Beverages" },
+        { "item": "Veg Grilled Pizza", "price": 350, "category": "Fast Food" },
+        { "item": "Paneer Wrap", "price": 180, "category": "Fast Food" }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Euphoria Lower Bazar Treats",
+      "cuisine": "Indian Street Food",
+      "description": "Experience the local flavors and spicy delights of Shimla's oldest market.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "Lower Bazar, Near Arya Samaj Mandir, Shimla, Himachal Pradesh 171001",
+      "image": "pexels-kadiravsarr-20169244.jpg",
+      "topItems": ["Aloo Tikki", "Chana Bhatura", "Jalebi with Rabri"],
+      "fullMenu": [
+        { "item": "Crispy Aloo Tikki", "price": 90, "category": "Street Food" },
+        { "item": "Chana Bhatura (2 Pcs)", "price": 160, "category": "Breakfast" },
+        { "item": "Jalebi with Thick Rabri", "price": 140, "category": "Dessert" },
+        { "item": "Pav Bhaji", "price": 150, "category": "Street Food" },
+        { "item": "Pani Puri (8 Pcs)", "price": 60, "category": "Street Food" }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Euphoria Sanjauli Summit",
+      "cuisine": "Tibetan & Local",
+      "description": "Warm and inviting space offering authentic Tibetan comfort food.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "Main Market Sanjauli, Shimla, Himachal Pradesh 171006",
+      "image": "pexels-jep-gambardella-5083898.jpg",
+      "topItems": ["Thenthuk", "Butter Tea", "Steamed Wontons"],
+      "fullMenu": [
+        { "item": "Veg/Chicken Thenthuk", "price": 260, "category": "Soups" },
+        { "item": "Authentic Butter Tea", "price": 100, "category": "Beverages" },
+        { "item": "Steamed Chicken Wontons", "price": 240, "category": "Starters" },
+        { "item": "Shaphaley (Tibetan Bread)", "price": 220, "category": "Main Course" },
+        { "item": "Tibetan Butter Rice", "price": 280, "category": "Main Course" }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Euphoria Chotta Shimla Tea House",
+      "cuisine": "Tea & Bakery",
+      "description": "The perfect spot for evening tea with a wide range of local bakes.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "Chotta Shimla Bazar, Near Secretariat, Shimla, Himachal Pradesh 171002",
+      "image": "kayleigh-harrington-yhn4okt6ci0-unsplash.jpg",
+      "topItems": ["Earl Grey Tea", "Fruit Cake", "Cheese Straws"],
+      "fullMenu": [
+        { "item": "Classic Earl Grey", "price": 120, "category": "Beverages" },
+        { "item": "Homemade Fruit Cake", "price": 150, "category": "Bakery" },
+        { "item": "Buttery Cheese Straws", "price": 80, "category": "Bakery" },
+        { "item": "Warm Scones with Jam", "price": 180, "category": "Bakery" },
+        { "item": "Darjeeling First Flush", "price": 140, "category": "Beverages" }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Euphoria Mashobra Greens",
+      "cuisine": "Salads & Grills",
+      "description": "Peaceful dining amidst apple orchards and lush greenery.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "CRAIGNANU, Mashobra, Shimla, Himachal Pradesh 171007",
+      "image": "pexels-quang-nguyen-vinh-222549-28999499.jpg",
+      "topItems": ["Garden Fresh Salad", "Grilled Trout Fish", "Herb Chicken"],
+      "fullMenu": [
+        { "item": "Garden Fresh Salad", "price": 280, "category": "Salads" },
+        { "item": "Grilled Rainbow Trout", "price": 780, "category": "Main Course" },
+        { "item": "Rosemary Herb Chicken", "price": 520, "category": "Main Course" },
+        { "item": "Roasted Root Vegetables", "price": 320, "category": "Starters" },
+        { "item": "Fresh Apple Juice", "price": 150, "category": "Beverages" }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Euphoria Victory Tunnel Hub",
+      "cuisine": "Multi-cuisine",
+      "description": "Conveniently located for travelers entering the heart of the city.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "Victory Tunnel, Near Railway Station, Shimla, Himachal Pradesh 171003",
+      "image": "shawn-nmpW_WwwVSc-unsplash.jpg",
+      "topItems": ["Veg Club Sandwich", "Cold Coffee", "Dal Fry"],
+      "fullMenu": [
+        { "item": "Veg Club Sandwich", "price": 220, "category": "Quick Bites" },
+        { "item": "Iced Cold Coffee", "price": 160, "category": "Beverages" },
+        { "item": "Yellow Dal Fry", "price": 280, "category": "Main Course" },
+        { "item": "Jeera Rice", "price": 180, "category": "Main Course" },
+        { "item": "Butter Chicken", "price": 480, "category": "Main Course" }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Euphoria Nabha Estate Cafe",
+      "cuisine": "Classic Indian",
+      "description": "Quiet and elegant dining for those looking to escape the Mall Road crowd.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "Nabha Estate, Near ISBT, Shimla, Himachal Pradesh 171004",
+      "image": "jason-leung-poI7DelFiVA-unsplash.jpg",
+      "topItems": ["Paneer Lababdar", "Missi Roti", "Gulab Jamun"],
+      "fullMenu": [
+        { "item": "Paneer Lababdar", "price": 390, "category": "Main Course" },
+        { "item": "Missi Roti", "price": 45, "category": "Breads" },
+        { "item": "Soft Gulab Jamun (2 Pcs)", "price": 120, "category": "Dessert" },
+        { "item": "Mixed Veg Jaipuri", "price": 340, "category": "Main Course" },
+        { "item": "Kadhai Chicken", "price": 520, "category": "Main Course" }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Euphoria Dhalli Junction",
+      "cuisine": "Tandoori & Punjabi",
+      "description": "A lively junction for spicy North Indian food lovers.",
+      "timing": "11:00 AM - 11:00 PM",
+      "address": "Dhalli Bypass, Near Tunnel, Shimla, Himachal Pradesh 171012",
+      "image": "nick-karvounis-Ciqxn7FE4vE-unsplash.jpg",
+      "topItems": ["Amritsari Kulcha", "Dal Tadka", "Lassi"],
+      "fullMenu": [
+        { "item": "Amritsari Kulcha with Chana", "price": 240, "category": "Breakfast" },
+        { "item": "Dal Tadka (Panchratan)", "price": 290, "category": "Main Course" },
+        { "item": "Sweet Punjabi Lassi", "price": 120, "category": "Beverages" },
+        { "item": "Murgh Tandoori (Full)", "price": 580, "category": "Starters" },
+        { "item": "Garlic Naan", "price": 60, "category": "Breads" }
+      ]
+    }
+  ]
+}
