@@ -1,28 +1,41 @@
-import { StrictMode } from 'react'
+import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
-import Homepagelayout from './components/Homepage/Homepagelayout'
-import Homepage from './components/Homepage/Homepage'
-import Roompage from './components/Roompage/Roompage'
-import Dining from './components/Dining'
-import Bookingpage from './components/Bookingpage'
-import Contact from './components/Contact'
-import Errorpage from './Errorpage'
-import Details from './components/Roompage/Details'
 import { Provider } from 'react-redux'
 import { store } from './store/store'
 
-const router=createBrowserRouter(
+
+import FullScreenLoader from './components/FullScreenLoader' 
+
+const Homepagelayout = lazy(() => import('./components/Homepage/Homepagelayout'))
+const Homepage = lazy(() => import('./components/Homepage/Homepage'))
+const Roompage = lazy(() => import('./components/Roompage/Roompage'))
+const Details = lazy(() => import('./components/Roompage/Details'))
+const Dining = lazy(() => import('./components/Dining'))
+const Bookingpage = lazy(() => import('./components/Bookingpage'))
+const Contact = lazy(() => import('./components/Contact'))
+const Errorpage = lazy(() => import('./Errorpage'))
+
+const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='' element={<Homepagelayout />} errorElement={<Errorpage />} >
-    <Route path='/' element={<Homepage />} />
-    <Route path='/room' element={<Roompage />} />
-    <Route path='/room/:id' element={<Details />} />
-    <Route path='/dining' element={<Dining />} />
-    <Route path='/booking' element={<Bookingpage />} />
-    <Route path='/contact' element={<Contact />} />
+    /* 3. Sabse upar wale Route ko Suspense mein lapeto */
+    <Route 
+      path='' 
+      element={
+        <Suspense fallback={<FullScreenLoader />}>
+          <Homepagelayout />
+        </Suspense>
+      } 
+      errorElement={<Errorpage />} 
+    >
+      <Route path='/' element={<Homepage />} />
+      <Route path='/room' element={<Roompage />} />
+      <Route path='/room/:id' element={<Details />} />
+      <Route path='/dining' element={<Dining />} />
+      <Route path='/booking' element={<Bookingpage />} />
+      <Route path='/contact' element={<Contact />} />
     </Route>
   )
 )
@@ -30,7 +43,7 @@ const router=createBrowserRouter(
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
-   <RouterProvider router={router} />
-   </Provider>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>
 )
