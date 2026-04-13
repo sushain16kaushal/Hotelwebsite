@@ -24,8 +24,8 @@ export const HeroSection = () => {
   const [resetKey, setResetKey] = useState(0);
 
   return (
-    // Height optimized: Mobile pe 100vh enough hai, desktop pe 120vh look deta hai
-    <div className="relative h-[100vh] md:h-[120vh] w-full overflow-hidden">
+
+    <div className="relative h-screen md:h-[120vh] w-full overflow-hidden">
       
       {/* Background Section */}
       <div className="absolute inset-0">
