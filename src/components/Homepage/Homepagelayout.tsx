@@ -8,7 +8,7 @@ import FullScreenLoader from "../FullScreenLoader"
 
 
 function Homepagelayout() {
-  const { data, loading, error } = useFetchcontent(`https://hotelapp-tiof.onrender.com/api/data`);
+  const { data, loading, error } = useFetchcontent(`https://hotelapp-tiof.onrender.com/api/all-content`);
 
   
   if (loading) return <FullScreenLoader />; 
