@@ -12,4 +12,6 @@ app.use('/api',routes);
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.689oscc.mongodb.net/Hotel?retryWrites=true&w=majority`)
   .then(() => console.log("Connected to Hotel Database"))
   .catch(err => console.log(err));
-app.listen(port);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on port ${port}`);
+});
