@@ -26,7 +26,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#fdfaf5] pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-[#f5f1ea] pt-32 pb-20 px-6">
       <div className="max-w-6xl mx-auto">
         
         {/* Header */}

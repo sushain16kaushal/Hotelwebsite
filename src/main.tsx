@@ -6,10 +6,9 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import { Provider } from 'react-redux'
 import { store } from './store/store'
 
-// 1. Loader ko import karo (taaki ye 'intezaar' ke waqt dikhe)
+
 import FullScreenLoader from './components/FullScreenLoader' 
 
-// 2. Normal imports ko 'lazy' imports mein badlo
 const Homepagelayout = lazy(() => import('./components/Homepage/Homepagelayout'))
 const Homepage = lazy(() => import('./components/Homepage/Homepage'))
 const Roompage = lazy(() => import('./components/Roompage/Roompage'))
