@@ -32,14 +32,25 @@ router.get("/all-content", async (req, res) => {
 router.post("/login", login);
 router.delete("/delete-hotel/:id", verifyAdmin, async (req, res) => {
   try {
-    // findByIdAndDelete ki jagah findOneAndDelete use karo field ke saath
-    const result = await Hotel.findOneAndDelete({ hotelId: req.params.id });
+    const idToDelete = req.params.id;
+    console.log("Deleting hotel with ID:", idToDelete);
+
+    // Try finding by BOTH (hotelId as number AND as string for safety)
+    const result = await Hotel.findOneAndDelete({ 
+      $or: [
+        { hotelId: idToDelete }, 
+        { hotelId: Number(idToDelete) } 
+      ] 
+    });
     
-    if (!result) return res.status(404).json("Hotel nahi mila database mein!");
+    if (!result) {
+      return res.status(404).json("Hotel not found in DB!");
+    }
     
-    res.status(200).json("Hotel has been deleted.");
+    res.status(200).json("Hotel has been deleted successfully.");
   } catch (err) {
-    res.status(500).json(err);
+    console.error("Delete Crash Error:", err);
+    res.status(500).json({ message: "Server Crash", error: err.message });
   }
 });
 router.post("/add-room", verifyAdmin, (req, res) => {
