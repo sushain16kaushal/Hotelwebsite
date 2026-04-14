@@ -30,6 +30,14 @@ router.get("/all-content", async (req, res) => {
   }
 });
 router.post("/login", login);
+router.delete("/delete-hotel/:id", verifyAdmin, async (req, res) => {
+  try {
+    await Hotel.findByIdAndDelete(req.params.id);
+    res.status(200).json("Hotel has been deleted.");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 router.post("/add-room", verifyAdmin, (req, res) => {
     // Room save karne ka logic yahan aayega
     res.status(200).json("Room has been added by Admin!");
