@@ -13,12 +13,11 @@ const handleDelete = async (id: any, name: string) => { // id ko any ya string r
       const token = localStorage.getItem('adminToken');
       console.log("Token being sent:", token); // Debugging ke liye
 
-      await axios.delete(`https://hotelapp-tiof.onrender.com/api/delete-hotel/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('adminToken')}` // Ensure format is correct
-        }
-      });
-
+   await axios.delete(`https://hotelapp-tiof.onrender.com/api/delete-hotel/${id}`, {
+  headers: {
+    'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+  }
+});
       // UI update logic (filter based on the ID sent)
       setData((prev: any) => ({
         ...prev,
