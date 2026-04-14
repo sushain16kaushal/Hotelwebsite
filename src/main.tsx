@@ -1,7 +1,7 @@
 import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-
+import ProtectedRoute from './components/ProtectedRoute'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './store/store'
@@ -17,7 +17,7 @@ const Dining = lazy(() => import('./components/Dining'))
 const Bookingpage = lazy(() => import('./components/Bookingpage'))
 const Contact = lazy(() => import('./components/Contact'))
 const Errorpage = lazy(() => import('./Errorpage'))
-
+const AdminDashboard = lazy(()=> import('./pages/Admin/AdminDashboard'))
 const router = createBrowserRouter(
   createRoutesFromElements(
     /* 3. Sabse upar wale Route ko Suspense mein lapeto */
@@ -36,6 +36,14 @@ const router = createBrowserRouter(
       <Route path='/dining' element={<Dining />} />
       <Route path='/booking' element={<Bookingpage />} />
       <Route path='/contact' element={<Contact />} />
+      <Route 
+    path="/admin/dashboard" 
+    element={
+        <ProtectedRoute>
+            <AdminDashboard />
+        </ProtectedRoute>
+    } 
+/>
     </Route>
   )
 )
