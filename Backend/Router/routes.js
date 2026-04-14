@@ -32,16 +32,30 @@ router.get("/all-content", async (req, res) => {
 router.post("/login", login);
 router.delete("/delete-hotel/:id", verifyAdmin, async (req, res) => {
   try {
-    const idToDelete = req.params.id;
-    console.log("Deleting hotel with ID:", idToDelete);
+    const idFromParams = req.params.id;
+    console.log("Delete request for ID:", idFromParams);
 
-    // Try finding by BOTH (hotelId as number AND as string for safety)
+    // Hotel.findOneAndDelete use kar rahe hain kyunki hum 'hotelId' (115) bhej rahe hain
+    // Number() conversion zaroori hai kyunki DB mein hotelId number ho sakta hai
     const result = await Hotel.findOneAndDelete({ 
       $or: [
-        { hotelId: idToDelete }, 
-        { hotelId: Number(idToDelete) } 
+        { hotelId: idFromParams }, 
+        { hotelId: Number(idFromParams) }
       ] 
     });
+
+    if (!result) {
+      console.log("Hotel not found in database.");
+      return res.status(404).json("Hotel not found!");
+    }
+
+    console.log("Delete Successful!");
+    res.status(200).json("Hotel has been deleted successfully.");
+  } catch (err) {
+    console.error("CRASH ERROR:", err.message);
+    res.status(500).json({ message: "Server Error", error: err.message });
+  }
+});
     
     if (!result) {
       return res.status(404).json("Hotel not found in DB!");
