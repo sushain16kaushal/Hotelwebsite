@@ -1,10 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import axios from 'axios';
+import type { Hotels } from '../../types/content';
 
 const AdminDashboard = () => {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+const handleDelete = async (id: Number, name: string) => {
+  // 1. Alert Logic: Confirm before delete
+  const confirmDelete = window.confirm(`Are you Sure you want to delete "${name}" from your database`);
+  
+  if (confirmDelete) {
+    try {
+      const token = localStorage.getItem('adminToken');
+      
+      // 2. Axios DELETE call with Authorization Header
+      await axios.delete(`https://hotelapp-tiof.onrender.com/api/delete-hotel/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
 
+      // 3. UI Update: Bina refresh kiye state se hatana
+      setData((prev: any) => ({
+        ...prev,
+        hotels: prev.hotels.filter((hotel: any) => hotel.hotelId !== id)
+      }));
+
+      alert("Your Hotel has been successfully deleted");
+    } catch (err: any) {
+      console.error("Delete failed:", err);
+      alert("Unable to Remove " + (err.response?.data || "Server Error"));
+    }
+  }
+};
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,7 +80,7 @@ const AdminDashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.hotels.map((hotel: any) => (
+              {data?.hotels.map((hotel:Hotels) => (
                 <tr key={hotel.hotelId} className="hover:bg-white/5 transition border-b border-white/5">
                   <td className="p-4 font-light">{hotel.hotelName}</td>
                   <td className="p-4 text-gray-400 text-sm">{hotel.address || "Shimla"}</td>
@@ -60,7 +88,7 @@ const AdminDashboard = () => {
                     <button className="text-blue-400 hover:text-blue-300 mr-4 text-sm">Edit</button>
                     <button 
                       className="text-red-500 hover:text-red-400 text-sm"
-                      onClick={() => console.log("Delete logic incoming for:", hotel._id)}
+                      onClick={() => handleDelete(hotel.hotelId, hotel.hotelName)}
                     >
                       Delete
                     </button>
