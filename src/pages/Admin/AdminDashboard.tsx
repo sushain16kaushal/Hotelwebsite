@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 interface Props {}
 
@@ -7,6 +7,7 @@ function AdminDashboard(props: Props) {
 
     return (
         <>
+        <h1>Dashboard</h1>
         </>
     )
 }
