@@ -32,7 +32,11 @@ router.get("/all-content", async (req, res) => {
 router.post("/login", login);
 router.delete("/delete-hotel/:id", verifyAdmin, async (req, res) => {
   try {
-    await Hotel.findByIdAndDelete(req.params.id);
+    // findByIdAndDelete ki jagah findOneAndDelete use karo field ke saath
+    const result = await Hotel.findOneAndDelete({ hotelId: req.params.id });
+    
+    if (!result) return res.status(404).json("Hotel nahi mila database mein!");
+    
     res.status(200).json("Hotel has been deleted.");
   } catch (err) {
     res.status(500).json(err);
