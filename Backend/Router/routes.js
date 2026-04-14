@@ -32,16 +32,23 @@ router.get("/all-content", async (req, res) => {
 router.post("/login", login);
 router.delete("/delete-hotel/:id", verifyAdmin, async (req, res) => {
   try {
-    // findByIdAndDelete ki jagah findOneAndDelete use karo field ke saath
-    const result = await Hotel.findOneAndDelete({ hotelId: req.params.id });
-    
-    if (!result) return res.status(404).json("Hotel nahi mila database mein!");
-    
-    res.status(200).json("Hotel has been deleted.");
+    const idParam = req.params.id;
+    console.log("Deleting Hotel ID:", idParam);
+
+    // Number conversion zaroori hai kyunki DB mein hotelId: 101 (Number) hai
+    const result = await Hotel.findOneAndDelete({ hotelId: Number(idParam) });
+
+    if (!result) {
+      return res.status(404).json("Database mein ye Hotel nahi mila!");
+    }
+
+    res.status(200).json("Hotel deleted successfully from Shimla database! 🏔️");
   } catch (err) {
-    res.status(500).json(err);
+    console.error("Delete Crash:", err.message);
+    res.status(500).json({ message: "Server Crash", error: err.message });
   }
 });
+  
 router.post("/add-room", verifyAdmin, (req, res) => {
     // Room save karne ka logic yahan aayega
     res.status(200).json("Room has been added by Admin!");
