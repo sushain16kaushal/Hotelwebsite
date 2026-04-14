@@ -57,16 +57,7 @@ router.delete("/delete-hotel/:id", verifyAdmin, async (req, res) => {
   }
 });
     
-    if (!result) {
-      return res.status(404).json("Hotel not found in DB!");
-    }
-    
-    res.status(200).json("Hotel has been deleted successfully.");
-  } catch (err) {
-    console.error("Delete Crash Error:", err);
-    res.status(500).json({ message: "Server Crash", error: err.message });
-  }
-});
+  
 router.post("/add-room", verifyAdmin, (req, res) => {
     // Room save karne ka logic yahan aayega
     res.status(200).json("Room has been added by Admin!");
