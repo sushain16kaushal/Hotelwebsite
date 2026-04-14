@@ -5,31 +5,32 @@ import type { Hotels } from '../../types/content';
 const AdminDashboard = () => {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-const handleDelete = async (id: Number, name: string) => {
-  // 1. Alert Logic: Confirm before delete
-  const confirmDelete = window.confirm(`Are you Sure you want to delete "${name}" from your database`);
+const handleDelete = async (id: any, name: string) => { // id ko any ya string rakho for mongo compatibility
+  const confirmDelete = window.confirm(`Are you Sure you want to delete "${name}"?`);
   
   if (confirmDelete) {
     try {
       const token = localStorage.getItem('adminToken');
-      
-      // 2. Axios DELETE call with Authorization Header
+      console.log("Token being sent:", token); // Debugging ke liye
+
       await axios.delete(`https://hotelapp-tiof.onrender.com/api/delete-hotel/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`
+          'Authorization': `Bearer ${token}` // Ensure format is correct
         }
       });
 
-      // 3. UI Update: Bina refresh kiye state se hatana
+      // UI update logic (filter based on the ID sent)
       setData((prev: any) => ({
         ...prev,
-        hotels: prev.hotels.filter((hotel: any) => hotel.hotelId !== id)
+        hotels: prev.hotels.filter((hotel: any) => 
+          (hotel._id ? hotel._id !== id : hotel.hotelId !== id)
+        )
       }));
 
-      alert("Your Hotel has been successfully deleted");
+      alert("Success! Hotel has been removed.");
     } catch (err: any) {
-      console.error("Delete failed:", err);
-      alert("Unable to Remove " + (err.response?.data || "Server Error"));
+      console.error("Delete Error:", err.response?.data); // Isse asli wajah pata chalegi
+      alert(`Unable to Remove: ${err.response?.data?.message || err.message}`);
     }
   }
 };
