@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 export const verifyAdmin = (req, res, next) => {
   // 1. Teeno raaste check karo (Standard, tumhara purana header, aur lowercase)
   const authHeader = req.headers.authorization || req.headers.token || req.headers.Authorization;
