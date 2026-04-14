@@ -15,7 +15,7 @@ const handleDelete = async (id: any, name: string) => { // id ko any ya string r
 
       await axios.delete(`https://hotelapp-tiof.onrender.com/api/delete-hotel/${id}`, {
         headers: {
-          'Authorization': `Bearer ${token}` // Ensure format is correct
+          'Authorization': `Bearer ${localStorage.getItem('adminToken')}` // Ensure format is correct
         }
       });
 
