@@ -1,6 +1,6 @@
 import  { useEffect, useState } from 'react';
 import axios from 'axios';
-import type { Hotels } from '../../types/content';
+
 
 const AdminDashboard = () => {
   const [data, setData] = useState<any>(null);
