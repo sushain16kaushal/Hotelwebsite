@@ -26,6 +26,7 @@ router.get("/all-content", async (req, res) => {
       dinings
     });
   } catch (err) {
+  
     res.status(500).json(err);
   }
 });
@@ -33,18 +34,26 @@ router.post("/login", login);
 router.delete("/delete-hotel/:id", verifyAdmin, async (req, res) => {
   try {
     const idParam = req.params.id;
-    console.log("Deleting Hotel ID:", idParam);
 
-    // Number conversion zaroori hai kyunki DB mein hotelId: 101 (Number) hai
-    const result = await Hotel.findOneAndDelete({ hotelId: Number(idParam) });
+    console.log("ID RECEIVED:", idParam);
 
-    if (!result) {
-      return res.status(404).json("Database mein ye Hotel nahi mila!");
+    // ✅ IMPORTANT VALIDATION
+    if (!mongoose.Types.ObjectId.isValid(idParam)) {
+      return res.status(400).json({ message: "Invalid ID format" });
     }
 
-    res.status(200).json("Hotel deleted successfully from Shimla database! 🏔️");
+    const result = await Hotel.findByIdAndDelete(idParam);
+
+    console.log("DELETE RESULT:", result);
+
+    if (!result) {
+      return res.status(404).json({ message: "Hotel not found" });
+    }
+
+    res.status(200).json({ message: "Hotel deleted successfully ✅" });
+
   } catch (err) {
-    console.error("Delete Crash:", err.message);
+    console.error("FULL DELETE ERROR:", err); // 🔥 FULL error print
     res.status(500).json({ message: "Server Crash", error: err.message });
   }
 });
