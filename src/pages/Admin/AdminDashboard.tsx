@@ -21,9 +21,7 @@ const handleDelete = async (id: any, name: string) => { // id ko any ya string r
       // UI update logic (filter based on the ID sent)
       setData((prev: any) => ({
         ...prev,
-        hotels: prev.hotels.filter((hotel: any) => 
-          (hotel._id ? hotel._id !== id : hotel.hotelId !== id)
-        )
+        hotels: prev.hotels.filter((hotel: any) => hotel._id !== id)
       }));
 
       alert("Success! Hotel has been removed.");
@@ -80,7 +78,7 @@ const handleDelete = async (id: any, name: string) => { // id ko any ya string r
               </tr>
             </thead>
             <tbody>
-              {data?.hotels.map((hotel:Hotels) => (
+              {data?.hotels.map((hotel:any) => (
                 <tr key={hotel.hotelId} className="hover:bg-white/5 transition border-b border-white/5">
                   <td className="p-4 font-light">{hotel.hotelName}</td>
                   <td className="p-4 text-gray-400 text-sm">{hotel.address || "Shimla"}</td>
@@ -88,7 +86,7 @@ const handleDelete = async (id: any, name: string) => { // id ko any ya string r
                     <button className="text-blue-400 hover:text-blue-300 mr-4 text-sm">Edit</button>
                     <button 
                       className="text-red-500 hover:text-red-400 text-sm"
-                      onClick={() => handleDelete(hotel.hotelId, hotel.hotelName)}
+                      onClick={() => handleDelete(hotel._id, hotel.hotelName)}
                     >
                       Delete
                     </button>
