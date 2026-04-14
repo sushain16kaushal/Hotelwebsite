@@ -27,4 +27,4 @@ const hotelSchema = new mongoose.Schema({
   Features: [String]
 }, { timestamps: true });
 
-export default mongoose.model("Hotel", hotelSchema);
+export default mongoose.model("Hotel", hotelSchema,"hotels");
