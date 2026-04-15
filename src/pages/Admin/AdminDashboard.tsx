@@ -62,9 +62,6 @@ const handleDelete = async (id: any, name: string) => { // id ko any ya string r
       <main className="flex-1 p-8 overflow-y-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-serif">Smart Hotel Management System</h1>
-          <button className="bg-[#c5a059] text-black px-6 py-2 rounded shadow-lg hover:bg-[#a8894a] transition font-medium">
-            + Add New Property
-          </button>
         </div>
 
         {/* Hotels Table */}
