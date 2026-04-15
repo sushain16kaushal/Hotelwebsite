@@ -123,20 +123,34 @@ const EditHotelPage = () => {
                                             ))}
                                         </div>
 
-                                        {/* Input to Add Feature */}
-                                        <div className="relative">
-                                            <input
-                                                type="text"
-                                                placeholder="Add feature and press Enter..."
-                                                className="w-full bg-transparent border-b border-white/10 text-sm py-2 focus:border-[#c5a059] outline-none transition-all placeholder:text-gray-700"
-                                                onKeyDown={(e: any) => {
-                                                    if (e.key === 'Enter' && e.target.value.trim()) {
-                                                        handleFeatureChange(catIdx, optIdx, [...opt.features, e.target.value.trim()]);
-                                                        e.target.value = '';
-                                                    }
-                                                }}
-                                            />
-                                        </div>
+                                     
+                                       {/* Input to Add Feature with Button */}
+<div className="relative flex items-center gap-2 mt-2">
+    <input
+        type="text"
+        id={`input-${catIdx}-${optIdx}`} // Unique ID for each input
+        placeholder="Add amenity..."
+        className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:border-[#c5a059] outline-none transition-all placeholder:text-gray-700"
+        onKeyDown={(e: any) => {
+            if (e.key === 'Enter' && e.target.value.trim()) {
+                handleFeatureChange(catIdx, optIdx, [...opt.features, e.target.value.trim()]);
+                e.target.value = '';
+            }
+        }}
+    />
+    <button 
+        onClick={() => {
+            const inputEl = document.getElementById(`input-${catIdx}-${optIdx}`) as HTMLInputElement;
+            if (inputEl.value.trim()) {
+                handleFeatureChange(catIdx, optIdx, [...opt.features, inputEl.value.trim()]);
+                inputEl.value = '';
+            }
+        }}
+        className="bg-[#c5a059] text-black w-10 h-10 rounded-lg font-bold text-xl flex items-center justify-center shadow-lg active:scale-95 transition-transform"
+    >
+        +
+    </button>
+</div>
                                     </div>
 
                                 </div>

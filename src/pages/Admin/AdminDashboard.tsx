@@ -53,12 +53,15 @@ const AdminDashboard = () => {
     <div className="flex flex-col md:flex-row min-h-screen bg-[#121212] text-white font-sans">
       
       {/* --- MOBILE HEADER --- */}
-      <header className="md:hidden bg-[#1a1a1a] p-4 flex justify-between items-center border-b border-[#c5a059]/20 sticky top-0 z-50">
-        <h2 className="text-[#c5a059] text-xl font-serif">Euphoria Admin</h2>
-        <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-[#c5a059]">
-          {isSidebarOpen ? '✕ Close' : '☰ Menu'}
-        </button>
-      </header>
+     <header className="md:hidden bg-[#1a1a1a] p-4 flex justify-between items-center border-b border-[#c5a059]/20 sticky top-0 z-50">
+  <h2 className="text-[#c5a059] text-xl font-serif">Euphoria Admin</h2>
+  <div className="flex gap-4 items-center">
+    <button onClick={handleLogout} className="text-red-500 text-sm font-bold">LOGOUT</button>
+    <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-[#c5a059] text-2xl">
+      {isSidebarOpen ? '✕' : '☰'}
+    </button>
+  </div>
+</header>
 
       {/* --- SIDEBAR (Hidden on mobile unless toggled) --- */}
       <aside className={`
