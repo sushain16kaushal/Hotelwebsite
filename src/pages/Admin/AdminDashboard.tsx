@@ -1,12 +1,26 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Navigation ke liye
-
+import { useLocation } from 'react-router-dom';
 const AdminDashboard = () => {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const location =useLocation();
+const fetchData = async () => {
+    try {
+      const res = await axios.get('https://hotelapp-tiof.onrender.com/api/all-content');
+      setData(res.data);
+      setLoading(false);
+    } catch (err) {
+      console.error("Data fetch failed", err);
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
+    fetchData();
+  }, [location.key]);
   // --- LOGOUT LOGIC ---
   const handleLogout = () => {
     localStorage.removeItem('adminToken'); // Token clear
