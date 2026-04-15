@@ -54,7 +54,11 @@ const router = createBrowserRouter(
         </ProtectedRoute>
     } 
 />
-<Route path="/admin/edit-hotel/:id" element={<EditHotelPage />} />
+<Route path="/admin/edit-hotel/:id" element={
+        <ProtectedRoute>
+          <Suspense fallback={<FullScreenLoader />}><EditHotelPage /></Suspense>
+        </ProtectedRoute>
+    } />
     </Route>
     </Route>
   )
