@@ -12,6 +12,7 @@ const EditHotelPage = () => {
     const getHotel = async () => {
       try {
         const res = await axios.get(`https://hotelapp-tiof.onrender.com/api/hotel/${id}`);
+        console.log(res.data)
         setHotel(res.data);
         setLoading(false);
       } catch (err) {
