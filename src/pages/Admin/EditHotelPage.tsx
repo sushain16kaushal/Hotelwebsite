@@ -26,13 +26,14 @@ const EditHotelPage = () => {
   const handleUpdate = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      await axios.put(`https://hotelapp-tiof.onrender.com/api/update-prices/${hotel.hotelId}`, 
+      await axios.put(`https://hotelapp-tiof.onrender.com/api/update-prices/${hotel._id}`, 
         { roomCategories: hotel.roomCategories },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert("Shimla Database Updated! 🏔️✨");
       navigate('/admin/dashboard');
-    } catch (err) {
+    } catch (err:any) {
+      console.error("Update Error:", err.response?.data);
       alert("Update Failed!");
     }
   };
