@@ -31,6 +31,14 @@ router.get("/all-content", async (req, res) => {
     res.status(500).json(err);
   }
 });
+router.get("/hotel/:id", async (req, res) => {
+  try {
+    const hotel = await Hotel.findById(req.params.id);
+    res.status(200).json(hotel);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 router.post("/login", login);
 router.delete("/delete-hotel/:id", verifyAdmin, async (req, res) => {
   try {
