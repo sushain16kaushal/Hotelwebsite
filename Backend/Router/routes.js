@@ -86,18 +86,7 @@ router.put("/update-prices/:id", async (req, res) => {
     res.status(500).json(err.message);
   }
 });
-router.put("/update-features/:id", verifyAdmin, async (req, res) => {
-  try {
-    const updatedHotel = await Hotel.findByIdAndUpdate(
-      req.params.id,
-      { $set: { features: req.body.features } }, // 'features' ek array hoga strings ka
-      { new: true }
-    );
-    res.status(200).json(updatedHotel);
-  } catch (err) {
-    res.status(500).json(err.message);
-  }
-});
+
 router.post("/add-room", verifyAdmin, (req, res) => {
     // Room save karne ka logic yahan aayega
     res.status(200).json("Room has been added by Admin!");
