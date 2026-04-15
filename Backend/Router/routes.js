@@ -5,6 +5,7 @@ import {login} from '../Controllers/authController.js';
 import Hotel from '../Models/Hotel.js';
 import Dining from '../Models/Dining.js';
 import SiteConfig from '../Models/SiteConfig.js';
+import mongoose from "mongoose";
 /*const data=JSON.parse(
     fs.readFileSync(new URL("../data.json",import.meta.url),"utf-8")
 )*/
