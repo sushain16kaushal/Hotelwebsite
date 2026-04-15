@@ -98,8 +98,39 @@ router.put("/update-features/:id", verifyAdmin, async (req, res) => {
     res.status(500).json(err.message);
   }
 });
-router.post("/add-room", verifyAdmin, (req, res) => {
-    // Room save karne ka logic yahan aayega
-    res.status(200).json("Room has been added by Admin!");
+// Dining Routes
+// 1. Get Single Dining Details
+router.get("/dining/:id", async (req, res) => {
+  try {
+    const venue = await Dining.findById(req.params.id);
+    res.json(venue);
+  } catch (err) {
+    res.status(500).json({ message: "Dining not found" });
+  }
 });
+
+// 2. Update Dining Menu (Protected)
+router.put("/update-dining/:id", async (req, res) => {
+  try {
+    const updatedDining = await Dining.findByIdAndUpdate(
+      req.params.id,
+      { $set: { fullMenu: req.body.fullMenu } }, // Sirf menu array update hoga
+      { new: true }
+    );
+    res.status(200).json(updatedDining);
+  } catch (err) {
+    res.status(500).json({ message: "Update failed" });
+  }
+});
+
+// 3. Delete Dining (Optional but recommended)
+router.delete("/delete-dining/:id", async (req, res) => {
+    try {
+        await Dining.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: "Dining removed" });
+    } catch (err) {
+        res.status(500).json({ message: "Delete failed" });
+    }
+});
+
 export default router;
