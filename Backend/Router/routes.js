@@ -31,12 +31,19 @@ router.get("/all-content", async (req, res) => {
     res.status(500).json(err);
   }
 });
+// Ye route specific hotel ka data nikaalne ke liye hai
 router.get("/hotel/:id", async (req, res) => {
   try {
     const hotel = await Hotel.findById(req.params.id);
+    
+    if (!hotel) {
+      return res.status(404).json("Hotel record not found in database!");
+    }
+    
     res.status(200).json(hotel);
   } catch (err) {
-    res.status(500).json(err);
+    // Agar ID ka format galat hua toh ye catch karega
+    res.status(500).json({ message: "Invalid ID format or Server Error", error: err.message });
   }
 });
 router.post("/login", login);
