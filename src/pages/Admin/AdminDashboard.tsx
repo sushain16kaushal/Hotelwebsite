@@ -63,7 +63,7 @@ const fetchData = async () => {
   if (loading) return <div className="bg-[#121212] text-[#c5a059] h-screen flex justify-center items-center font-serif text-2xl">Data Incoming 🏔️</div>;
 
   return (
-    <div className="flex h-screen bg-[#121212] text-white font-sans">
+    <div className="flex h-screen bg-[#121212] mt-3 text-white font-sans">
       {/* Sidebar */}
       <aside className="w-64 bg-[#1a1a1a] border-r border-[#c5a059]/30 p-6 flex flex-col justify-between">
         <div>

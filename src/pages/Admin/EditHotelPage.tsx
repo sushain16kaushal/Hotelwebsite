@@ -31,7 +31,7 @@ const EditHotelPage = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert("Shimla Database Updated! 🏔️✨");
-      navigate('/admin/dashboard');
+    window.location.href = '/admin/dashboard';
     } catch (err:any) {
       console.error("Update Error:", err.response?.data);
       alert("Update Failed!");
