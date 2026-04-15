@@ -7,7 +7,7 @@ const EditHotelPage = () => {
   const navigate = useNavigate();
   const [hotel, setHotel] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-
+const [isUpdating, setIsUpdating] = useState(false);
   useEffect(() => {
     const getHotel = async () => {
       try {
@@ -24,16 +24,19 @@ const EditHotelPage = () => {
   }, [id]);
 
   const handleUpdate = async () => {
+    setIsUpdating(true);
     try {
       const token = localStorage.getItem('adminToken');
-      await axios.put(`https://hotelapp-tiof.onrender.com/api/update-prices/${hotel.hotelId}`, 
+      await axios.put(`https://hotelapp-tiof.onrender.com/api/update-prices/${hotel._id}`, 
         { roomCategories: hotel.roomCategories },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert("Shimla Database Updated! 🏔️✨");
-      navigate('/admin/dashboard');
-    } catch (err) {
+    window.location.href = '/admin/dashboard';
+    } catch (err:any) {
+      console.error("Update Error:", err.response?.data);
       alert("Update Failed!");
+      setIsUpdating(false);
     }
   };
 
@@ -47,7 +50,7 @@ const EditHotelPage = () => {
   if (loading) return <div className="h-screen bg-[#121212] flex items-center justify-center text-[#c5a059]">Loading Details...</div>;
 
   return (
-    <div className="min-h-screen bg-[#121212] text-white p-8 font-sans">
+    <div className="min-h-screen bg-[#121212] mt-3 text-white p-8 font-sans">
       {/* Header Area */}
       <div className="max-w-5xl mx-auto flex justify-between items-center mb-10">
         <div>
@@ -57,9 +60,12 @@ const EditHotelPage = () => {
         </div>
         <button 
           onClick={handleUpdate}
-          className="bg-[#c5a059] text-black px-10 py-3 rounded-full font-bold shadow-[0_0_20px_rgba(197,160,89,0.3)] hover:scale-105 transition"
+           disabled={isUpdating}
+          className="px-6 py-2 rounded-lg font-bold transition-all ${
+    isUpdating ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#C5A059] hover:bg-[#A38446] text-white"
+          
         >
-          SAVE CHANGES
+          {isUpdating ? 'Updating...' : 'SAVE CHANGES'}
         </button>
       </div>
 

@@ -1,12 +1,26 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Navigation ke liye
-
+import { useLocation } from 'react-router-dom';
 const AdminDashboard = () => {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const location =useLocation();
+const fetchData = async () => {
+    try {
+      const res = await axios.get('https://hotelapp-tiof.onrender.com/api/all-content');
+      setData(res.data);
+      setLoading(false);
+    } catch (err) {
+      console.error("Data fetch failed", err);
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
+    fetchData();
+  }, [location.key]);
   // --- LOGOUT LOGIC ---
   const handleLogout = () => {
     localStorage.removeItem('adminToken'); // Token clear
@@ -49,7 +63,7 @@ const AdminDashboard = () => {
   if (loading) return <div className="bg-[#121212] text-[#c5a059] h-screen flex justify-center items-center font-serif text-2xl">Data Incoming 🏔️</div>;
 
   return (
-    <div className="flex h-screen bg-[#121212] text-white font-sans">
+    <div className="flex h-screen bg-[#121212] mt-3 text-white font-sans">
       {/* Sidebar */}
       <aside className="w-64 bg-[#1a1a1a] border-r border-[#c5a059]/30 p-6 flex flex-col justify-between">
         <div>
