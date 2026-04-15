@@ -31,6 +31,32 @@ router.get("/all-content", async (req, res) => {
     res.status(500).json(err);
   }
 });
+router.get("/hotel/:id", async (req, res) => {
+  try {
+    const hotel = await Hotel.findById(req.params.id);
+    
+    if (!hotel) {
+      return res.status(404).json("Hotel record not found in database!");
+    }
+    
+    res.status(200).json(hotel);
+  } catch (err) {
+    // Agar ID ka format galat hua toh ye catch karega
+    res.status(500).json({ message: "Invalid ID format or Server Error", error: err.message });
+  }
+});
+ router.put("/update-prices/:id", async (req, res) => {
+  try {
+    const updatedHotel = await Hotel.findOneAndUpdate(
+      { hotelId: Number(req.params.id) }, // Price update ke liye tum hotelId use kar rahe ho
+      { $set: { roomCategories: req.body.roomCategories } },
+      { new: true }
+    );
+    res.status(200).json(updatedHotel);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+}); 
 router.post("/login", login);
 router.delete("/delete-hotel/:id", verifyAdmin, async (req, res) => {
   try {
