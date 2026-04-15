@@ -11,7 +11,7 @@ const AdminDashboard = () => {
   const handleLogout = () => {
     localStorage.removeItem('adminToken'); // Token clear
     alert("Logged out successfully. Security first! 🛡️");
-    navigate('/admin/login'); // Login page par bhej do
+    navigate('/login'); // Login page par bhej do
   };
 
   const handleDelete = async (id: any, name: string) => {
