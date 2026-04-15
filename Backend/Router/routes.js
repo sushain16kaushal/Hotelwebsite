@@ -73,7 +73,18 @@ router.delete("/delete-hotel/:id", verifyAdmin, async (req, res) => {
     res.status(500).json({ message: "Server Crash", error: err.message });
   }
 });
-  
+ router.put("/update-prices/:id", async (req, res) => {
+  try {
+    const updatedHotel = await Hotel.findOneAndUpdate(
+      { hotelId: Number(req.params.id) }, // Price update ke liye tum hotelId use kar rahe ho
+      { $set: { roomCategories: req.body.roomCategories } },
+      { new: true }
+    );
+    res.status(200).json(updatedHotel);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+}); 
 router.post("/add-room", verifyAdmin, (req, res) => {
     // Room save karne ka logic yahan aayega
     res.status(200).json("Room has been added by Admin!");
