@@ -58,7 +58,7 @@ const EditDiningPage = () => {
     if (loading) return <div className="h-screen bg-[#121212] flex items-center justify-center text-[#c5a059]">Fetching Menu...</div>;
 
     return (
-        <div className="min-h-screen bg-[#121212] text-white p-4 md:p-8">
+        <div className="min-h-screen bg-[#121212] text-white mt-4 p-4 md:p-8">
             <div className="max-w-4xl mx-auto">
                 <button onClick={() => navigate(-1)} className="text-gray-500 mb-4">← Back</button>
                 <h1 className="text-3xl font-serif text-[#c5a059] mb-2">{venue.name}</h1>

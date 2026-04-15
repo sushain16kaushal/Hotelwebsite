@@ -57,7 +57,7 @@ const AdminDashboard = () => {
   if (loading) return <div className="bg-[#121212] text-[#c5a059] h-screen flex justify-center items-center font-serif text-2xl italic">Data Incoming 🏔️</div>;
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-[#121212] text-white font-sans">
+    <div className="flex flex-col md:flex-row min-h-screen bg-[#121212] mt-4 text-white font-sans">
       
       {/* MOBILE HEADER */}
       <header className="md:hidden bg-[#1a1a1a] p-4 flex justify-between items-center border-b border-[#c5a059]/20 sticky top-0 z-50">

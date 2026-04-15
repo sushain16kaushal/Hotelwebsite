@@ -55,7 +55,7 @@ const EditHotelPage = () => {
     if (loading) return <div className="h-screen bg-[#121212] flex items-center justify-center text-[#c5a059]">Loading Details...</div>;
 
     return (
-        <div className="min-h-screen bg-[#121212] text-white p-4 md:p-8 font-sans">
+        <div className="min-h-screen bg-[#121212] text-white mt-4 p-4 md:p-8 font-sans">
             {/* Header Area */}
             <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
                 <div className="w-full md:w-auto">
