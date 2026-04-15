@@ -19,6 +19,7 @@ const Contact = lazy(() => import('./components/Contact'))
 const Errorpage = lazy(() => import('./Errorpage'))
 const AdminDashboard = lazy(()=> import('./pages/Admin/AdminDashboard'))
 const EditHotelPage = lazy(()=> import('./pages/Admin/EditHotelPage'))
+const EditFeatures = lazy(()=> import('./pages/Admin/EditFeatures'))
 const router = createBrowserRouter(
   createRoutesFromElements(
     /* 3. Sabse upar wale Route ko Suspense mein lapeto */
@@ -59,6 +60,11 @@ const router = createBrowserRouter(
           <Suspense fallback={<FullScreenLoader />}><EditHotelPage /></Suspense>
         </ProtectedRoute>
     } />
+    <Route path="/admin/edit-features/:id" element={
+  <ProtectedRoute>
+    <EditFeatures />
+  </ProtectedRoute>
+} />
     </Route>
     </Route>
   )

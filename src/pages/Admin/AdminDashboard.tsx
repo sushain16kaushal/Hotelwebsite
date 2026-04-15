@@ -122,6 +122,13 @@ const fetchData = async () => {
                     >
                       Remove
                     </button>
+                    {/* Naya Features Edit Button */}
+  <button 
+    onClick={() => navigate(`/admin/edit-features/${hotel._id}`)}
+    className="bg-[#C5A059] p-2 rounded text-sm text-black font-bold"
+  >
+    Edit Features
+  </button>
                   </td>
                 </tr>
               ))}
