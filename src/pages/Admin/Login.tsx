@@ -9,7 +9,7 @@ const Login = () => {
     const handleLogin = async (e:React.SubmitEvent) => {
         e.preventDefault();
         try {
-            const res = await axios.post('https://hotelapp-tiof.onrender.com/api/login', credentials);
+            const res = await axios.post('https://hotelapp-tiof.onrender.com/api/admin-login', credentials);
             localStorage.setItem('adminToken', res.data.token); // Token save kar liya
             navigate('/admin/dashboard');
         } catch (err:any) {
