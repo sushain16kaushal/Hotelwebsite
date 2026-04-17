@@ -39,7 +39,7 @@ const passportConfig = (passport) => {
         }
     }));
 
-    // --- FACEBOOK STRATEGY ---
+  /*  // --- FACEBOOK STRATEGY ---
     passport.use(new FacebookStrategy({
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
@@ -71,7 +71,7 @@ const passportConfig = (passport) => {
         } catch (err) {
             done(err, null);
         }
-    }));
+    }));*/
 };
 
 export default passportConfig;
