@@ -143,4 +143,29 @@ router.post('/forgot-password', async (req, res) => {
     // 4. Nodemailer se link bhejo: frontend.com/reset-password/TOKEN
     res.json({ message: "Reset link sent to email" });
 });
+
+// 2. Update Dining Menu (Protected)
+router.put("/update-dining/:id", async (req, res) => {
+  try {
+    const updatedDining = await Dining.findByIdAndUpdate(
+      req.params.id,
+      { $set: { fullMenu: req.body.fullMenu } }, // Sirf menu array update hoga
+      { new: true }
+    );
+    res.status(200).json(updatedDining);
+  } catch (err) {
+    res.status(500).json({ message: "Update failed" });
+  }
+});
+
+// 3. Delete Dining (Optional but recommended)
+router.delete("/delete-dining/:id", async (req, res) => {
+    try {
+        await Dining.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: "Dining removed" });
+    } catch (err) {
+        res.status(500).json({ message: "Delete failed" });
+    }
+});
+
 export default router;
