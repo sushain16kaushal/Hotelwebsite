@@ -6,7 +6,7 @@ import Hotel from '../Models/Hotel.js';
 import Dining from '../Models/Dining.js';
 import SiteConfig from '../Models/SiteConfig.js';
 import mongoose from "mongoose";
-import passportConfig from "passport";
+import passport from "passport";
 import jwt from 'jsonwebtoken';
 import Customer from "../Models/Customer.js";
 import { custlogin,signup,forgotPassword,resetPassword } from "../Controllers/authController.js";
@@ -126,17 +126,17 @@ router.delete("/delete-dining/:id", async (req, res) => {
     }
 });
 // --- AUTH ROUTES ---
-router.post("/login", login); // Admin Login
+
 router.post("/cust-login", custlogin); // Customer Login
 router.post("/signup", signup); // Customer Signup
 router.post("/forgot-password", forgotPassword); // Forgot Password Logic
 router.put("/reset-password/:token", resetPassword); // Reset Password Logic
 
 // --- GOOGLE OAUTH ROUTES ---
-router.get('/google', passportConfig.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 router.get('/google/callback', 
-  passportConfig.authenticate('google', { session: false, failureRedirect: '/login' }), 
+  passport.authenticate('google', { session: false, failureRedirect: '/login' }), 
   (req, res) => {
     // Passport logic execution ke baad req.user mein data hota hai
     const token = jwt.sign(
@@ -155,28 +155,5 @@ router.get('/google/callback',
     res.redirect(`${process.env.PRODUCTIONURL}/login-success?token=${token}&details=${userData}`);
 });
 
-// 2. Update Dining Menu (Protected)
-router.put("/update-dining/:id", async (req, res) => {
-  try {
-    const updatedDining = await Dining.findByIdAndUpdate(
-      req.params.id,
-      { $set: { fullMenu: req.body.fullMenu } }, // Sirf menu array update hoga
-      { new: true }
-    );
-    res.status(200).json(updatedDining);
-  } catch (err) {
-    res.status(500).json({ message: "Update failed" });
-  }
-});
-
-// 3. Delete Dining (Optional but recommended)
-router.delete("/delete-dining/:id", async (req, res) => {
-    try {
-        await Dining.findByIdAndDelete(req.params.id);
-        res.status(200).json({ message: "Dining removed" });
-    } catch (err) {
-        res.status(500).json({ message: "Delete failed" });
-    }
-});
 
 export default router;
