@@ -6,6 +6,8 @@ import Hotel from '../Models/Hotel.js';
 import Dining from '../Models/Dining.js';
 import SiteConfig from '../Models/SiteConfig.js';
 import mongoose from "mongoose";
+import passport from "passport";
+import jwt from 'jsonwebtoken';
 /*const data=JSON.parse(
     fs.readFileSync(new URL("../data.json",import.meta.url),"utf-8")
 )*/
@@ -121,5 +123,24 @@ router.delete("/delete-dining/:id", async (req, res) => {
         res.status(500).json({ message: "Delete failed" });
     }
 });
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
+router.get('/google/callback', 
+  passport.authenticate('google', { session: false }), 
+  (req, res) => {
+    // Passport user ko req.user mein daal dega
+    const token = jwt.sign({ id: req.user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    
+    // Token ko cookie ya URL ke zariye frontend bhej do
+    res.redirect(`${process.env.FRONTEND_URL}/login-success?token=${token}`);
+});
+
+// --- FORGOT PASSWORD ---
+router.post('/forgot-password', async (req, res) => {
+    // 1. Email check karo
+    // 2. Crypto token generate karo (crypto.randomBytes(20).toString('hex'))
+    // 3. User model mein save karo with expiry
+    // 4. Nodemailer se link bhejo: frontend.com/reset-password/TOKEN
+    res.json({ message: "Reset link sent to email" });
+});
 export default router;
