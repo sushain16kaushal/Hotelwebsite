@@ -3,6 +3,8 @@ import cors from 'cors';
 import routes from './Router/routes.js';
 import { configDotenv } from 'dotenv';
 import mongoose from 'mongoose';
+import passport from 'passport';
+import passportConfig from './config/passport.js';
 configDotenv();
 const app=express();
 const port=process.env.PORT || 4000;
@@ -20,3 +22,5 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cl
 app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
 });
+passportConfig(passport);
+app.use(passport.initialize());
