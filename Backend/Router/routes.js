@@ -1,5 +1,6 @@
 import {Router} from "express";
 import { verifyAdmin } from "../utils/verifyToken.js";
+import { adminLogin } from "../Controllers/authController.js";
 import fs from 'fs';
 import {login} from '../Controllers/authController.js';
 import Hotel from '../Models/Hotel.js';
@@ -50,7 +51,7 @@ router.get("/hotel/:id", async (req, res) => {
     res.status(500).json({ message: "Invalid ID format or Server Error", error: err.message });
   }
 });
-
+router.post("/admin-login", adminLogin);
 router.post("/login", login);
 router.delete("/delete-hotel/:id", verifyAdmin, async (req, res) => {
   try {
