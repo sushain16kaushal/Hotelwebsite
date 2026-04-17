@@ -96,6 +96,7 @@ const Header = ({ hero }: { hero: Herodata }): JSX.Element => {
                   { to: "/", label: hero.navbar.home },
                   { to: "/room", label: hero.navbar.Hotels },
                   { to: "/dining", label: hero.navbar.Dining },
+                  {to : "/booking", label:hero.navbar.booking},
                   { to: "/contact", label: hero.navbar.contact }
                 ].map((link) => (
                   <NavLink key={link.to} to={link.to} className={({ isActive }) => `px-4 py-3 rounded-2xl text-[11px] font-bold uppercase tracking-[2px] transition-all duration-300 ${isActive ? "bg-amber-50 text-amber-800" : "text-stone-500 hover:bg-stone-50 hover:text-stone-900"}`}>{link.label}</NavLink>
