@@ -58,7 +58,8 @@ const Header = ({ hero }: { hero: Herodata }): JSX.Element => {
                     <NavLink to={"/"} className={({ isActive }) => `text-[11px] font-bold uppercase tracking-widest duration-200 ${isActive ? "text-amber-700" : "text-gray-400 hover:text-stone-900"}`}>{hero.navbar.home}</NavLink>
                     <NavLink to={"/room"} className={({ isActive }) => `text-[11px] font-bold uppercase tracking-widest duration-200 ${isActive ? "text-amber-700" : "text-gray-400 hover:text-stone-900"}`}>{hero.navbar.Hotels}</NavLink>
                     <NavLink to={"/dining"} className={({ isActive }) => `text-[11px] font-bold uppercase tracking-widest duration-200 ${isActive ? "text-amber-700" : "text-gray-400 hover:text-stone-900"}`}>{hero.navbar.Dining}</NavLink>
-                    
+                      <NavLink to={"/booking"} className={({ isActive }) => `text-[11px] font-bold uppercase tracking-widest duration-200 ${isActive ? "text-amber-700" : "text-gray-400 hover:text-stone-900"}`}>{hero.navbar.booking}</NavLink>
+                        <NavLink to={"/contact"} className={({ isActive }) => `text-[11px] font-bold uppercase tracking-widest duration-200 ${isActive ? "text-amber-700" : "text-gray-400 hover:text-stone-900"}`}>{hero.navbar.contact}</NavLink>
                     {/* AUTH BUTTON DESKTOP */}
                     {user ? (
                       <div className="flex items-center gap-4 ml-4 border-l border-stone-200 pl-6">
@@ -95,6 +96,7 @@ const Header = ({ hero }: { hero: Herodata }): JSX.Element => {
                   { to: "/", label: hero.navbar.home },
                   { to: "/room", label: hero.navbar.Hotels },
                   { to: "/dining", label: hero.navbar.Dining },
+                  {to : "/booking", label:hero.navbar.booking},
                   { to: "/contact", label: hero.navbar.contact }
                 ].map((link) => (
                   <NavLink key={link.to} to={link.to} className={({ isActive }) => `px-4 py-3 rounded-2xl text-[11px] font-bold uppercase tracking-[2px] transition-all duration-300 ${isActive ? "bg-amber-50 text-amber-800" : "text-stone-500 hover:bg-stone-50 hover:text-stone-900"}`}>{link.label}</NavLink>

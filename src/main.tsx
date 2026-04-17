@@ -67,22 +67,22 @@ const router = createBrowserRouter(
       <Route path='/room' element={<Roompage />} />
       <Route path='/room/:id' element={<Details />} />
       <Route path='/dining' element={<Dining />} />
-      <Route path='/booking' element={<ProtectedRoute><Bookingpage /></ProtectedRoute>} />
+      <Route path='/booking' element={<ProtectedRoute roleRequired='customer'><Bookingpage /></ProtectedRoute>} />
       <Route path='/contact' element={<Contact />} />
       <Route 
     path="/admin/dashboard" 
     element={
-        <ProtectedRoute>
+        <ProtectedRoute roleRequired='admin'>
             <AdminDashboard />
         </ProtectedRoute>
     } 
 />
 <Route path="/admin/edit-hotel/:id" element={
-        <ProtectedRoute>
+        <ProtectedRoute roleRequired='admin'>
           <Suspense fallback={<FullScreenLoader />}><EditHotelPage /></Suspense>
         </ProtectedRoute>
     } />
- <Route path="/admin/edit-dining/:id" element={ <ProtectedRoute>
+ <Route path="/admin/edit-dining/:id" element={ <ProtectedRoute roleRequired='admin'>
           <Suspense fallback={<FullScreenLoader />}><EditDiningPage /></Suspense>
         </ProtectedRoute>} />
     </Route>
