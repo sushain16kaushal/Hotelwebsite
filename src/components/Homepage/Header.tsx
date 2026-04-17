@@ -1,7 +1,7 @@
 import type{ Herodata } from "../../types/content";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useRef, useState, useEffect, type JSX } from "react";
-import { Menu, X, User } from 'lucide-react'; // User icon add kiya
+import { Menu, X} from 'lucide-react'; // User icon add kiya
 import { useAuth } from "../../context/AuthContext"; // useAuth import karo
 
 const Header = ({ hero }: { hero: Herodata }): JSX.Element => {
