@@ -31,6 +31,27 @@ const generateToken = (user) => {
         { expiresIn: "24h" }
     );
 };
+// 1. ADMIN LOGIN (Specifically for Admin Panel)
+export const adminLogin = async (req, res) => {
+  try {
+    // User model (Admin) mein check karega
+    const admin = await User.findOne({ email: req.body.email });
+    if (!admin) return res.status(404).json("Admin not found!");
+
+    // Check if it's actually an admin
+    if (admin.role !== 'admin') return res.status(403).json("Access denied! Not an admin.");
+
+    const isPasswordCorrect = await bcrypt.compare(req.body.password, admin.password);
+    if (!isPasswordCorrect) return res.status(400).json("Wrong password or email!");
+
+    const token = generateToken(admin);
+
+    const { password, ...otherDetails } = admin._doc;
+    res.status(200).json({ details: { ...otherDetails }, token });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 // LOGIN LOGIC
 export const login = async (req, res) => {
   try {
