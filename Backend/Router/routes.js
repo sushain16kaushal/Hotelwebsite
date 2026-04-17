@@ -6,6 +6,10 @@ import Hotel from '../Models/Hotel.js';
 import Dining from '../Models/Dining.js';
 import SiteConfig from '../Models/SiteConfig.js';
 import mongoose from "mongoose";
+import passport from "passport";
+import jwt from 'jsonwebtoken';
+import Customer from "../Models/Customer.js";
+import { custlogin,signup,forgotPassword,resetPassword } from "../Controllers/authController.js";
 /*const data=JSON.parse(
     fs.readFileSync(new URL("../data.json",import.meta.url),"utf-8")
 )*/
@@ -46,6 +50,7 @@ router.get("/hotel/:id", async (req, res) => {
     res.status(500).json({ message: "Invalid ID format or Server Error", error: err.message });
   }
 });
+
 router.post("/login", login);
 router.delete("/delete-hotel/:id", verifyAdmin, async (req, res) => {
   try {
@@ -79,18 +84,6 @@ router.put("/update-prices/:id", async (req, res) => {
     const updatedHotel = await Hotel.findByIdAndUpdate(
       req.params.id, 
       { $set: { roomCategories: req.body.roomCategories } },
-      { new: true }
-    );
-    res.status(200).json(updatedHotel);
-  } catch (err) {
-    res.status(500).json(err.message);
-  }
-});
-router.put("/update-features/:id", verifyAdmin, async (req, res) => {
-  try {
-    const updatedHotel = await Hotel.findByIdAndUpdate(
-      req.params.id,
-      { $set: { features: req.body.features } }, // 'features' ek array hoga strings ka
       { new: true }
     );
     res.status(200).json(updatedHotel);
@@ -132,5 +125,35 @@ router.delete("/delete-dining/:id", async (req, res) => {
         res.status(500).json({ message: "Delete failed" });
     }
 });
+// --- AUTH ROUTES ---
+
+router.post("/cust-login", custlogin); // Customer Login
+router.post("/signup", signup); // Customer Signup
+router.post("/forgot-password", forgotPassword); // Forgot Password Logic
+router.put("/reset-password/:token", resetPassword); // Reset Password Logic
+
+// --- GOOGLE OAUTH ROUTES ---
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+router.get('/google/callback', 
+  passport.authenticate('google', { session: false, failureRedirect: '/login' }), 
+  (req, res) => {
+    // Passport logic execution ke baad req.user mein data hota hai
+    const token = jwt.sign(
+      { id: req.user._id, role: req.user.role }, 
+      process.env.JWT_SECRET, 
+      { expiresIn: '7d' }
+    );
+    const userData = encodeURIComponent(JSON.stringify({
+        name: req.user.name,
+        email: req.user.email,
+        profilePic: req.user.profilePic,
+        role: req.user.role
+    }));
+
+    // Redirect to Frontend LoginSuccess Page
+    res.redirect(`${process.env.PRODUCTIONURL}/login-success?token=${token}&details=${userData}`);
+});
+
 
 export default router;

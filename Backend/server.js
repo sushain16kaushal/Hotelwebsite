@@ -3,6 +3,8 @@ import cors from 'cors';
 import routes from './Router/routes.js';
 import { configDotenv } from 'dotenv';
 import mongoose from 'mongoose';
+import passport from 'passport';
+import passportConfig from './config/passport.js';
 configDotenv();
 const app=express();
 const port=process.env.PORT || 4000;
@@ -11,7 +13,8 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
-
+passportConfig(passport);
+app.use(passport.initialize());
 app.use(express.json());
 app.use('/api',routes);
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.689oscc.mongodb.net/Hotel?retryWrites=true&w=majority`)
