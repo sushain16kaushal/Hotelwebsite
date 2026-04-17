@@ -59,7 +59,6 @@ const Header = ({ hero }: { hero: Herodata }): JSX.Element => {
                     <NavLink to={"/room"} className={({ isActive }) => `text-[11px] font-bold uppercase tracking-widest duration-200 ${isActive ? "text-amber-700" : "text-gray-400 hover:text-stone-900"}`}>{hero.navbar.Hotels}</NavLink>
                     <NavLink to={"/dining"} className={({ isActive }) => `text-[11px] font-bold uppercase tracking-widest duration-200 ${isActive ? "text-amber-700" : "text-gray-400 hover:text-stone-900"}`}>{hero.navbar.Dining}</NavLink>
                       <NavLink to={"/booking"} className={({ isActive }) => `text-[11px] font-bold uppercase tracking-widest duration-200 ${isActive ? "text-amber-700" : "text-gray-400 hover:text-stone-900"}`}>{hero.navbar.booking}</NavLink>
-                       <NavLink to={"/booking"} className={({ isActive }) => `text-[11px] font-bold uppercase tracking-widest duration-200 ${isActive ? "text-amber-700" : "text-gray-400 hover:text-stone-900"}`}>{hero.navbar.booking}</NavLink>
                         <NavLink to={"/contact"} className={({ isActive }) => `text-[11px] font-bold uppercase tracking-widest duration-200 ${isActive ? "text-amber-700" : "text-gray-400 hover:text-stone-900"}`}>{hero.navbar.contact}</NavLink>
                     {/* AUTH BUTTON DESKTOP */}
                     {user ? (
