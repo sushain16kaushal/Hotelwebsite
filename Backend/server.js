@@ -7,6 +7,7 @@ import passport from 'passport';
 import passportConfig from './config/passport.js';
 configDotenv();
 const app=express();
+app.set("trust proxy", 1);
 const port=process.env.PORT || 4000;
 app.use(cors({
   origin: "*", // Testing ke liye sab allow kar do
