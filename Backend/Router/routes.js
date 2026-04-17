@@ -135,7 +135,7 @@ router.put("/reset-password/:token", resetPassword); // Reset Password Logic
 // --- GOOGLE OAUTH ROUTES ---
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-router.get('/google/callback', 
+router.get('/auth/google/callback', 
   passport.authenticate('google', { session: false, failureRedirect: '/login' }), 
   (req, res) => {
     // Passport logic execution ke baad req.user mein data hota hai
