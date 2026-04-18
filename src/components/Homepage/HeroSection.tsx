@@ -25,7 +25,7 @@ export const HeroSection = () => {
 
   return (
 
-    <div className="relative h-screen md:h-[120vh] w-full overflow-hidden">
+    <div className="relative h-screen md:h-[160vh] w-full overflow-hidden">
       
       {/* Background Section */}
       <div className="absolute inset-0">

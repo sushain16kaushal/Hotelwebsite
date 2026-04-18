@@ -1,15 +1,42 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useAuth } from '../../context/AuthContext';
 
 const AuthPage = () => {
     const [isLogin, setIsLogin] = useState(true);
+    const [formData, setFormData] = useState({ name: '', email: '', password: '' });
     const navigate = useNavigate();
     const backendUrl = 'https://hotelapp-tiof.onrender.com';
-
+const { setUser } = useAuth();
     const handleGoogleLogin = () => {
         // Direct backend OAuth route par redirect
         window.location.href = `${backendUrl}/api/google`;
+    };
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            if (isLogin) {
+                // --- LOGIN LOGIC ---
+                const res = await axios.post(`${backendUrl}/api/cust-login`, {
+                    email: formData.email,
+                    password: formData.password
+                });
+                
+                localStorage.setItem('customerToken', res.data.token);
+                localStorage.setItem('customerDetails', JSON.stringify(res.data.details));
+                setUser(res.data.details);
+                navigate('/'); // Login ke baad home page
+            } else {
+                // --- SIGNUP LOGIC ---
+                await axios.post(`${backendUrl}/api/signup`, formData);
+                alert("Registration Successful! Please Sign In.");
+                setIsLogin(true); // Signup ke baad login screen par bhej do
+            }
+        } catch (err: any) {
+            alert(err.response?.data?.msg || err.response?.data || "Something went wrong");
+        }
     };
 
     return (
@@ -49,20 +76,25 @@ const AuthPage = () => {
                 </div>
 
                 {/* Form Logic */}
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                     {!isLogin && (
                         <div>
                             <label className="text-gray-400 text-[10px] uppercase tracking-widest ml-1">Full Name</label>
-                            <input type="text" placeholder="John Doe" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-[#c5a059] outline-none transition" />
+                            <input type="text" required
+  value={formData.name}
+  onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="Enter your Full Name" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-[#c5a059] outline-none transition" />
                         </div>
                     )}
                     <div>
                         <label className="text-gray-400 text-[10px] uppercase tracking-widest ml-1">Email Address</label>
-                        <input type="email" placeholder="email@example.com" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-[#c5a059] outline-none transition" />
+                        <input type="email" value={formData.email}
+  onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="email@example.com" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-[#c5a059] outline-none transition" />
                     </div>
                     <div>
                         <label className="text-gray-400 text-[10px] uppercase tracking-widest ml-1">Password</label>
-                        <input type="password" placeholder="••••••••" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-[#c5a059] outline-none transition" />
+                        <input type="password" required
+  value={formData.password}
+  onChange={(e) => setFormData({...formData, password: e.target.value})} placeholder="••••••••" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-[#c5a059] outline-none transition" />
                         {isLogin && (
                             <button 
                                 type="button"

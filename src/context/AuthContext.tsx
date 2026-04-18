@@ -7,19 +7,28 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        // Page refresh hone par check karo ki kya pehle se data hai
+   useEffect(() => {
+    const initializeAuth = () => {
         const storedUser = localStorage.getItem('customerDetails');
-        const token = localStorage.getItem('customerToken');
+        // Dono tokens mein se koi bhi ek mil jaye
+        const token = localStorage.getItem('customerToken') || localStorage.getItem('adminToken');
         
         if (storedUser && token) {
-            setUser(JSON.parse(storedUser));
+            try {
+                setUser(JSON.parse(storedUser));
+            } catch (error) {
+                console.error("Auth initialization failed", error);
+            }
         }
         setLoading(false);
-    }, []);
+    };
+
+    initializeAuth();
+}, []);
 
     const logout = () => {
         localStorage.removeItem('customerToken');
+        localStorage.removeItem('adminToken');
         localStorage.removeItem('customerDetails');
         setUser(null);
         window.location.href = '/'; // Seedha home page par

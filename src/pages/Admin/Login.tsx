@@ -1,16 +1,18 @@
 import  { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { useAuth } from '../../context/AuthContext';
 const Login = () => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
     const navigate = useNavigate();
-
+    const { setUser } = useAuth();
     const handleLogin = async (e:React.SubmitEvent) => {
         e.preventDefault();
         try {
-            const res = await axios.post('https://hotelapp-tiof.onrender.com/api/login', credentials);
+            const res = await axios.post('https://hotelapp-tiof.onrender.com/api/admin-login', credentials);
             localStorage.setItem('adminToken', res.data.token); // Token save kar liya
+            localStorage.setItem('customerDetails', JSON.stringify(res.data.details));
+            setUser(res.data.details);
             navigate('/admin/dashboard');
         } catch (err:any) {
             const error=err as Error
