@@ -19,7 +19,7 @@ const { setUser } = useAuth();
         try {
             if (isLogin) {
                 // --- LOGIN LOGIC ---
-                const res = await axios.post(`${backendUrl}/api/auth/custlogin`, {
+                const res = await axios.post(`${backendUrl}/api/cust-login`, {
                     email: formData.email,
                     password: formData.password
                 });
@@ -30,7 +30,7 @@ const { setUser } = useAuth();
                 navigate('/'); // Login ke baad home page
             } else {
                 // --- SIGNUP LOGIC ---
-                await axios.post(`${backendUrl}/api/auth/signup`, formData);
+                await axios.post(`${backendUrl}/api/signup`, formData);
                 alert("Registration Successful! Please Sign In.");
                 setIsLogin(true); // Signup ke baad login screen par bhej do
             }
