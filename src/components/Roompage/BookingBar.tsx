@@ -3,31 +3,38 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { AnimatePresence } from 'framer-motion';
 import { GuestRoomModal } from './GuestRoomModal';
+
 export const BookingBar = () => {
+    // Dates default range: Aaj se Kal tak
     const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date(new Date().setDate(new Date().getDate() + 1)));
     const [showGuestModal, setShowGuestModal] = useState(false);
     
-    // Mock state for display
-    const [rooms, setRooms] = useState([{ id: 1, adults: 1, children: 0 }]);
+    // Default: 1 Room, 2 Adults (Jo Taj reference mein tha)
+    const [rooms, setRooms] = useState([{ id: 1, adults: 2, children: 0 }]);
 
     return (
-        <div className="sticky top-0 z-40 w-full bg-[#1c1c1c] border-b border-white/10 py-4 px-6 shadow-2xl">
+        // --- MATCHING: Background ab Cream (#f5f1ea) hai, Black nahi ---
+        <div className="sticky top-0 z-40 w-full bg-[#f5f1ea] border-b border-[#eaddca]/50 py-4 px-6 shadow-sm">
             <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
                 
-                {/* Date Picker Section */}
-                <div className="flex items-center gap-2 bg-white/5 p-3 rounded-xl border border-white/10">
-                    <span className="text-[#c5a059] text-[10px] uppercase font-bold px-2">Dates</span>
+                {/* --- DATE PICKER SECTION --- */}
+                {/* Background ab White hai, borders matching cream se hain */}
+                <div className="flex items-center gap-2 bg-white p-3 rounded-xl border border-[#eaddca] shadow-inner">
+                    {/* Label color is matching #bc9a7c (Gold/Tan) */}
+                    <span className="text-[#bc9a7c] text-[10px] uppercase font-bold px-2">Dates</span>
                     <DatePicker
                         selected={startDate}
                         onChange={(date:unknown) => setStartDate(date as Date)}
                         selectsStart
                         startDate={startDate}
                         endDate={endDate}
-                        className="bg-transparent text-white text-sm outline-none w-24 cursor-pointer"
+                        dateFormat="dd MMM yyyy"
+                        // Text color is now Dark Brown (#4a3f35)
+                        className="bg-transparent text-[#4a3f35] text-sm outline-none w-28 cursor-pointer font-medium"
                         placeholderText="Check In"
                     />
-                    <span className="text-gray-600">|</span>
+                    <span className="text-[#eaddca]">|</span>
                     <DatePicker
                         selected={endDate}
                         onChange={(date:unknown) => setEndDate(date as Date)}
@@ -35,22 +42,28 @@ export const BookingBar = () => {
                         startDate={startDate}
                         endDate={endDate}
                         minDate={startDate}
-                        className="bg-transparent text-white text-sm outline-none w-24 cursor-pointer"
+                        dateFormat="dd MMM yyyy"
+                        className="bg-transparent text-[#4a3f35] text-sm outline-none w-28 cursor-pointer font-medium"
                         placeholderText="Check Out"
                     />
                 </div>
 
-                {/* Guest & Room Selector */}
+                {/* --- GUEST & ROOM SELECTOR --- */}
                 <div 
                     className="relative flex-1 min-w-50 cursor-pointer"
                     onClick={() => setShowGuestModal(!showGuestModal)}
                 >
-                    <div className="bg-white/5 p-3 rounded-xl border border-white/10 flex justify-between items-center">
+                    <div className="bg-white p-3 rounded-xl border border-[#eaddca] flex justify-between items-center shadow-inner">
                         <div>
-                            <span className="text-[#c5a059] text-[10px] uppercase font-bold block">Accommodation</span>
-                            <span className="text-white text-sm">{rooms.length} Room, {rooms.reduce((a, b) => a + b.adults, 0)} Adults</span>
+                            {/* Matching Gold/Tan #bc9a7c */}
+                            <span className="text-[#bc9a7c] text-[10px] uppercase font-bold block">Accommodation</span>
+                            {/* Matching Dark Brown #4a3f35 */}
+                            <span className="text-[#4a3f35] text-sm font-medium">
+                                {rooms.length} Room, {rooms.reduce((a, b) => a + b.adults, 0)} Adults
+                            </span>
                         </div>
-                        <i className={`transition-transform ${showGuestModal ? 'rotate-180' : ''}`}>▼</i>
+                        {/* Down Arrow color matching */}
+                        <i className={`transition-transform text-[#bc9a7c] ${showGuestModal ? 'rotate-180' : ''}`}>▼</i>
                     </div>
 
                     {/* Guest Modal Call */}
@@ -61,8 +74,9 @@ export const BookingBar = () => {
                     </AnimatePresence>
                 </div>
 
-                {/* Search Button */}
-                <button className="bg-[#c5a059] text-black px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-[#d4b57a] transition-all">
+                {/* --- SEARCH BUTTON: Perfect Match --- */}
+                {/* Background is Dark Brown (#4a3f35), Text is White */}
+                <button className="bg-[#4a3f35] text-white px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-[#bc9a7c] transition-all shadow-md active:scale-95">
                     Check Availability
                 </button>
             </div>
