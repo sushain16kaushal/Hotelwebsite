@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { addRoomBooking } from "../../store/bookingSlice";
 import toast, { Toaster } from 'react-hot-toast';
+import { BookingBar } from "./BookingBar";
 const Details = () => {
   const data = useOutletContext<ContentData>();
   const { id } = useParams<{ id: string }>();
@@ -58,7 +59,7 @@ toast.success(`Success! ${planType} added to your bookings`, {
       {/* --- HERO IMAGE SECTION (No Text Overlay) --- */}
       <section className="px-4 pt-6">
         <div className="relative w-full h-[70vh] md:h-[80vh] min-h-125 max-h-212.5 rounded-[30px] md:rounded-[40px] overflow-hidden shadow-2xl border border-[#eaddca] bg-[#1a1a1a] group">
-    
+
     <AnimatePresence mode="wait">
       <motion.img
         key={`${selectedCatIndex}-${activeImgIndex}`}
@@ -90,7 +91,7 @@ toast.success(`Success! ${planType} added to your bookings`, {
           </div>
         </div>
       </section>
-
+      <BookingBar />
       {/* --- INFO SECTION --- */}
       <div className="max-w-6xl mx-auto px-6 mt-10">
         <header className="mb-12">
