@@ -142,6 +142,7 @@ export const forgotPassword = async (req, res) => {
 
         res.json({ msg: "Reset link sent to your email! 📧" });
     } catch (err) {
+        console.log(err);
         res.status(500).json("Mail System Error");
     }
 };
