@@ -123,7 +123,7 @@ export const forgotPassword = async (req, res) => {
         customer.resetPasswordExpire = Date.now() + 30 * 60 * 1000; // 30 mins
         await customer.save();
 
-        const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+        const resetUrl = `${process.env.PRODUCTIONURL}/reset-password/${resetToken}`;
 
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
