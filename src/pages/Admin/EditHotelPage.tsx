@@ -179,3 +179,4 @@ if (loading) return (
         </div>
     );
 };
+export default EditHotelPage;
