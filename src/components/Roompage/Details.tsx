@@ -143,9 +143,9 @@ const start = new Date(bookingDates.startDate).getTime();
 
   const handleFinalBooking = () => {
   const token = localStorage.getItem("token");
-
+console.log("Auth Token Value:", token);
   // 1. Auth Check
-  if (!token) {
+  if (!token || token === "undefined" || token === "null" || token === "") {
     toast.error("Please sign in first!", {
       style: { borderRadius: '15px', background: '#4a3f35', color: '#fff' }
     });
