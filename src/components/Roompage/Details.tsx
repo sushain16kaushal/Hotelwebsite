@@ -19,8 +19,8 @@ interface CartItem {
   nights: number;
   totalBase: number;
   image: string;
-  checkIn: Date;
-  checkOut: Date;
+  checkIn: Date | string;
+  checkOut: Date | string;
 }
 
 const Details = () => {
@@ -59,7 +59,7 @@ const Details = () => {
   const category = hotel.roomCategories[selectedCatIndex];
 
   // --- LOGIC: CART & CALCULATIONS ---
-  const nights = Math.ceil((bookingDates.endDate.getTime() - bookingDates.startDate.getTime()) / (1000 * 60 * 60 * 24));
+ 
 const handleReserve = (planType: string, price: number) => {
     if (!rooms || rooms.length === 0) {
         toast.error("Please select rooms from the booking bar first!");
@@ -94,7 +94,18 @@ const handleReserve = (planType: string, price: number) => {
     }
 
     // 4. LOGIC: Nayi quantity aur dates ka snapshot
-    const nightCount = nights > 0 ? nights : 1;
+    
+    // --- DYNAMIC DATE CALCULATION FIX ---
+    // Yahan hum fresh dates le rahe hain taaki agar user ne modal mein change kiya ho toh wo turant calculate ho
+const start = new Date(bookingDates.startDate).getTime();
+    const end = new Date(bookingDates.endDate).getTime();
+    
+    // Difference in days calculation
+    const diffInMs = end - start;
+    const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+    
+    // Safety check: Agar same date hai toh 1 night, warna calculated nights
+    const finalNights = diffInDays > 0 ? diffInDays : 1;
     const roomsSnapshot = JSON.parse(JSON.stringify(matchingRoomsInModal));
 
     setCart(prevCart => {
@@ -108,11 +119,11 @@ const handleReserve = (planType: string, price: number) => {
             planType: planType,
             pricePerNight: price,
             roomsData: roomsSnapshot, // Exact matching rooms from modal
-            nights: nightCount,
-            totalBase: price * nightCount * roomsSnapshot.length,
+            nights: finalNights,
+            totalBase: price * finalNights * roomsSnapshot.length,
             image: category.categoryImages[0],
-            checkIn: new Date(bookingDates.startDate),
-            checkOut: new Date(bookingDates.endDate)
+            checkIn: new Date(start).toISOString(),
+            checkOut: new Date(end).toISOString()
         };
 
         return [...otherItems, newBooking];
@@ -241,21 +252,19 @@ const handleReserve = (planType: string, price: number) => {
                 
                 {/* --- IMPROVED: DATES & NIGHTS DISPLAY --- */}
                 <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1">
-                  <p className="text-[11px] text-[#8c7e6d] flex items-center gap-1">
-                    <span className="opacity-60">📅</span> 
-                    {bookingDates.startDate.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })} - {bookingDates.endDate.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}
-                  </p>
-                  <p className="text-[11px] font-bold text-[#bc9a7c]">
-                    {item.nights} {item.nights > 1 ? 'Nights' : 'Night'}
-                  </p>
-                  <p className="text-[11px] text-[#8c7e6d]">
-                    {item.roomsData.length} Room(s)
-                  </p>
+                 
                   <p className="text-[11px] text-[#8c7e6d] flex items-center gap-1">
     <span className="opacity-60">📅</span> 
     {new Date(item.checkIn).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })} - 
     {new Date(item.checkOut).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}
 </p>
+<p className="text-[11px] font-bold text-[#bc9a7c]">
+      {item.nights} {item.nights > 1 ? 'Nights' : 'Night'}
+    </p>
+
+    <p className="text-[11px] text-[#8c7e6d]">
+      {item.roomsData.length} Room(s)
+    </p>
                 </div>
               </div>
             </div>
