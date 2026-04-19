@@ -19,6 +19,8 @@ interface CartItem {
   nights: number;
   totalBase: number;
   image: string;
+  checkIn: Date;
+  checkOut: Date;
 }
 
 const Details = () => {
@@ -59,54 +61,65 @@ const Details = () => {
   // --- LOGIC: CART & CALCULATIONS ---
   const nights = Math.ceil((bookingDates.endDate.getTime() - bookingDates.startDate.getTime()) / (1000 * 60 * 60 * 24));
 const handleReserve = (planType: string, price: number) => {
-    // 1. Basic check for rooms selection
     if (!rooms || rooms.length === 0) {
         toast.error("Please select rooms from the booking bar first!");
         return;
     }
 
-    // 2. Category Lock (Jo pehle theek kaam kar raha tha)
-    const isTypeMatched = rooms.some(r => 
-        r.type.toLowerCase().includes(category.categoryName.toLowerCase()) ||
-        category.categoryName.toLowerCase().includes(r.type.toLowerCase())
+    // 1. MODAL INVENTORY: Modal mein is category ke kitne rooms hain?
+    const matchingRoomsInModal = rooms.filter(r => 
+        category.categoryName.toLowerCase().includes(r.type.toLowerCase()) ||
+        r.type.toLowerCase().includes(category.categoryName.toLowerCase())
     );
 
-    if (!isTypeMatched) {
-        toast.error(`Please reserve the matching category for ${rooms[0].type}.`);
+    const modalCount = matchingRoomsInModal.length;
+
+    if (modalCount === 0) {
+        toast.error(`you have not selected ${category.categoryName} in the booking slot`);
         return;
     }
 
-    // 3. QUANTITY SYNC & DUPLICATE CHECK (The Fix)
-    // Hum check karenge ki kya ye specific category pehle se cart mein hai
-    const isAlreadyInCart = cart.some(item => item.categoryName === category.categoryName);
+    // 2. CART CHECK: Cart mein is category ke kitne rooms pehle se hain?
+    const existingInCart = cart.find(item => item.categoryName === category.categoryName);
+    const cartCount = existingInCart ? existingInCart.roomsData.length : 0;
 
-    if (isAlreadyInCart) {
-        toast.error(`You have already reserved ${category.categoryName}. To change quantity, please update the booking bar.`, {
+    // 3. QUANTITY SAFETY LOCK
+    // Agar user ne modal mein 2 rooms rakhe hain aur cart mein pehle se 2 hain, toh aur add nahi karne dena
+    if (cartCount >= modalCount) {
+        toast.error(`Limit Reached!  ${modalCount} ${category.categoryName} `, {
+            icon: '🚫',
             style: { background: '#4a3f35', color: '#fff' }
         });
         return;
     }
 
-    // 4. Night Calculation and Deep Cloning
+    // 4. LOGIC: Nayi quantity aur dates ka snapshot
     const nightCount = nights > 0 ? nights : 1;
-    const currentSelection = JSON.parse(JSON.stringify(rooms));
+    const roomsSnapshot = JSON.parse(JSON.stringify(matchingRoomsInModal));
 
-    const newBooking: CartItem = {
-        cartId: Date.now(),
-        hotelName: hotel.hotelName,
-        categoryName: category.categoryName,
-        planType: planType,
-        pricePerNight: price,
-        roomsData: currentSelection, 
-        nights: nightCount,
-        totalBase: price * nightCount * currentSelection.length,
-        image: category.categoryImages[0]
-    };
+    setCart(prevCart => {
+        // Purani entry delete karo taaki updated selections (agar user ne modal badla ho) refresh ho jayein
+        const otherItems = prevCart.filter(item => item.categoryName !== category.categoryName);
+        
+        const newBooking = {
+            cartId: Date.now(),
+            hotelName: hotel.hotelName,
+            categoryName: category.categoryName,
+            planType: planType,
+            pricePerNight: price,
+            roomsData: roomsSnapshot, // Exact matching rooms from modal
+            nights: nightCount,
+            totalBase: price * nightCount * roomsSnapshot.length,
+            image: category.categoryImages[0],
+            checkIn: new Date(bookingDates.startDate),
+            checkOut: new Date(bookingDates.endDate)
+        };
 
-    setCart([...cart, newBooking]);
-    
-    toast.success(`${currentSelection.length} Room(s) reserved successfully!`, {
-        icon: '✅'
+        return [...otherItems, newBooking];
+    });
+
+    toast.success(`Reserved: ${roomsSnapshot.length} ${category.categoryName}`, {
+        icon: '🏨'
     });
 };
 
@@ -212,49 +225,95 @@ const handleReserve = (planType: string, price: number) => {
           </div>
         </section>
 
-        {/* --- DYNAMIC ORDER SUMMARY (CART) --- */}
-        {cart.length > 0 && (
-          <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="mt-20 pt-12 border-t border-[#eaddca]">
-            <h2 className="text-3xl font-serif text-[#4a3f35] mb-8 italic">Your Selection Summary</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-              <div className="lg:col-span-2 space-y-4">
-                {cart.map((item) => (
-                  <div key={item.cartId} className="bg-white border border-[#eaddca] p-6 rounded-[25px] flex justify-between items-center shadow-sm">
-                    <div>
-                      <span className="text-[10px] bg-[#4a3f35] text-white px-2 py-0.5 rounded-full uppercase tracking-tighter mb-2 inline-block">{item.planType}</span>
-                      <h4 className="font-serif text-lg font-bold text-[#4a3f35]">{item.categoryName}</h4>
-                      <p className="text-xs text-[#8c7e6d]">
-                        {item.roomsData.length} Room(s) • {item.nights} Night(s) • 
-                        {item.roomsData.reduce((acc, r) => acc + r.adults, 0)} Adults
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold text-[#4a3f35]">₹{item.totalBase.toLocaleString('en-IN')}</p>
-                      <button onClick={() => setCart(cart.filter(c => c.cartId !== item.cartId))} className="text-[10px] uppercase text-red-400 font-bold mt-2">Remove</button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Bill Details Card */}
-              <div className="bg-[#4a3f35] text-white p-8 rounded-[35px] shadow-2xl h-fit sticky top-24">
-                <h3 className="text-xl font-serif mb-6 border-b border-white/10 pb-4 italic text-[#bc9a7c]">Bill Details</h3>
-                <div className="space-y-4 text-sm font-light">
-                  <div className="flex justify-between"><span className="opacity-70">Room Subtotal</span><span>₹{subtotal.toLocaleString()}</span></div>
-                  <div className="flex justify-between"><span className="opacity-70">GST (Shimla {gstRate * 100}%)</span><span>₹{totalGST.toLocaleString()}</span></div>
-                  <div className="flex justify-between"><span className="opacity-70">Service Charge (5%)</span><span>₹{serviceCharge.toLocaleString()}</span></div>
-                  <div className="pt-6 mt-4 border-t border-white/10 flex justify-between items-end">
-                    <span className="text-xs uppercase tracking-widest font-bold">Total Amount</span>
-                    <span className="text-3xl font-serif text-[#bc9a7c]">₹{Math.round(grandTotal).toLocaleString()}</span>
-                  </div>
+       {/* --- DYNAMIC ORDER SUMMARY (CART) --- */}
+{cart.length > 0 && (
+  <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="mt-20 pt-12 border-t border-[#eaddca]">
+    <h2 className="text-3xl font-serif text-[#4a3f35] mb-8 italic">Your Selection Summary</h2>
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div className="lg:col-span-2 space-y-4">
+        {cart.map((item) => (
+          <div key={item.cartId} className="bg-white border border-[#eaddca] p-6 rounded-[25px] flex flex-col md:flex-row justify-between items-start md:items-center shadow-sm gap-4">
+            <div className="flex gap-4 items-center">
+              <img src={`https://ik.imagekit.io/y4ytihgqk/${item.image}?tr=w-200,h-200`} className="w-20 h-20 rounded-xl object-cover" alt="room" />
+              <div>
+                <span className="text-[10px] bg-[#4a3f35] text-white px-2 py-0.5 rounded-full uppercase tracking-tighter mb-1 inline-block">{item.planType}</span>
+                <h4 className="font-serif text-lg font-bold text-[#4a3f35]">{item.categoryName}</h4>
+                
+                {/* --- IMPROVED: DATES & NIGHTS DISPLAY --- */}
+                <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1">
+                  <p className="text-[11px] text-[#8c7e6d] flex items-center gap-1">
+                    <span className="opacity-60">📅</span> 
+                    {bookingDates.startDate.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })} - {bookingDates.endDate.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}
+                  </p>
+                  <p className="text-[11px] font-bold text-[#bc9a7c]">
+                    {item.nights} {item.nights > 1 ? 'Nights' : 'Night'}
+                  </p>
+                  <p className="text-[11px] text-[#8c7e6d]">
+                    {item.roomsData.length} Room(s)
+                  </p>
+                  <p className="text-[11px] text-[#8c7e6d] flex items-center gap-1">
+    <span className="opacity-60">📅</span> 
+    {new Date(item.checkIn).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })} - 
+    {new Date(item.checkOut).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}
+</p>
                 </div>
-                <button onClick={handleFinalBooking} className="w-full mt-8 bg-[#bc9a7c] hover:bg-white hover:text-[#4a3f35] text-white py-4 rounded-2xl font-bold uppercase tracking-[3px] text-[11px] transition-all shadow-lg active:scale-95">
-                  Add to Booking & Proceed 🔒
-                </button>
               </div>
             </div>
-          </motion.section>
-        )}
+
+            <div className="text-right w-full md:w-auto border-t md:border-0 pt-4 md:pt-0">
+              <p className="text-xs text-[#8c7e6d] mb-1">
+                ₹{item.pricePerNight.toLocaleString()} x {item.nights} Nights
+              </p>
+              <p className="font-bold text-xl text-[#4a3f35]">
+                ₹{item.totalBase.toLocaleString('en-IN')}
+              </p>
+              <button 
+                onClick={() => setCart(cart.filter(c => c.cartId !== item.cartId))} 
+                className="text-[10px] uppercase text-red-400 font-bold mt-2 hover:underline cursor-pointer"
+              >
+                Remove Selection
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Bill Details Card (Grand Total Calculation) */}
+      <div className="bg-[#4a3f35] text-white p-8 rounded-[35px] shadow-2xl h-fit lg:sticky lg:top-24">
+        <h3 className="text-xl font-serif mb-6 border-b border-white/10 pb-4 italic text-[#bc9a7c]">Final Bill Details</h3>
+        <div className="space-y-4 text-sm font-light">
+          <div className="flex justify-between">
+            <span className="opacity-70">Room Subtotal ({cart.reduce((acc, i) => acc + i.nights, 0)} Nights)</span>
+            <span>₹{subtotal.toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="opacity-70">Taxes & GST</span>
+            <span>₹{totalGST.toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="opacity-70">Service Charge (5%)</span>
+            <span>₹{serviceCharge.toLocaleString()}</span>
+          </div>
+          
+          <div className="pt-6 mt-4 border-t border-white/10 flex justify-between items-end">
+            <div>
+              <span className="text-[10px] uppercase tracking-widest font-bold opacity-60 block">Payable Amount</span>
+              <span className="text-3xl font-serif text-[#bc9a7c]">₹{Math.round(grandTotal).toLocaleString()}</span>
+            </div>
+          </div>
+        </div>
+        
+        <button 
+          onClick={handleFinalBooking} 
+          className="w-full mt-8 bg-[#bc9a7c] hover:bg-white hover:text-[#4a3f35] text-white py-4 rounded-2xl font-bold uppercase tracking-[3px] text-[11px] transition-all shadow-lg active:scale-95"
+        >
+          Confirm & Pay Securely
+        </button>
+      </div>
+    </div>
+  </motion.section>
+)}
+        
       </div>
     </div>
   );
