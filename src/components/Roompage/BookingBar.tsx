@@ -18,9 +18,7 @@ interface BookingBarProps {
 }
 export const BookingBar = ({ 
   rooms, 
-  setRooms, 
-  bookingDates, 
-  setBookingDates 
+  setRooms,  
 }: BookingBarProps) => {
     // Dates default range: Aaj se Kal tak
     const [startDate, setStartDate] = useState(new Date());
