@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-
+import toast from 'react-hot-toast';
 const LoginSuccess = () => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
@@ -24,7 +24,14 @@ const LoginSuccess = () => {
             // Redirect to home or booking
             const redirectTo = sessionStorage.getItem('redirectAfterLogin') || '/';
             navigate(redirectTo);
-        }
+        }else if (!token) {
+    // Jahan se user bhaga hai, wahi wapas aaye login ke baad
+    sessionStorage.setItem('redirectAfterLogin', window.location.pathname); 
+    
+    toast.error("Please sign in first!");
+    navigate('/auth');
+    return;
+}
     }, [searchParams, navigate, setUser]);
 
     return (

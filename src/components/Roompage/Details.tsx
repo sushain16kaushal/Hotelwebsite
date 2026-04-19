@@ -142,7 +142,7 @@ const start = new Date(bookingDates.startDate).getTime();
   const grandTotal = subtotal + totalGST + serviceCharge;
 
   const handleFinalBooking = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("customerToken");
 console.log("Auth Token Value:", token);
   // 1. Auth Check
   if (!token || token === "undefined" || token === "null" || token === "") {
