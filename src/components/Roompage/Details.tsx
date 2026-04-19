@@ -93,7 +93,7 @@ const Details = () => {
     if (!isAuthenticated) {
       toast.error("Sign-in required to confirm booking", { icon: '🔒' });
       // Redirecting to login with state to return back
-      navigate('/login', { state: { from: location.pathname, pendingCart: cart } });
+      navigate('/auth', { state: { from: location.pathname, pendingCart: cart } });
     } else {
       // Dispatch to Redux and Move to Bookings Page
       cart.forEach(item => dispatch(addRoomBooking(item)));
