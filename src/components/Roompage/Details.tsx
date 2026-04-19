@@ -142,18 +142,50 @@ const start = new Date(bookingDates.startDate).getTime();
   const grandTotal = subtotal + totalGST + serviceCharge;
 
   const handleFinalBooking = () => {
-    const isAuthenticated = localStorage.getItem("token"); // Aapka auth logic
+  const token = localStorage.getItem("token");
 
-    if (!isAuthenticated) {
-      toast.error("Sign-in required to confirm booking", { icon: '🔒' });
-      // Redirecting to login with state to return back
-      navigate('/auth', { state: { from: location.pathname, pendingCart: cart } });
-    } else {
-      // Dispatch to Redux and Move to Bookings Page
-      cart.forEach(item => dispatch(addRoomBooking(item)));
-      navigate('/bookings');
-    }
-  };
+  // 1. Auth Check
+  if (!token) {
+    toast.error("Please sign in first!", {
+      style: { borderRadius: '15px', background: '#4a3f35', color: '#fff' }
+    });
+    navigate('/auth');
+    return;
+  }
+
+  // 2. Check if cart is empty
+  if (cart.length === 0) {
+    toast.error("Your cart is empty!");
+    return;
+  }
+
+  // 3. PUSH DATA TO REDUX (Booking Summary Page ke liye)
+  // Hum cart ke saare items ko bari-bari Redux mein bhej rahe hain
+  cart.forEach((item) => {
+    dispatch(addRoomBooking({
+      id: item.cartId,           // Unique ID
+      hotelName: item.hotelName, // Euphoria Hotel, Shimla
+      roomCategory: item.categoryName,
+      image: item.image,
+      price: item.totalBase,     // Total price including nights and room count
+      plan: item.planType,
+      nights: item.nights,
+      checkIn: item.checkIn,
+      checkOut: item.checkOut
+    }));
+  });
+
+  // 4. Success Toast
+  toast.success("Added to Booking Summary!", {
+    icon: '🏔️',
+    style: { borderRadius: '20px', border: '1px solid #eaddca' }
+  });
+
+  // 5. Redirect to Booking Page
+  setTimeout(() => {
+    navigate('/booking'); // Is route ko apne hisab se check kar lena
+  }, 1000);
+};
 
   const nextSlide = () => setActiveImgIndex((prev) => (prev + 1) % category.categoryImages.length);
   const prevSlide = () => setActiveImgIndex((prev) => (prev - 1 + category.categoryImages.length) % category.categoryImages.length);
