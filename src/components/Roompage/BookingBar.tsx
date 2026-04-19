@@ -3,15 +3,31 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { AnimatePresence } from 'framer-motion';
 import { GuestRoomModal } from './GuestRoomModal';
-
-export const BookingBar = () => {
+import type{ Dispatch,SetStateAction } from 'react';
+interface BookingBarProps {
+  rooms: any[];
+  setRooms: Dispatch<SetStateAction<any[]>>;
+  bookingDates: {
+    startDate: Date;
+    endDate: Date;
+  };
+  setBookingDates: Dispatch<SetStateAction<{
+    startDate: Date;
+    endDate: Date;
+  }>>;
+}
+export const BookingBar = ({ 
+  rooms, 
+  setRooms, 
+  bookingDates, 
+  setBookingDates 
+}: BookingBarProps) => {
     // Dates default range: Aaj se Kal tak
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date(new Date().setDate(new Date().getDate() + 1)));
     const [showGuestModal, setShowGuestModal] = useState(false);
     
-    // Default: 1 Room, 2 Adults (Jo Taj reference mein tha)
-    const [rooms, setRooms] = useState([{ id: 1, adults: 2, children: 0 }]);
+  
 
     return (
         // --- MATCHING: Background ab Cream (#f5f1ea) hai, Black nahi ---
