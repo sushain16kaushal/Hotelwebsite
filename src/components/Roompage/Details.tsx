@@ -59,33 +59,36 @@ const Details = () => {
   // --- LOGIC: CART & CALCULATIONS ---
   const nights = Math.ceil((bookingDates.endDate.getTime() - bookingDates.startDate.getTime()) / (1000 * 60 * 60 * 24));
 const handleReserve = (planType: string, price: number) => {
-    // 1. Pehle check karo user ne rooms select kiye hain ya nahi
+    // 1. Basic check for rooms selection
     if (!rooms || rooms.length === 0) {
         toast.error("Please select rooms from the booking bar first!");
         return;
     }
 
-    // 2. Room Type Validation (IMPORTANT FIX)
-    // Hum check karenge ki user ne modal mein jo 'type' select kiya hai 
-    // kya wo is category (Single/Double) se match karta hai?
-    
+    // 2. Category Lock (Jo pehle theek kaam kar raha tha)
     const isTypeMatched = rooms.some(r => 
         r.type.toLowerCase().includes(category.categoryName.toLowerCase()) ||
         category.categoryName.toLowerCase().includes(r.type.toLowerCase())
     );
 
-    // Agar user ne modal mein 'Double Bed' select kiya hai par wo 'Single Room' reserve kar raha hai:
     if (!isTypeMatched) {
-        toast.error(`You have selected ${rooms[0].type} in booking bar. Please reserve the matching category or change your selection.`, {
-            duration: 4000,
-            position: 'top-center'
+        toast.error(`Please reserve the matching category for ${rooms[0].type}.`);
+        return;
+    }
+
+    // 3. QUANTITY SYNC & DUPLICATE CHECK (The Fix)
+    // Hum check karenge ki kya ye specific category pehle se cart mein hai
+    const isAlreadyInCart = cart.some(item => item.categoryName === category.categoryName);
+
+    if (isAlreadyInCart) {
+        toast.error(`You have already reserved ${category.categoryName}. To change quantity, please update the booking bar.`, {
+            style: { background: '#4a3f35', color: '#fff' }
         });
         return;
     }
 
+    // 4. Night Calculation and Deep Cloning
     const nightCount = nights > 0 ? nights : 1;
-
-    // 3. Deep Clone to prevent replication (Jo guest issue fix kiya tha)
     const currentSelection = JSON.parse(JSON.stringify(rooms));
 
     const newBooking: CartItem = {
@@ -102,8 +105,8 @@ const handleReserve = (planType: string, price: number) => {
 
     setCart([...cart, newBooking]);
     
-    toast.success(`Success! ${currentSelection.length} ${category.categoryName} reserved.`, {
-        style: { background: '#4a3f35', color: '#fff' }
+    toast.success(`${currentSelection.length} Room(s) reserved successfully!`, {
+        icon: '✅'
     });
 };
 
