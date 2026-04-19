@@ -1,4 +1,4 @@
-import { useParams, useNavigate, useLocation } from "react-router-dom"
+import { useParams, useNavigate} from "react-router-dom"
 import { useOutletContext } from "react-router-dom";
 import type { ContentData } from "../../types/content";
 import { useState, useEffect } from "react";
