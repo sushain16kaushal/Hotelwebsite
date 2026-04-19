@@ -58,22 +58,35 @@ const Details = () => {
 
   // --- LOGIC: CART & CALCULATIONS ---
   const nights = Math.ceil((bookingDates.endDate.getTime() - bookingDates.startDate.getTime()) / (1000 * 60 * 60 * 24));
-  
- const handleReserve = (planType: string, price: number) => {
-    // Problem 2 Fix: Pehle check karo user ne rooms select kiye hain ya nahi
+const handleReserve = (planType: string, price: number) => {
+    // 1. Pehle check karo user ne rooms select kiye hain ya nahi
     if (!rooms || rooms.length === 0) {
-        toast.error("Please select rooms and guests from the booking bar first!");
+        toast.error("Please select rooms from the booking bar first!");
+        return;
+    }
+
+    // 2. Room Type Validation (IMPORTANT FIX)
+    // Hum check karenge ki user ne modal mein jo 'type' select kiya hai 
+    // kya wo is category (Single/Double) se match karta hai?
+    
+    const isTypeMatched = rooms.some(r => 
+        r.type.toLowerCase().includes(category.categoryName.toLowerCase()) ||
+        category.categoryName.toLowerCase().includes(r.type.toLowerCase())
+    );
+
+    // Agar user ne modal mein 'Double Bed' select kiya hai par wo 'Single Room' reserve kar raha hai:
+    if (!isTypeMatched) {
+        toast.error(`You have selected ${rooms[0].type} in booking bar. Please reserve the matching category or change your selection.`, {
+            duration: 4000,
+            position: 'top-center'
+        });
         return;
     }
 
     const nightCount = nights > 0 ? nights : 1;
 
-    // Problem 1 Fix: Deep Clone the rooms array
-    // Isse 'Single Bedroom' cart mein save hone ke baad modal mein 'Double' karne par change nahi hoga
-    const currentSelection = rooms.map(room => ({
-        ...room,
-        assignedCategory: category.categoryName // Room ko category ke saath lock kar do
-    }));
+    // 3. Deep Clone to prevent replication (Jo guest issue fix kiya tha)
+    const currentSelection = JSON.parse(JSON.stringify(rooms));
 
     const newBooking: CartItem = {
         cartId: Date.now(),
@@ -89,11 +102,7 @@ const Details = () => {
 
     setCart([...cart, newBooking]);
     
-    // Optional: Reserve karne ke baad modal reset karna chaho toh yahan kar sakte ho
-    // setRooms([{ id: 1, adults: 1, children: 0, type: 'Double Bed' }]);
-
-    toast.success(`${currentSelection.length} Room(s) added to Summary`, {
-        icon: '🏨',
+    toast.success(`Success! ${currentSelection.length} ${category.categoryName} reserved.`, {
         style: { background: '#4a3f35', color: '#fff' }
     });
 };
