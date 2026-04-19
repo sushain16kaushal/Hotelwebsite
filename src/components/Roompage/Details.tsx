@@ -27,7 +27,7 @@ const Details = () => {
   const data = useOutletContext<ContentData>();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const location = useLocation();
+
   const dispatch = useDispatch();
 
   const hotelData = data?.hotels ?? [];
