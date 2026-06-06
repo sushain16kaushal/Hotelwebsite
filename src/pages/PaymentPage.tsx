@@ -1,0 +1,188 @@
+// src/pages/PaymentPage.tsx
+
+import React, { useState, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { motion } from 'framer-motion';
+import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { clearBookings } from '../store/bookingSlice';
+import { FaLock, FaCreditCard } from 'react-icons/fa';
+
+// ⚠️ Replace with your real Stripe Test Key
+const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphd7Vu'); 
+
+const PaymentForm = ({ amount }: { amount: number }) => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handlePayment = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!stripe || !elements) return;
+    
+    setLoading(true);
+    setError(null);
+
+    try {
+      // 🔒 Real Stripe Integration Logic (Simulated for now)
+      // In production: const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {...});
+      
+      // Simulation delay
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      // ✅ Success Steps
+      dispatch(clearBookings());
+      console.log(`📧 Email sent: Booking confirmed for ₹${amount}`);
+      toast.success("✅ Booking Confirmed! Check your email.");
+      navigate('/'); // Redirect to home
+
+    } catch (err: any) {
+      setError(err.message || "Payment failed. Please try again.");
+      toast.error("Payment failed!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handlePayment} className="space-y-6">
+      {error && (
+        <div className="bg-red-50 text-red-500 p-3 rounded-lg text-xs text-center border border-red-100">
+          {error}
+        </div>
+      )}
+      
+      <div className="bg-white p-6 rounded-2xl border border-[#dcd0c0] shadow-sm">
+        <label className=" text-xs font-bold text-[#4a3f35] uppercase tracking-widest mb-3 flex items-center gap-2">
+          <FaCreditCard className="text-[#bc9a7c]" /> Card Details
+        </label>
+        <div className="p-4 bg-[#f9f9f9] rounded-xl border border-[#eaddca]">
+          <CardElement options={{
+            style: {
+              base: {
+                fontSize: '16px',
+                color: '#4a3f35',
+                fontFamily: '"Serif", serif',
+                '::placeholder': { color: '#bc9a7c' },
+              },
+            },
+          }} />
+        </div>
+      </div>
+
+      <button 
+        type="submit"
+        disabled={!stripe || loading}
+        className="w-full py-5 bg-[#bc9a7c] text-white rounded-2xl font-bold uppercase tracking-[3px] text-[12px] shadow-xl hover:bg-[#a88969] transition-all active:scale-95 flex justify-center items-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
+      >
+        {loading ? (
+          <div className="flex items-center gap-2">
+            <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+            <span>Processing...</span>
+          </div>
+        ) : (
+          <span className="flex items-center gap-2">
+            <FaLock className="text-xs" /> Pay ₹{amount.toLocaleString('en-IN')}
+          </span>
+        )}
+      </button>
+      
+      <p className="text-center text-[10px] text-[#8c7e6d]">
+        🔒 Secured by Stripe Test Mode
+      </p>
+    </form>
+  );
+};
+
+const PaymentPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // Get total from state or use fallback
+  const totalAmount = location.state?.total || 0; 
+  const [paymentType, setPaymentType] = useState<'FULL' | 'PARTIAL'>('FULL');
+
+  // Redirect if no amount
+  React.useEffect(() => {
+    if (!totalAmount || totalAmount === 0) {
+      toast.error("Your cart is empty!");
+      navigate('/booking-summary');
+    }
+  }, [totalAmount, navigate]);
+
+  const calculatedAmount = useMemo(() => {
+    return paymentType === 'PARTIAL' 
+      ? Math.round(totalAmount * 0.30) 
+      : totalAmount;
+  }, [paymentType, totalAmount]);
+
+  return (
+    <div className="min-h-screen bg-[#f5f1ea] flex items-center justify-center p-4 md:p-8">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-md bg-[#faf9f6] rounded-[3rem] shadow-2xl overflow-hidden border border-[#dcd0c0]"
+      >
+        {/* Header */}
+        <div className="bg-[#4a3f35] p-8 text-center">
+          <h2 className="text-2xl font-serif font-bold text-white">Secure Checkout</h2>
+          <p className="text-[10px] text-[#bc9a7c] uppercase tracking-widest mt-1">Euphoria, Shimla</p>
+        </div>
+
+        {/* Payment Content */}
+        <div className="p-8">
+          <label className="block text-xs font-bold text-[#4a3f35] mb-4 uppercase tracking-widest">
+            Select Payment Mode
+          </label>
+          
+          <div className="flex gap-4 mb-8">
+            <button 
+              type="button"
+              onClick={() => setPaymentType('FULL')}
+              className={`flex-1 py-4 rounded-2xl border-2 text-sm font-bold transition-all ${
+                paymentType === 'FULL' 
+                ? 'bg-[#4a3f35] text-white border-[#4a3f35]' 
+                : 'bg-white text-[#8c7e6d] border-[#eaddca] hover:border-[#bc9a7c]'
+              }`}
+            >
+              Full Payment
+              <span className="block text-[10px] font-normal opacity-70 mt-1">
+                ₹{totalAmount.toLocaleString('en-IN')}
+              </span>
+            </button>
+            
+            <button 
+              type="button"
+              onClick={() => setPaymentType('PARTIAL')}
+              className={`flex-1 py-4 rounded-2xl border-2 text-sm font-bold transition-all ${
+                paymentType === 'PARTIAL' 
+                ? 'bg-[#4a3f35] text-white border-[#4a3f35]' 
+                : 'bg-white text-[#8c7e6d] border-[#eaddca] hover:border-[#bc9a7c]'
+              }`}
+            >
+              Partial (30%)
+              <span className="block text-[10px] font-normal opacity-70 mt-1">
+                Pay ₹{Math.round(totalAmount * 0.3).toLocaleString('en-IN')}
+              </span>
+            </button>
+          </div>
+
+          <div className="border-t border-[#eaddca] my-6"></div>
+
+          {/* Stripe Form */}
+          <Elements stripe={stripePromise}>
+            <PaymentForm amount={calculatedAmount} />
+          </Elements>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+export default PaymentPage;

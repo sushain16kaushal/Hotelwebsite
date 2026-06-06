@@ -4,8 +4,9 @@ import './index.css'
 import ProtectedRoute from './components/ProtectedRoute'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { store } from './store/store'
+import { store,persistor } from './store/store'
 import { AuthProvider } from './context/AuthContext';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import FullScreenLoader from './components/FullScreenLoader' 
 const Login= lazy(() => import('./pages/Admin/Login'))
@@ -24,6 +25,7 @@ const AuthPage = lazy(() => import('./pages/Admin/AuthPage')) // Customer Login/
 const LoginSuccess = lazy(() => import('./pages/Admin/LoginSuccess'))
 const ForgotPassword = lazy(() => import('./pages/Admin/ForgotPassword'))
 const ResetPassword = lazy(() => import('./pages/Admin/Resetpassword'))
+const PaymentPage = lazy(() => import('./pages/PaymentPage'))
 const router = createBrowserRouter(
   createRoutesFromElements(
     /* 3. Sabse upar wale Route ko Suspense mein lapeto */
@@ -69,6 +71,8 @@ const router = createBrowserRouter(
       <Route path='/dining' element={<Dining />} />
       <Route path='/booking' element={<ProtectedRoute roleRequired='customer'><Bookingpage /></ProtectedRoute>} />
       <Route path='/contact' element={<Contact />} />
+      <Route path="/payment" element={<PaymentPage />} />
+      <Route path="/booking-summary" element={<Bookingpage />} />
       <Route 
     path="/admin/dashboard" 
     element={
@@ -94,7 +98,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AuthProvider>
     <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
       <RouterProvider router={router} />
+      </PersistGate>
     </Provider>
     </AuthProvider>
   </StrictMode>

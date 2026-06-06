@@ -10,22 +10,44 @@ const DiningComponent = (): JSX.Element => {
   const data = useOutletContext<ContentData>();
   const [selectedMenu, setSelectedMenu] = useState<Dining | null>(null);
   const dispatch = useDispatch();
-
+const [bookingDetails, setBookingDetails] = useState<{
+  restaurant: Dining | null;
+  date: string;
+  time: string;
+  tables: number;
+}>({
+  restaurant: null,
+  date: "",
+  time: "",
+  tables: 1,
+});
   // Booking Handler for Dining
   const handleBookTable = (restaurant: Dining) => {
+    if (!bookingDetails.date || !bookingDetails.time) {
+    toast.error("Please select Date and Time!");
+    return;
+  }
     const diningData = {
       id: Date.now(),
       name: restaurant.name,
       cuisine: restaurant.cuisine,
       address: restaurant.address,
       image: restaurant.image, // Summary page par dikhane ke liye
+      tables: bookingDetails.tables,
+      price: 1500 * bookingDetails.tables, // Aapki fix price requirement
+      
+    meta: {
+      date: bookingDetails.date,
+      time: bookingDetails.time,
+      
+    }
     };
 
     // Dispatch to Redux
     dispatch(addDiningBooking(diningData));
 
     // Ecommerce style toast
-    toast.success(`${restaurant.name} added to bookings!`, {
+    toast.success(`${bookingDetails.tables} Table(s) at ${restaurant.name} added!`, {
       duration: 2000,
       position: 'bottom-right',
       style: {
@@ -45,7 +67,36 @@ const DiningComponent = (): JSX.Element => {
   return (
     <div className="mt-2 flex flex-wrap bg-[#f5f1ea] p-2 md:p-6 min-h-screen relative">
       <Toaster /> {/* Toast Container */}
-      
+      <div className="w-full bg-[#faf9f6] p-6 md:p-8 rounded-[2rem] mb-8 shadow-sm border border-[#eaddca]/60 flex flex-wrap gap-4 items-center justify-between">
+  <div className="flex flex-col gap-1 w-full md:w-auto">
+    <label className="text-[10px] uppercase tracking-[0.2em] text-[#bc9a7c] font-bold ml-1">Reservation Date</label>
+    <input 
+      type="date" 
+      className="bg-white border border-[#eaddca] text-[#4a3f35] text-sm rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#bc9a7c]/20 focus:border-[#bc9a7c] transition-all outline-none"
+      onChange={(e) => setBookingDetails(prev => ({...prev, date: e.target.value}))} 
+    />
+  </div>
+
+  <div className="flex flex-col gap-1 w-full md:w-auto">
+    <label className="text-[10px] uppercase tracking-[0.2em] text-[#bc9a7c] font-bold ml-1">Preferred Time</label>
+    <input 
+      type="time" 
+      className="bg-white border border-[#eaddca] text-[#4a3f35] text-sm rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#bc9a7c]/20 focus:border-[#bc9a7c] transition-all outline-none"
+      onChange={(e) => setBookingDetails(prev => ({...prev, time: e.target.value}))} 
+    />
+  </div>
+
+  <div className="flex flex-col gap-1 w-full md:w-auto">
+    <label className="text-[10px] uppercase tracking-[0.2em] text-[#bc9a7c] font-bold ml-1">No of Tables</label>
+    <input 
+      type="number" 
+      min="1" 
+      placeholder="0"
+      className="bg-white border border-[#eaddca] text-[#4a3f35] text-sm rounded-xl px-4 py-3 w-full md:w-24 focus:ring-2 focus:ring-[#bc9a7c]/20 focus:border-[#bc9a7c] transition-all outline-none"
+      onChange={(e) => setBookingDetails(prev => ({...prev, tables: Number(e.target.value)}))} 
+    />
+  </div>
+</div>
       {data.dinings.map((item, index) => (
         <div key={index} className="w-full md:w-1/2 p-3">
           <div className="group relative flex flex-col lg:flex-row border border-[#dcd0c0] p-6 rounded-[2.5rem] bg-[#faf9f6] shadow-sm transition-all duration-500 hover:shadow-2xl hover:border-[#bc9a7c]/40 hover:-translate-y-1 h-full overflow-hidden">
