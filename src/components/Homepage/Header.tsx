@@ -44,7 +44,7 @@ const Header = ({ hero }: { hero: Herodata }): JSX.Element => {
             >
               {isScrolled && (
                 <div className="text-white">
-                  {isOpen ? <X size={20} /> : (user?.profilePic ? <img src={user.profilePic} className="w-15 h-15 rounded-full border border-amber-500" /> : <Menu size={20} />)}
+                  {isOpen ? <X size={20} /> : <Menu size={20} />}
                 </div>
               )}
 
