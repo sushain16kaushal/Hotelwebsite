@@ -1,4 +1,4 @@
-// src/pages/PaymentPage.tsx - Fixed Version
+// src/pages/PaymentPage.tsx - Fully Fixed
 
 import React, { useState, useMemo, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -10,18 +10,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearBookings } from '../store/bookingSlice';
 import { FaLock, FaCreditCard } from 'react-icons/fa';
 import type { RootState } from '../store/store';
-import type { User } from '../types/content'; // ✅ Import User type
+import type { User } from '../types/content';
 
-// ⚠️ Your Stripe Test Key
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphd7Vu');
 
-const PaymentForm = ({ amount }: { amount: number }) => {
+const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FULL' | 'PARTIAL' }) => {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-  // ✅ Explicitly typed user
   const user = useSelector((state: RootState) => state.auth?.user as User | null);
   const token = useSelector((state: RootState) => state.auth?.token as string | null);
   
@@ -37,7 +35,6 @@ const PaymentForm = ({ amount }: { amount: number }) => {
     
     if (!stripe || !elements) return;
     
-    // ✅ Safe check for user._id
     if (!user || !user._id || !token) {
       toast.error("Please login to complete payment!");
       navigate('/login');
@@ -51,7 +48,7 @@ const PaymentForm = ({ amount }: { amount: number }) => {
       // Simulate Stripe Payment
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      // Call Backend API
+      // Call Backend API - NOW USING paymentType ✅
       const response = await fetch('http://localhost:5000/api/booking/process-payment', {
         method: 'POST',
         headers: { 
@@ -61,7 +58,7 @@ const PaymentForm = ({ amount }: { amount: number }) => {
         body: JSON.stringify({
           userId: user._id,
           amount: amount,
-          paymentType: 'FULL',
+          paymentType: paymentType, // ✅ Used here
           bookingDetails: {
             hotels: roomBookings,
             dining: diningBookings,
@@ -74,7 +71,14 @@ const PaymentForm = ({ amount }: { amount: number }) => {
 
       if (data.success) {
         dispatch(clearBookings());
-        toast.success("🎉 Booking Confirmed! Check your email.");
+        
+        // Show appropriate message based on payment type ✅
+        if (paymentType === 'PARTIAL') {
+          toast.success("🎉 Partial Payment Done! Balance to pay at check-in.");
+        } else {
+          toast.success("🎉 Full Payment Confirmed! Check your email.");
+        }
+        
         navigate('/');
       } else {
         throw new Error(data.message || "Payment failed");
@@ -129,6 +133,10 @@ const PaymentForm = ({ amount }: { amount: number }) => {
           </span>
         )}
       </button>
+      
+      <p className="text-center text-[10px] text-[#8c7e6d]">
+        🔒 Secured by Stripe Test Mode
+      </p>
     </form>
   );
 };
@@ -138,9 +146,8 @@ const PaymentPage = () => {
   const navigate = useNavigate();
   
   const totalAmount = location.state?.total || 0; 
-  const [paymentType, setPaymentType] = useState<'FULL' | 'PARTIAL'>('FULL');
+  const [paymentType, setPaymentType] = useState<'FULL' | 'PARTIAL'>('FULL'); // ✅ Now used
 
-  // ✅ Explicitly typed user
   const user = useSelector((state: RootState) => state.auth?.user as User | null);
 
   useEffect(() => {
@@ -180,8 +187,47 @@ const PaymentPage = () => {
         </div>
 
         <div className="p-8">
+          <label className="block text-xs font-bold text-[#4a3f35] mb-4 uppercase tracking-widest">
+            Select Payment Mode
+          </label>
+          
+          <div className="flex gap-4 mb-8">
+            <button 
+              type="button"
+              onClick={() => setPaymentType('FULL')}
+              className={`flex-1 py-4 rounded-2xl border-2 text-sm font-bold transition-all ${
+                paymentType === 'FULL' 
+                ? 'bg-[#4a3f35] text-white border-[#4a3f35]' 
+                : 'bg-white text-[#8c7e6d] border-[#eaddca]'
+              }`}
+            >
+              Full Payment
+              <span className="block text-[10px] font-normal opacity-70 mt-1">
+                ₹{totalAmount.toLocaleString('en-IN')}
+              </span>
+            </button>
+            
+            <button 
+              type="button"
+              onClick={() => setPaymentType('PARTIAL')}
+              className={`flex-1 py-4 rounded-2xl border-2 text-sm font-bold transition-all ${
+                paymentType === 'PARTIAL' 
+                ? 'bg-[#4a3f35] text-white border-[#4a3f35]' 
+                : 'bg-white text-[#8c7e6d] border-[#eaddca]'
+              }`}
+            >
+              Partial (30%)
+              <span className="block text-[10px] font-normal opacity-70 mt-1">
+                Pay ₹{Math.round(totalAmount * 0.3).toLocaleString('en-IN')}
+              </span>
+            </button>
+          </div>
+
+          <div className="border-t border-[#eaddca] my-6"></div>
+
+          {/* ✅ Pass paymentType to PaymentForm */}
           <Elements stripe={stripePromise}>
-            <PaymentForm amount={calculatedAmount} />
+            <PaymentForm amount={calculatedAmount} paymentType={paymentType} />
           </Elements>
         </div>
       </motion.div>

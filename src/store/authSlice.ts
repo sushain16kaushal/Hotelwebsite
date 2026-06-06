@@ -1,7 +1,7 @@
 // src/store/authSlice.js
 
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+
 const initialState = {
   user: null,
   token: null,
