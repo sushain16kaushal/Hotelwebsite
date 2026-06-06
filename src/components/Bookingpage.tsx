@@ -1,38 +1,41 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { RootState } from '../store/store';
 import { removeDiningBooking, removeRoomBooking, removeOfferBooking } from '../store/bookingSlice';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { useMemo } from 'react';
+
 const BookingPage = () => {
   const { roomBookings, diningBookings, offerBookings } = useSelector((state: RootState) => state.booking);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [viewingDetails, setViewingDetails] = useState<any>(null);
-// Component ke andar:
-const groupedDining = useMemo(() => {
-  return diningBookings.reduce((acc: any, curr: any) => {
-    const existing = acc.find((item: any) => item.name === curr.name);
-    if (existing) {
-      existing.tables = (existing.tables || 1) + (curr.tables || 1);
-      // Optional: Agar aap saari original IDs rakhna chahte hain
-      existing.allIds = [...(existing.allIds || [existing.id]), curr.id]; 
-    } else {
-      acc.push({ ...curr, allIds: [curr.id] });
-    }
-    return acc;
-  }, []);
-}, [diningBookings]);
-  // --- 1. DYNAMIC COMBINED CALCULATIONS FOR ORDER SUMMARY ---
+
+  // --- 1. MEMOized GROUPING FOR DINING RESERVATIONS ---
+  const groupedDining = useMemo(() => {
+    return diningBookings.reduce((acc: any, curr: any) => {
+      const existing = acc.find((item: any) => item.name === curr.name);
+      if (existing) {
+        existing.tables = (existing.tables || 1) + (curr.tables || 1);
+        existing.allIds = [...(existing.allIds || [existing.id]), curr.id]; 
+      } else {
+        // Fallback or explicit check ensuring current tables default to 1 if missing
+        acc.push({ ...curr, allIds: [curr.id], tables: curr.tables || 1 });
+      }
+      return acc;
+    }, []);
+  }, [diningBookings]);
+
+  // --- 2. DYNAMIC COMBINED CALCULATIONS FOR ORDER SUMMARY ---
   const roomsSubtotal = roomBookings.reduce((acc, item) => acc + (item.price || 0), 0);
- 
-// Dining cost based on table count (1500 per table)
-  const diningSubtotal = diningBookings.reduce((acc, item) => {
+  
+  // Fixed: Dining calculations grouped list se fetch hogi to ensure sync accuracy
+  const diningSubtotal = groupedDining.reduce((acc, item) => {
     const tableCount = item.tables || 1; 
     return acc + (tableCount * 1500);
   }, 0);
+
   const offersSubtotal = offerBookings.reduce((acc, item) => acc + (Number(item.price) || 0), 0);
 
   const overallSubtotal = roomsSubtotal + diningSubtotal + offersSubtotal;
@@ -50,7 +53,6 @@ const groupedDining = useMemo(() => {
     }
     toast.loading("Initiating secure checkout for Euphoria, Shimla...", { duration: 2000 });
     
-    // Yahan aap apna backend payment processing link map kar sakte ho future mein
     setTimeout(() => {
       toast.success("Redirecting to payment gateway...");
     }, 2000);
@@ -84,7 +86,7 @@ const groupedDining = useMemo(() => {
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-[#4a3f35] mt-2">Booking Summary</h1>
         </header>
 
-        {/* Outer Layout Grid to split items and Summary sticky block */}
+        {/* Outer Layout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
           
           {/* LEFT 2 COLUMNS: ALL ACTIVE SECTIONS */}
@@ -143,7 +145,7 @@ const groupedDining = useMemo(() => {
               {groupedDining.length > 0 ? (
                 <div className="grid gap-6">
                   <AnimatePresence mode='popLayout'>
-                    {groupedDining.map((item:any) => (
+                    {groupedDining.map((item: any) => (
                       <motion.div layout key={item.id} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50, scale: 0.95 }} transition={{ duration: 0.4 }} className="group relative bg-[#faf9f6] border border-[#dcd0c0] rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-all duration-500">
                         <div className="w-full md:w-52 h-40 md:h-auto shrink-0 overflow-hidden">
                           <img src={`https://ik.imagekit.io/y4ytihgqk/${item.image}?tr=w-500,h-400,fo-auto`} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -168,20 +170,18 @@ const groupedDining = useMemo(() => {
                             <button onClick={() => item.allIds.forEach((id: any) => dispatch(removeDiningBooking(id)))} className="text-[10px] font-bold text-red-400 hover:text-red-600 transition-colors uppercase tracking-widest cursor-pointer flex items-center gap-1.5">
                               Cancel All ({item.tables} Tables)
                             </button>
-              {/* Add Time and Tables display */}
- {/* PRICE DISPLAY SECTION */}
-            <div className="flex flex-col items-end">
-              <span className="text-[10px] text-[#8c7e6d] font-bold">
-                {item.tables} Table(s)
-              </span>
-              <span className="text-sm font-bold text-[#4a3f35]">
-                {/* 1500 is the rate per table */}
-                ₹{( (item.tables * 1500) ).toLocaleString('en-IN')}
-              </span>
-            </div>
+                            
+                            {/* FIXED PRICE DISPLAY SECTION */}
+                            <div className="flex flex-col items-end">
+                              <span className="text-[10px] text-[#8c7e6d] font-bold">
+                                {item.tables} Table(s)
+                              </span>
+                              <span className="text-sm font-bold text-[#4a3f35]">
+                                ₹{((item.tables || 1) * 1500).toLocaleString('en-IN')}
+                              </span>
+                            </div>
                           </div>
                         </div>
-
                       </motion.div>
                     ))}
                   </AnimatePresence>
@@ -243,17 +243,18 @@ const groupedDining = useMemo(() => {
                 <span className="font-mono">₹{roomsSubtotal.toLocaleString('en-IN')}</span>
               </div>
               
-          {diningSubtotal > 0 && (
-  <div className="flex justify-between">
-    <span className="opacity-70">
-      Dining 
-      <span className="ml-1 text-[9px] bg-white/10 px-1.5 py-0.5 rounded">
-        ({diningBookings.reduce((sum, item) => sum + (item.tables || 1), 0)} Tables)
-      </span>
-    </span>
-    <span className="font-mono">₹{diningSubtotal.toLocaleString('en-IN')}</span>
-  </div>
-)}
+              {/* FIXED DINING BILL BLOCK */}
+              {diningSubtotal > 0 && (
+                <div className="flex justify-between">
+                  <span className="opacity-70">
+                    Dining 
+                    <span className="ml-1 text-[9px] bg-white/10 px-1.5 py-0.5 rounded">
+                      ({groupedDining.reduce((sum, item) => sum + (item.tables || 1), 0)} Tables)
+                    </span>
+                  </span>
+                  <span className="font-mono">₹{diningSubtotal.toLocaleString('en-IN')}</span>
+                </div>
+              )}
 
               {offersSubtotal > 0 && (
                 <div className="flex justify-between">
