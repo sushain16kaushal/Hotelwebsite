@@ -49,7 +49,13 @@ const BookingPage = () => {
       return;
     }
     toast.loading("Initiating secure checkout for Euphoria, Shimla...", { duration: 2000 });
-    
+      navigate('/payment', { 
+      state: { 
+        total: grandTotal,
+        rooms: roomBookings.length,
+        dining: groupedDining.length
+      } 
+    });
     setTimeout(() => {
       toast.success("Redirecting to payment gateway...");
     }, 2000);

@@ -25,6 +25,7 @@ const bookingSlice = createSlice({
     clearBookings: (state) => {
       state.roomBookings = [];
       state.diningBookings = [];
+       state.offerBookings = [];
     },
     removeRoomBooking: (state, action: PayloadAction<number>) => {
   state.roomBookings = state.roomBookings.filter(item => item.id !== action.payload);

@@ -25,6 +25,7 @@ const AuthPage = lazy(() => import('./pages/Admin/AuthPage')) // Customer Login/
 const LoginSuccess = lazy(() => import('./pages/Admin/LoginSuccess'))
 const ForgotPassword = lazy(() => import('./pages/Admin/ForgotPassword'))
 const ResetPassword = lazy(() => import('./pages/Admin/Resetpassword'))
+const PaymentPage = lazy(() => import('./pages/PaymentPage'))
 const router = createBrowserRouter(
   createRoutesFromElements(
     /* 3. Sabse upar wale Route ko Suspense mein lapeto */
@@ -70,6 +71,8 @@ const router = createBrowserRouter(
       <Route path='/dining' element={<Dining />} />
       <Route path='/booking' element={<ProtectedRoute roleRequired='customer'><Bookingpage /></ProtectedRoute>} />
       <Route path='/contact' element={<Contact />} />
+      <Route path="/payment" element={<PaymentPage />} />
+      <Route path="/booking-summary" element={<Bookingpage />} />
       <Route 
     path="/admin/dashboard" 
     element={
