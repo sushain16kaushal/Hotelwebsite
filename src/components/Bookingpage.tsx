@@ -62,7 +62,15 @@ const BookingPage = () => {
       </button>
     </motion.div>
   );
-
+const groupedDining = diningBookings.reduce((acc: any, curr: any) => {
+  const existing = acc.find((item: any) => item.name === curr.name);
+  if (existing) {
+    existing.tables = (existing.tables || 1) + (curr.tables || 1);
+  } else {
+    acc.push({ ...curr });
+  }
+  return acc;
+}, []);
   return (
     <div className="min-h-screen bg-[#f5f1ea] p-4 md:p-12 pb-32 relative">
       <div className="max-w-6xl mx-auto">
@@ -127,10 +135,10 @@ const BookingPage = () => {
                 <div className="h-px bg-[#eaddca] grow"></div>
                 <span className="bg-[#bc9a7c] text-white text-[10px] px-3 py-1 rounded-full font-bold">{diningBookings.length}</span>
               </div>
-              {diningBookings.length > 0 ? (
+              {groupedDining.length > 0 ? (
                 <div className="grid gap-6">
                   <AnimatePresence mode='popLayout'>
-                    {diningBookings.map((item) => (
+                    {groupedDining.map((item:any) => (
                       <motion.div layout key={item.id} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50, scale: 0.95 }} transition={{ duration: 0.4 }} className="group relative bg-[#faf9f6] border border-[#dcd0c0] rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-all duration-500">
                         <div className="w-full md:w-52 h-40 md:h-auto shrink-0 overflow-hidden">
                           <img src={`https://ik.imagekit.io/y4ytihgqk/${item.image}?tr=w-500,h-400,fo-auto`} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -156,16 +164,19 @@ const BookingPage = () => {
                               Cancel Slot
                             </button>
               {/* Add Time and Tables display */}
-  <div className="flex flex-col items-end">
-    <span className="text-[10px] text-[#8c7e6d] font-bold">
-      {item.time ? `At ${item.time}` : ''} • {item.tables || 1} Table(s)
-    </span>
-    <span className="text-sm font-bold text-[#4a3f35]">
-      ₹{( (item.tables || 1) * 1500 ).toLocaleString('en-IN')}
-    </span>
-  </div>
+ {/* PRICE DISPLAY SECTION */}
+            <div className="flex flex-col items-end">
+              <span className="text-[10px] text-[#8c7e6d] font-bold">
+                {item.time ? `At ${item.time}` : ''} • {item.tables || 1} Table(s)
+              </span>
+              <span className="text-sm font-bold text-[#4a3f35]">
+                {/* 1500 is the rate per table */}
+                ₹{( (item.tables || 1) * 1500 ).toLocaleString('en-IN')}
+              </span>
+            </div>
                           </div>
                         </div>
+
                       </motion.div>
                     ))}
                   </AnimatePresence>
