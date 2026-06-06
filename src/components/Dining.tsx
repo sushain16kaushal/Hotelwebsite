@@ -23,7 +23,6 @@ const DiningComponent = (): JSX.Element => {
 
   const dispatch = useDispatch();
 
-  // Booking Handler: Ab ye sirf modal se data lega
   const handleConfirmBooking = () => {
     const { restaurant, date, time, tables } = bookingDetails;
     
@@ -46,34 +45,33 @@ const DiningComponent = (): JSX.Element => {
     dispatch(addDiningBooking(diningData));
     toast.success(`${restaurant.name} added to bookings!`);
     
-    // Reset Modal
+    // RESET: Modal band karne ke liye restaurant ko null kiya
     setBookingDetails({ restaurant: null, date: "", time: "", tables: 1 });
   };
-
-  // ... (getGoogleMapsUrl function remains same)
 
   return (
     <div className="mt-2 flex flex-wrap bg-[#f5f1ea] p-2 md:p-6 min-h-screen relative">
       <Toaster />
       
-      {/* --- RENDER LIST CODE SAME RAKHNA, BAS BUTTON UPDATE KARNA HAI --- */}
       {data.dinings.map((item, index) => (
-        // ... (rest of the map code)
-        <button 
-          onClick={() => setBookingDetails({ ...bookingDetails, restaurant: item })}
-          className="flex-[1.5] py-3 bg-[#4a3f35] text-white rounded-2xl transition-all duration-300 hover:bg-[#bc9a7c] hover:shadow-xl active:scale-95 text-[11px] font-bold uppercase cursor-pointer tracking-widest"
-        >
-          Book Table
-        </button>
+        <div key={index} className="w-full md:w-1/2 p-3">
+          {/* ... (apka existing card code) */}
+          <button 
+            onClick={() => setBookingDetails({ ...bookingDetails, restaurant: item })}
+            className="flex-[1.5] py-3 bg-[#4a3f35] text-white rounded-2xl transition-all duration-300 hover:bg-[#bc9a7c] hover:shadow-xl active:scale-95 text-[11px] font-bold uppercase cursor-pointer tracking-widest"
+          >
+            Book Table
+          </button>
+        </div>
       ))}
 
-      {/* --- NEW BOOKING MODAL --- */}
+      {/* --- FIXED BOOKING MODAL --- */}
       <AnimatePresence>
         {bookingDetails.restaurant && (
           <>
             <motion.div 
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              onClick={() => setBookingDetails({ ...bookingDetails, restaurant: null })}
+              onClick={() => setBookingDetails({ restaurant: null, date: "", time: "", tables: 1 })}
               className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[200] flex items-center justify-center p-4"
             />
             <motion.div 
@@ -83,30 +81,51 @@ const DiningComponent = (): JSX.Element => {
               <h3 className="text-xl font-serif font-bold text-[#4a3f35] mb-6">Table Reservation</h3>
               
               <div className="space-y-4">
-                <input type="date" className="w-full p-3 bg-white border border-[#eaddca] rounded-xl text-sm" 
-                  onChange={(e) => setBookingDetails({...bookingDetails, date: e.target.value})} />
+                <input 
+                  type="date" 
+                  min={new Date().toISOString().split("T")[0]}
+                  value={bookingDetails.date}
+                  className="w-full p-3 bg-white border border-[#eaddca] rounded-xl text-sm" 
+                  onChange={(e) => setBookingDetails({...bookingDetails, date: e.target.value})} 
+                />
                 
-                <input type="time" className="w-full p-3 bg-white border border-[#eaddca] rounded-xl text-sm" 
-                  onChange={(e) => setBookingDetails({...bookingDetails, time: e.target.value})} />
+                <input 
+                  type="time" 
+                  value={bookingDetails.time}
+                  className="w-full p-3 bg-white border border-[#eaddca] rounded-xl text-sm" 
+                  onChange={(e) => setBookingDetails({...bookingDetails, time: e.target.value})} 
+                />
                 
                 <div className="flex items-center gap-4">
                   <label className="text-xs font-bold text-[#8c7e6d]">Tables:</label>
-                  <input type="number" min="1" defaultValue="1" className="w-20 p-3 bg-white border border-[#eaddca] rounded-xl text-sm" 
-                    onChange={(e) => setBookingDetails({...bookingDetails, tables: Number(e.target.value)})} />
+                  <input 
+                    type="number" 
+                    min="1" 
+                    value={bookingDetails.tables}
+                    className="w-20 p-3 bg-white border border-[#eaddca] rounded-xl text-sm" 
+                    onChange={(e) => setBookingDetails({...bookingDetails, tables: Number(e.target.value)})} 
+                  />
                 </div>
               </div>
 
               <div className="flex gap-4 mt-8">
-                <button onClick={() => setBookingDetails({ ...bookingDetails, restaurant: null })} className="flex-1 py-3 text-xs font-bold text-[#8c7e6d] hover:text-[#4a3f35]">Cancel</button>
-                <button onClick={handleConfirmBooking} className="flex-1 py-3 bg-[#4a3f35] text-white rounded-2xl text-xs font-bold hover:bg-[#bc9a7c]">Confirm</button>
+                <button 
+                  onClick={() => setBookingDetails({ restaurant: null, date: "", time: "", tables: 1 })} 
+                  className="flex-1 py-3 text-xs font-bold text-[#8c7e6d] hover:text-[#4a3f35]"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={handleConfirmBooking} 
+                  className="flex-1 py-3 bg-[#4a3f35] text-white rounded-2xl text-xs font-bold hover:bg-[#bc9a7c]"
+                >
+                  Confirm
+                </button>
               </div>
             </motion.div>
           </>
         )}
       </AnimatePresence>
-
-      {/* --- MENU MODAL --- */}
-      {/* ... (Existing Menu Modal) */}
     </div>
   );
 };
