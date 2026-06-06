@@ -157,6 +157,6 @@ router.get('/auth/google/callback',
     res.redirect(`${process.env.PRODUCTIONURL}/login-success?token=${token}&details=${userData}`);
 });
 router.post('/process-payment', processPayment);
-router.get('/user/:userId', getUserBookings);
+router.get('/user-bookings/:userId', getUserBookings);
 
 export default router;

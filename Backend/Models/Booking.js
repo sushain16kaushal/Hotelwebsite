@@ -41,5 +41,6 @@ const BookingSchema = new mongoose.Schema({
   },
   createdAt: { type: Date, default: Date.now }
 });
-
-export default mongoose.model('Booking', BookingSchema);
+// Booking.js Model file ke niche change karein:
+const Booking = mongoose.models.Booking || mongoose.model('Booking', BookingSchema);
+export default Booking;
