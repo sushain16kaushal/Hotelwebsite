@@ -12,7 +12,7 @@ import { FaLock, FaCreditCard } from 'react-icons/fa';
 import type { RootState } from '../store/store';
 import type { User } from '../types/content';
 
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphd7Vu');
+const stripePromise = loadStripe('pk_test_51TfRtM9Or23fsXSkUgO7kUe5UfHxfHadTrWZWlmV5m4eBUrejcmIAQZkNAQd3y19C40iG1oLztS6sAn3Lyr9skT800HhfBSB6v');
 
 const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FULL' | 'PARTIAL' }) => {
   const stripe = useStripe();
@@ -111,7 +111,7 @@ const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FU
       )}
       
       <div className="bg-white p-6 rounded-2xl border border-[#dcd0c0] shadow-sm">
-        <label className="block text-xs font-bold text-[#4a3f35] uppercase tracking-widest mb-3 flex items-center gap-2">
+        <label className=" text-xs font-bold text-[#4a3f35] uppercase tracking-widest mb-3 flex items-center gap-2">
           <FaCreditCard className="text-[#bc9a7c]" /> Card Details
         </label>
         <div className="p-4 bg-[#f9f9f9] rounded-xl border border-[#eaddca]">
