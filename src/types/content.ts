@@ -85,4 +85,19 @@ export interface ContentData{
   dinings:Dining[];
 }
 
+// src/types/authTypes.ts
 
+export interface User {
+  _id?: string;
+  name: string;
+  email: string;
+  phone?: string;
+  role?: string;
+}
+
+export interface AuthState {
+  user: User | null;
+  token: string | null;
+  loading: boolean;
+  error: string | null;
+}
