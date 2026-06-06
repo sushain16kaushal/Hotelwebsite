@@ -1,7 +1,7 @@
 // controllers/bookingController.js
 
-import Booking from '../models/Booking.js';
-import Customer from '../models/Customer.js';
+import Booking from '../Models/Booking.js'
+import Customer from '../Models/Customer.js';
 import nodemailer from 'nodemailer';
 
 // Nodemailer Transporter
