@@ -8,7 +8,6 @@ import toast, { Toaster } from "react-hot-toast"; // 3. Notification
 
 const DiningComponent = (): JSX.Element => {
   const data = useOutletContext<ContentData>();
-  const [selectedMenu, setSelectedMenu] = useState<Dining | null>(null);
   const [bookingDetails, setBookingDetails] = useState<{
     restaurant: Dining | null;
     date: string;
@@ -72,7 +71,7 @@ const DiningComponent = (): JSX.Element => {
             <motion.div 
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setBookingDetails({ restaurant: null, date: "", time: "", tables: 1 })}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[200] flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-200 flex items-center justify-center p-4"
             />
             <motion.div 
               initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}

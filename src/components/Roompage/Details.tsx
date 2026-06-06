@@ -28,10 +28,6 @@ interface CartItem {
 const today = new Date();
 today.setHours(0, 0, 0, 0); // Time ko reset kar do taaki sirf date matter kare
 
-const [bookingDates, setBookingDates] = useState({ 
-  startDate: today, 
-  endDate: new Date(today.getTime() + 86400000) 
-});
 const Details = () => {
   const data = useOutletContext<ContentData>();
   const { id } = useParams<{ id: string }>();
