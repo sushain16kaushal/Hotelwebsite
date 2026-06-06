@@ -15,10 +15,11 @@ const BookingPage = () => {
   // --- 1. DYNAMIC COMBINED CALCULATIONS FOR ORDER SUMMARY ---
   const roomsSubtotal = roomBookings.reduce((acc, item) => acc + (item.price || 0), 0);
  
-const diningSubtotal = diningBookings.reduce((acc, item) => {
-  const tableCount = item.tables || 1; // Default 1 agar missing ho
-  return acc + (tableCount * 1500);
-}, 0); 
+// Dining cost based on table count (1500 per table)
+  const diningSubtotal = diningBookings.reduce((acc, item) => {
+    const tableCount = item.tables || 1; 
+    return acc + (tableCount * 1500);
+  }, 0);
   const offersSubtotal = offerBookings.reduce((acc, item) => acc + (Number(item.price) || 0), 0);
 
   const overallSubtotal = roomsSubtotal + diningSubtotal + offersSubtotal;
@@ -226,10 +227,13 @@ const diningSubtotal = diningBookings.reduce((acc, item) => {
                 <span className="font-mono">₹{roomsSubtotal.toLocaleString('en-IN')}</span>
               </div>
               
-             {diningSubtotal > 0 && (
+          {diningSubtotal > 0 && (
   <div className="flex justify-between">
     <span className="opacity-70">
-      Dining ( {diningBookings.reduce((sum, item) => sum + (item.tables || 1), 0)} Tables )
+      Dining 
+      <span className="ml-1 text-[9px] bg-white/10 px-1.5 py-0.5 rounded">
+        ({diningBookings.reduce((sum, item) => sum + (item.tables || 1), 0)} Tables)
+      </span>
     </span>
     <span className="font-mono">₹{diningSubtotal.toLocaleString('en-IN')}</span>
   </div>
