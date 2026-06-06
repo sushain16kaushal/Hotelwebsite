@@ -5,7 +5,7 @@ import { removeDiningBooking, removeRoomBooking, removeOfferBooking } from '../s
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-
+import { useMemo } from 'react';
 const BookingPage = () => {
   const { roomBookings, diningBookings, offerBookings } = useSelector((state: RootState) => state.booking);
   const dispatch = useDispatch();
@@ -62,15 +62,20 @@ const BookingPage = () => {
       </button>
     </motion.div>
   );
-const groupedDining = diningBookings.reduce((acc: any, curr: any) => {
-  const existing = acc.find((item: any) => item.name === curr.name);
-  if (existing) {
-    existing.tables = (existing.tables || 1) + (curr.tables || 1);
-  } else {
-    acc.push({ ...curr });
-  }
-  return acc;
-}, []);
+// Component ke andar:
+const groupedDining = useMemo(() => {
+  return diningBookings.reduce((acc: any, curr: any) => {
+    const existing = acc.find((item: any) => item.name === curr.name);
+    if (existing) {
+      existing.tables = (existing.tables || 1) + (curr.tables || 1);
+      // Optional: Agar aap saari original IDs rakhna chahte hain
+      existing.allIds = [...(existing.allIds || [existing.id]), curr.id]; 
+    } else {
+      acc.push({ ...curr, allIds: [curr.id] });
+    }
+    return acc;
+  }, []);
+}, [diningBookings]);
   return (
     <div className="min-h-screen bg-[#f5f1ea] p-4 md:p-12 pb-32 relative">
       <div className="max-w-6xl mx-auto">
@@ -160,18 +165,18 @@ const groupedDining = diningBookings.reduce((acc: any, curr: any) => {
                             </div>
                           </div>
                           <div className="mt-4 flex items-center justify-between pt-4 border-t border-[#eaddca]/40">
-                            <button onClick={() => dispatch(removeDiningBooking(item.id))} className="text-[10px] font-bold text-red-400 hover:text-red-600 transition-colors uppercase tracking-widest cursor-pointer flex items-center gap-1.5">
-                              Cancel Slot
+                            <button onClick={() => item.allIds.forEach((id: any) => dispatch(removeDiningBooking(id)))} className="text-[10px] font-bold text-red-400 hover:text-red-600 transition-colors uppercase tracking-widest cursor-pointer flex items-center gap-1.5">
+                              Cancel All ({item.tables} Tables)
                             </button>
               {/* Add Time and Tables display */}
  {/* PRICE DISPLAY SECTION */}
             <div className="flex flex-col items-end">
               <span className="text-[10px] text-[#8c7e6d] font-bold">
-                {item.time ? `At ${item.time}` : ''} • {item.tables || 1} Table(s)
+                {item.tables} Table(s)
               </span>
               <span className="text-sm font-bold text-[#4a3f35]">
                 {/* 1500 is the rate per table */}
-                ₹{( (item.tables || 1) * 1500 ).toLocaleString('en-IN')}
+                ₹{( (item.tables || 1) ).toLocaleString('en-IN')}
               </span>
             </div>
                           </div>
