@@ -1,17 +1,42 @@
-
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import type { RootState } from '../store/store';
-import { removeDiningBooking, removeRoomBooking } from '../store/bookingSlice';
+import { removeDiningBooking, removeRoomBooking, removeOfferBooking } from '../store/bookingSlice';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { removeOfferBooking } from '../store/bookingSlice';
 import toast from 'react-hot-toast';
+
 const BookingPage = () => {
-  const { roomBookings, diningBookings,offerBookings } = useSelector((state: RootState) => state.booking);
+  const { roomBookings, diningBookings, offerBookings } = useSelector((state: RootState) => state.booking);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [viewingDetails, setViewingDetails] = useState<any>(null);
+
+  // --- 1. DYNAMIC COMBINED CALCULATIONS FOR ORDER SUMMARY ---
+  const roomsSubtotal = roomBookings.reduce((acc, item) => acc + (item.price || 0), 0);
+  const diningSubtotal = diningBookings.reduce((acc, item) => acc + (item.price || 0), 0); 
+  const offersSubtotal = offerBookings.reduce((acc, item) => acc + (Number(item.price) || 0), 0);
+
+  const overallSubtotal = roomsSubtotal + diningSubtotal + offersSubtotal;
+  
+  // Luxury Slab Rule: If subtotal > 7500, GST is 18%, else 12%
+  const gstRate = overallSubtotal > 7500 ? 0.18 : 0.12;
+  const totalGST = overallSubtotal * gstRate;
+  const serviceCharge = overallSubtotal * 0.05;
+  const grandTotal = overallSubtotal + totalGST + serviceCharge;
+
+  const handleProceedToPayment = () => {
+    if (overallSubtotal === 0) {
+      toast.error("Your experience itinerary is empty!");
+      return;
+    }
+    toast.loading("Initiating secure checkout for Euphoria, Shimla...", { duration: 2000 });
+    
+    // Yahan aap apna backend payment processing link map kar sakte ho future mein
+    setTimeout(() => {
+      toast.success("Redirecting to payment gateway...");
+    }, 2000);
+  };
 
   const EmptyState = ({ title, type }: { title: string, type: 'room' | 'dining' }) => (
     <motion.div 
@@ -41,183 +66,219 @@ const BookingPage = () => {
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-[#4a3f35] mt-2">Booking Summary</h1>
         </header>
 
-        <div className="space-y-20">
-          {/* --- ROOMS SECTION --- */}
-          <section>
-            <div className="flex items-center gap-4 mb-10">
-              <h2 className="text-xl font-bold text-[#4a3f35] uppercase tracking-[3px]">Reserved Rooms</h2>
-              <div className="h-px bg-[#eaddca] grow"></div>
-              <span className="bg-[#bc9a7c] text-white text-[10px] px-3 py-1 rounded-full font-bold shadow-sm">{roomBookings.length}</span>
-            </div>
-            {roomBookings.length > 0 ? (
-              <div className="grid gap-6">
-                <AnimatePresence mode='popLayout'>
-                  {roomBookings.map((item) => (
-                    <motion.div layout key={item.id} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, x: -100 }} className="group bg-[#faf9f6] border border-[#dcd0c0] rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-xl transition-all duration-500">
-                      <div className="w-full md:w-64 h-48 md:h-auto shrink-0 overflow-hidden">
-                        <img src={`https://ik.imagekit.io/y4ytihgqk/${item.image}?tr=w-600,h-400`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="" />
-                      </div>
-                      <div className="p-8 flex flex-col justify-between grow">
-                        <div className="flex flex-col md:flex-row justify-between items-start">
-                          <div>
-                            <p className="text-[10px] uppercase text-[#bc9a7c] font-bold tracking-widest">{item.roomCategory}</p>
-                            <h3 className="text-2xl font-serif font-bold text-[#4a3f35]">{item.hotelName}</h3>
-                          </div>
-                          <div className="mt-4 md:mt-0 md:text-right">
-                            <p className="text-2xl font-medium text-[#4a3f35]">₹{item.price.toLocaleString('en-IN')}</p>
-                          </div>
-                        </div>
-                        <div className="mt-8 flex justify-between items-center pt-6 border-t border-[#eaddca]/40">
-                          <div className="flex gap-6">
-                            <button onClick={() => dispatch(removeRoomBooking(item.id))} className="text-[10px] font-bold text-red-400 uppercase tracking-widest cursor-pointer hover:text-red-600">Remove</button>
-                            <button onClick={() => setViewingDetails(item)} className="text-[10px] font-bold text-[#8c7e6d] uppercase tracking-widest cursor-pointer hover:text-[#4a3f35]">Details</button>
-                          </div>
-                          <button className="px-8 py-3 bg-[#4a3f35] text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-[#bc9a7c]">Pay Now</button>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
+        {/* Outer Layout Grid to split items and Summary sticky block */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+          
+          {/* LEFT 2 COLUMNS: ALL ACTIVE SECTIONS */}
+          <div className="lg:col-span-2 space-y-16">
+            
+            {/* --- ROOMS SECTION --- */}
+            <section>
+              <div className="flex items-center gap-4 mb-8">
+                <h2 className="text-sm font-bold text-[#4a3f35] uppercase tracking-[3px]">Reserved Rooms</h2>
+                <div className="h-px bg-[#eaddca] grow"></div>
+                <span className="bg-[#bc9a7c] text-white text-[10px] px-3 py-1 rounded-full font-bold shadow-sm">{roomBookings.length}</span>
               </div>
-            ) : <EmptyState title="No Rooms Reserved" type="room" />}
-          </section>
-
-          {/* --- DINING SECTION --- */}
-          <section>
-            <div className="flex items-center gap-4 mb-10">
-              <h2 className="text-xl font-bold text-[#4a3f35] uppercase tracking-[3px]">Table Reservations</h2>
-              <div className="h-px bg-[#eaddca] grow"></div>
-              <span className="bg-[#bc9a7c] text-white text-[10px] px-3 py-1 rounded-full font-bold">{diningBookings.length}</span>
-            </div>
-            {diningBookings.length > 0 ? (
-              <div className="grid gap-6">
-                <AnimatePresence mode='popLayout'>
-                  {diningBookings.map((item) => (
-                    <motion.div layout key={item.id} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50, scale: 0.95 }} transition={{ duration: 0.4 }} className="group relative bg-[#faf9f6] border border-[#dcd0c0] rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-xl transition-all duration-500">
-                      <div className="w-full md:w-64 h-48 md:h-auto shrink-0 overflow-hidden">
-                        <img src={`https://ik.imagekit.io/y4ytihgqk/${item.image}?tr=w-600,h-400,fo-auto`} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                      </div>
-                      <div className="p-8 flex flex-col justify-between grow">
-                        <div className="flex flex-col md:flex-row justify-between items-start gap-4">
-                          <div>
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="text-[10px] uppercase tracking-widest text-[#bc9a7c] font-bold">{item.cuisine}</span>
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#eaddca]"></span>
-                              <span className="text-[10px] uppercase tracking-widest text-[#8c7e6d] font-bold">Confirmed Table</span>
+              {roomBookings.length > 0 ? (
+                <div className="grid gap-6">
+                  <AnimatePresence mode='popLayout'>
+                    {roomBookings.map((item) => (
+                      <motion.div layout key={item.id} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, x: -100 }} className="group bg-[#faf9f6] border border-[#dcd0c0] rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-all duration-500">
+                        <div className="w-full md:w-52 h-40 md:h-auto shrink-0 overflow-hidden">
+                          <img src={`https://ik.imagekit.io/y4ytihgqk/${item.image}?tr=w-500,h-400`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="" />
+                        </div>
+                        <div className="p-6 flex flex-col justify-between grow">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <span className="text-[9px] bg-[#4a3f35] text-white px-2 py-0.5 rounded-full uppercase tracking-widest mb-1.5 inline-block">{item.plan || "EP Plan"}</span>
+                              <p className="text-[10px] uppercase text-[#bc9a7c] font-bold tracking-widest">{item.roomCategory}</p>
+                              <h3 className="text-xl font-serif font-bold text-[#4a3f35]">{item.hotelName}</h3>
+                              {item.nights && (
+                                <p className="text-[11px] text-[#8c7e6d] mt-1">Duration: <span className="font-bold text-[#bc9a7c]">{item.nights} Night(s)</span></p>
+                              )}
                             </div>
-                            <h3 className="text-2xl font-serif font-bold text-[#4a3f35]">{item.name}</h3>
-                            <p className="text-[11px] text-[#8c7e6d] mt-2 italic flex items-center gap-1.5">
-                              <svg className="w-3.5 h-3.5 text-[#bc9a7c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
-                              {item.address}
-                            </p>
+                            <div className="text-right">
+                              <p className="text-xl font-medium text-[#4a3f35]">₹{item.price.toLocaleString('en-IN')}</p>
+                            </div>
                           </div>
-                          <div className="bg-[#4a3f35]/5 px-5 py-2.5 rounded-2xl border border-[#4a3f35]/10">
-                            <p className="text-[9px] uppercase text-[#bc9a7c] font-extrabold text-center tracking-tighter">Booking ID</p>
-                            <p className="text-[11px] font-bold text-[#4a3f35] text-center font-mono">#EPH-{item.id.toString().slice(-4)}</p>
+                          <div className="mt-4 flex justify-between items-center pt-4 border-t border-[#eaddca]/40">
+                            <div className="flex gap-4">
+                              <button onClick={() => dispatch(removeRoomBooking(item.id))} className="text-[10px] font-bold text-red-400 uppercase tracking-widest cursor-pointer hover:text-red-600">Remove</button>
+                              <button onClick={() => setViewingDetails(item)} className="text-[10px] font-bold text-[#8c7e6d] uppercase tracking-widest cursor-pointer hover:text-[#4a3f35]">Details</button>
+                            </div>
                           </div>
                         </div>
-                        <div className="mt-8 flex items-center justify-between pt-6 border-t border-[#eaddca]/40">
-                          <button onClick={() => dispatch(removeDiningBooking(item.id))} className="text-[11px] font-bold text-red-400 hover:text-red-600 transition-colors uppercase tracking-widest cursor-pointer group/btn flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-red-400 group-hover/btn:bg-red-600"></span>Cancel Reservation
-                          </button>
-                          <button className="px-10 py-3 bg-[#4a3f35] text-white rounded-xl text-[10px] font-bold uppercase tracking-[2px] hover:bg-[#bc9a7c] transition-all shadow-lg active:scale-95">Confirm & Finalize</button>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </div>
+              ) : <EmptyState title="No Rooms Reserved" type="room" />}
+            </section>
+
+            {/* --- DINING SECTION --- */}
+            <section>
+              <div className="flex items-center gap-4 mb-8">
+                <h2 className="text-sm font-bold text-[#4a3f35] uppercase tracking-[3px]">Table Reservations</h2>
+                <div className="h-px bg-[#eaddca] grow"></div>
+                <span className="bg-[#bc9a7c] text-white text-[10px] px-3 py-1 rounded-full font-bold">{diningBookings.length}</span>
+              </div>
+              {diningBookings.length > 0 ? (
+                <div className="grid gap-6">
+                  <AnimatePresence mode='popLayout'>
+                    {diningBookings.map((item) => (
+                      <motion.div layout key={item.id} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50, scale: 0.95 }} transition={{ duration: 0.4 }} className="group relative bg-[#faf9f6] border border-[#dcd0c0] rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-all duration-500">
+                        <div className="w-full md:w-52 h-40 md:h-auto shrink-0 overflow-hidden">
+                          <img src={`https://ik.imagekit.io/y4ytihgqk/${item.image}?tr=w-500,h-400,fo-auto`} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </div>
-            ) : <EmptyState title="No Tables Booked" type="dining" />}
-          </section>
-          {/* --- SPECIAL OFFERS RESERVATIONS --- */}
-<section>
-  <div className="flex items-center gap-4 mb-10">
-    <h2 className="text-xl font-bold text-[#4a3f35] uppercase tracking-[3px]">Special Packages</h2>
-    <div className="h-px bg-[#eaddca] grow"></div>
-    <span className="bg-amber-700 text-white text-[10px] px-3 py-1 rounded-full font-bold shadow-sm">
-      {offerBookings.length}
-    </span>
-  </div>
-
-  {offerBookings.length > 0 ? (
-    <div className="grid gap-6">
-      <AnimatePresence mode='popLayout'>
-        {offerBookings.map((offer) => (
-          <motion.div 
-            layout 
-            key={offer.id}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, x: 100 }}
-            className="group bg-[#faf9f6] border border-[#dcd0c0] rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-all duration-500"
-          >
-            {/* Offer Image Thumbnail */}
-            <div className="w-full md:w-48 h-40 md:h-auto shrink-0 overflow-hidden">
-             <img 
-  src={`https://ik.imagekit.io/y4ytihgqk/${offer.image}?tr=w-400,h-400`} 
-  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-  alt={offer.title} 
-  /* Image load na ho toh fallback ke liye */
-  onError={(e) => {
-    (e.target as HTMLImageElement).src = 'https://via.placeholder.com/400x400?text=Experience';
-  }}
-/>
-            </div>
-
-            {/* Offer Details */}
-            <div className="p-6 flex flex-col justify-between grow">
-              <div className="flex flex-col md:flex-row justify-between items-start gap-4">
-                <div>
-                  <span className="text-[9px] uppercase tracking-[2px] text-amber-700 font-bold bg-amber-50 px-2 py-0.5 rounded-md">Special Experience</span>
-                  <h3 className="text-xl font-serif font-bold text-[#4a3f35] mt-1">{offer.title}</h3>
-                  <p className="text-[11px] text-[#8c7e6d] mt-2 line-clamp-2 italic">{offer.description}</p>
+                        <div className="p-6 flex flex-col justify-between grow">
+                          <div className="flex justify-between items-start gap-4">
+                            <div>
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="text-[10px] uppercase tracking-widest text-[#bc9a7c] font-bold">{item.cuisine}</span>
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#eaddca]"></span>
+                                <span className="text-[10px] uppercase tracking-widest text-[#8c7e6d] font-bold">Table Slot</span>
+                              </div>
+                              <h3 className="text-xl font-serif font-bold text-[#4a3f35]">{item.name}</h3>
+                              <p className="text-[11px] text-[#8c7e6d] mt-1 line-clamp-1 italic">{item.address}</p>
+                            </div>
+                            <div className="bg-[#4a3f35]/5 px-4 py-2 rounded-2xl border border-[#4a3f35]/10 text-right">
+                              <p className="text-[8px] uppercase text-[#bc9a7c] font-extrabold tracking-tighter">ID</p>
+                              <p className="text-[10px] font-bold text-[#4a3f35] font-mono">#EPH-{item.id.toString().slice(-4)}</p>
+                            </div>
+                          </div>
+                          <div className="mt-4 flex items-center justify-between pt-4 border-t border-[#eaddca]/40">
+                            <button onClick={() => dispatch(removeDiningBooking(item.id))} className="text-[10px] font-bold text-red-400 hover:text-red-600 transition-colors uppercase tracking-widest cursor-pointer flex items-center gap-1.5">
+                              Cancel Slot
+                            </button>
+                            {item.price && item.price > 0 && <span className="text-sm font-bold text-[#4a3f35]">₹{item.price}</span>}
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
                 </div>
-                <div className="text-right">
-                  <p className="text-xl font-bold text-[#4a3f35]">₹{offer.price}</p>
+              ) : <EmptyState title="No Tables Booked" type="dining" />}
+            </section>
+
+            {/* --- SPECIAL OFFERS SECTION --- */}
+            <section>
+              <div className="flex items-center gap-4 mb-8">
+                <h2 className="text-sm font-bold text-[#4a3f35] uppercase tracking-[3px]">Special Packages</h2>
+                <div className="h-px bg-[#eaddca] grow"></div>
+                <span className="bg-amber-700 text-white text-[10px] px-3 py-1 rounded-full font-bold shadow-sm">{offerBookings.length}</span>
+              </div>
+              {offerBookings.length > 0 ? (
+                <div className="grid gap-6">
+                  <AnimatePresence mode='popLayout'>
+                    {offerBookings.map((offer) => (
+                      <motion.div layout key={offer.id} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, x: 100 }} className="group bg-[#faf9f6] border border-[#dcd0c0] rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-all duration-500">
+                        <div className="w-full md:w-52 h-40 md:h-auto shrink-0 overflow-hidden">
+                          <img src={`https://ik.imagekit.io/y4ytihgqk/${offer.image}?tr=w-500,h-400`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={offer.title} onError={(e) => { (e.target as HTMLImageElement).src = 'https://via.placeholder.com/400x400?text=Experience'; }} />
+                        </div>
+                        <div className="p-6 flex flex-col justify-between grow">
+                          <div className="flex justify-between items-start gap-4">
+                            <div>
+                              <span className="text-[9px] uppercase tracking-[2px] text-amber-700 font-bold bg-amber-50 px-2 py-0.5 rounded-md">Special Experience</span>
+                              <h3 className="text-xl font-serif font-bold text-[#4a3f35] mt-1">{offer.title}</h3>
+                              <p className="text-[11px] text-[#8c7e6d] mt-1 line-clamp-2 italic">{offer.description}</p>
+                            </div>
+                            <div className="text-right">
+                              <p className="text-xl font-bold text-[#4a3f35]">₹{offer.price}</p>
+                            </div>
+                          </div>
+                          <div className="mt-4 flex justify-between items-center pt-4 border-t border-[#eaddca]/40">
+                            <button onClick={() => dispatch(removeOfferBooking(offer.id))} className="text-[10px] font-bold text-red-400 uppercase tracking-widest hover:text-red-600 cursor-pointer">
+                              Remove Package
+                            </button>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
                 </div>
+              ) : (
+                <div className="text-center py-10 bg-white/30 rounded-4xl border-2 border-dashed border-[#eaddca]">
+                  <p className="text-[#8c7e6d] italic text-sm">No special experiences claimed yet.</p>
+                </div>
+              )}
+            </section>
+          </div>
+
+          {/* --- RIGHT COLUMN: STICKY DYNAMIC MASTER CART BILL DETAILS --- */}
+          <div className="bg-[#4a3f35] text-white p-8 rounded-[35px] shadow-2xl h-fit lg:sticky lg:top-24 border border-[#bc9a7c]/20">
+            <h3 className="text-xl font-serif mb-6 border-b border-white/10 pb-4 italic text-[#bc9a7c] tracking-wider">Itinerary Bill Details</h3>
+            
+            <div className="space-y-4 text-xs font-light">
+              <div className="flex justify-between">
+                <span className="opacity-70">Rooms Segment Subtotal</span>
+                <span className="font-mono">₹{roomsSubtotal.toLocaleString('en-IN')}</span>
+              </div>
+              
+              {diningSubtotal > 0 && (
+                <div className="flex justify-between">
+                  <span className="opacity-70">Dining Component</span>
+                  <span className="font-mono">₹{diningSubtotal.toLocaleString('en-IN')}</span>
+                </div>
+              )}
+
+              {offersSubtotal > 0 && (
+                <div className="flex justify-between">
+                  <span className="opacity-70">Experiences & Packages</span>
+                  <span className="font-mono">₹{offersSubtotal.toLocaleString('en-IN')}</span>
+                </div>
+              )}
+
+              <div className="h-px bg-white/10 my-2"></div>
+
+              <div className="flex justify-between text-[#bc9a7c]">
+                <span>Base Subtotal</span>
+                <span className="font-mono font-medium">₹{overallSubtotal.toLocaleString('en-IN')}</span>
               </div>
 
-              <div className="mt-6 flex justify-between items-center pt-4 border-t border-[#eaddca]/40">
-                <button 
-                  onClick={() => {
-                    dispatch(removeOfferBooking(offer.id));
-                    
-                  }}
-                  className="text-[10px] font-bold text-red-400 uppercase tracking-widest hover:text-red-600 transition-colors cursor-pointer"
-                >
-                  Remove Package
-                </button>
-                
-                <button 
-                  onClick={() => toast.success(`Proceeding to pay for ${offer.title}`)}
-                  className="px-6 py-2.5 bg-amber-800 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-[#4a3f35] transition-all shadow-md active:scale-95"
-                >
-                  Pay For Package
-                </button>
+              <div className="flex justify-between">
+                <span className="opacity-70">Luxury GST & Hotel Taxes ({Math.round(gstRate * 100)}%)</span>
+                <span className="font-mono">₹{Math.round(totalGST).toLocaleString('en-IN')}</span>
+              </div>
+              
+              <div className="flex justify-between">
+                <span className="opacity-70">Resort Service Charge (5%)</span>
+                <span className="font-mono">₹{Math.round(serviceCharge).toLocaleString('en-IN')}</span>
+              </div>
+              
+              {/* Grand Total Execution */}
+              <div className="pt-6 mt-6 border-t border-white/20 flex flex-col gap-1">
+                <span className="text-[9px] uppercase tracking-widest font-bold opacity-60">Total Amount Payable</span>
+                <span className="text-3xl font-serif text-[#bc9a7c] font-bold">
+                  ₹{Math.round(grandTotal).toLocaleString('en-IN')}
+                </span>
               </div>
             </div>
-          </motion.div>
-        ))}
-      </AnimatePresence>
-    </div>
-  ) : (
-    <div className="text-center py-10 bg-white/30 rounded-4xl border-2 border-dashed border-[#eaddca]">
-       <p className="text-[#8c7e6d] italic text-sm">No special experiences claimed yet.</p>
-    </div>
-  )}
-</section>
+            
+            <button 
+              onClick={handleProceedToPayment}
+              disabled={overallSubtotal === 0}
+              className={`w-full mt-8 py-4 rounded-2xl font-bold uppercase tracking-[3px] text-[11px] transition-all shadow-lg active:scale-95 text-center ${
+                overallSubtotal === 0 
+                ? "bg-white/10 text-white/40 cursor-not-allowed" 
+                : "bg-[#bc9a7c] text-white hover:bg-white hover:text-[#4a3f35] cursor-pointer"
+              }`}
+            >
+              Proceed With Payment Securely
+            </button>
+          </div>
+
         </div>
       </div>
 
-      {/* --- RE-ADDED MODAL WINDOW --- */}
+      {/* --- DETAILS MODAL WINDOW --- */}
       <AnimatePresence>
         {viewingDetails && (
-          <div className="fixed inset-0 z-999 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setViewingDetails(null)} className="absolute inset-0 bg-[#4a3f35]/60 backdrop-blur-md" />
             <motion.div initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.9, opacity: 0, y: 20 }} className="relative w-full max-w-lg bg-[#faf9f6] rounded-[3rem] shadow-2xl overflow-hidden border border-[#dcd0c0]">
               <div className="relative h-56 bg-[#4a3f35]">
                 <img src={`https://ik.imagekit.io/y4ytihgqk/${viewingDetails.image}?tr=w-800,h-500`} className="w-full h-full object-cover opacity-80" alt="" />
-                <div className="absolute inset-0 bg-linear-to-t from-[#4a3f35] to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#4a3f35] to-transparent"></div>
                 <button onClick={() => setViewingDetails(null)} className="absolute top-6 right-6 bg-white/20 backdrop-blur-lg p-2 rounded-full hover:bg-white/40 transition-colors cursor-pointer"><svg width="20" height="20" fill="none" stroke="white" strokeWidth="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
                 <div className="absolute bottom-6 left-8 text-white">
                   <p className="text-[10px] uppercase tracking-[3px] font-bold opacity-80 mb-1">Reservation Detail</p>
@@ -232,8 +293,8 @@ const BookingPage = () => {
                 <div className="bg-[#f5f1ea] p-5 rounded-2xl border border-[#eaddca]/50">
                   <p className="text-[10px] uppercase text-[#bc9a7c] font-bold tracking-widest mb-3">Plan Inclusions</p>
                   <ul className="text-[11px] text-[#6d5f53] space-y-2.5 font-medium">
-                    <li className="flex items-center gap-2"><span className="text-[#bc9a7c]">✓</span> Complimentary Breakfast & Wi-Fi</li>
-                    <li className="flex items-center gap-2"><span className="text-[#bc9a7c]">✓</span> Access to Heritage Lounge</li>
+                    <li className="flex items-center gap-2"><span className="text-[#bc9a7c]">✓</span> {viewingDetails.plan || "Selected Plan Inclusions"}</li>
+                    <li className="flex items-center gap-2"><span className="text-[#bc9a7c]">✓</span> Access to Euphoria Heritage Club & Wi-Fi</li>
                   </ul>
                 </div>
                 <div className="flex items-center justify-between pt-6 border-t border-[#eaddca]">
@@ -245,7 +306,6 @@ const BookingPage = () => {
           </div>
         )}
       </AnimatePresence>
-      
     </div>
   );
 };
