@@ -33,11 +33,13 @@ const [bookingDetails, setBookingDetails] = useState<{
       cuisine: restaurant.cuisine,
       address: restaurant.address,
       image: restaurant.image, // Summary page par dikhane ke liye
+      tables: bookingDetails.tables,
       price: 1500 * bookingDetails.tables, // Aapki fix price requirement
+      
     meta: {
       date: bookingDetails.date,
       time: bookingDetails.time,
-      tables: bookingDetails.tables
+      
     }
     };
 
@@ -45,7 +47,7 @@ const [bookingDetails, setBookingDetails] = useState<{
     dispatch(addDiningBooking(diningData));
 
     // Ecommerce style toast
-    toast.success(`${restaurant.name} added to bookings!`, {
+    toast.success(`${bookingDetails.tables} Table(s) at ${restaurant.name} added!`, {
       duration: 2000,
       position: 'bottom-right',
       style: {
