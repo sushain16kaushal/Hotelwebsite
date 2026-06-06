@@ -1,4 +1,7 @@
+// models/Booking.js
+
 import mongoose from 'mongoose';
+
 const BookingSchema = new mongoose.Schema({
   userId: { 
     type: mongoose.Schema.Types.ObjectId, 
@@ -27,8 +30,8 @@ const BookingSchema = new mongoose.Schema({
   paymentInfo: {
     amount: { type: Number, required: true },
     paymentType: { type: String, enum: ['FULL', 'PARTIAL'], default: 'FULL' },
-    transactionId: { type: String }, // Stripe Transaction ID
-    status: { type: String, enum: ['PENDING', 'PAID', 'FAILED'], default: 'PENDING' },
+    transactionId: { type: String },
+    status: { type: String, enum: ['PENDING', 'PAID', 'FAILED'], default: 'PAID' },
     paidAt: { type: Date, default: Date.now }
   },
   status: { 
@@ -38,4 +41,5 @@ const BookingSchema = new mongoose.Schema({
   },
   createdAt: { type: Date, default: Date.now }
 });
+
 export default mongoose.model('Booking', BookingSchema);

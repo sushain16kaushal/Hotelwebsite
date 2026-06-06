@@ -1,27 +1,24 @@
 // controllers/bookingController.js
 
-import Booking from '../Models/Booking.js';
-import Customer from '../Models/Customer.js';
+import Booking from '../models/Booking.js';
+import Customer from '../models/Customer.js';
 import nodemailer from 'nodemailer';
-import crypto from 'crypto';
 
-// --- NODEMAILER SETUP (Existing Transporter Logic) ---
-const createTransporter = () => {
-  return nodemailer.createTransport({
-    service: 'Gmail',
-    auth: { 
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    }
-  });
-};
+// Nodemailer Transporter
+const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: { 
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
 
-// --- PROCESS PAYMENT & SAVE BOOKING ---
+// Process Payment
 export const processPayment = async (req, res) => {
   const { userId, amount, paymentType, bookingDetails } = req.body;
 
   try {
-    // 1. Save Booking to Database
+    // 1. Save Booking to Database ✅
     const newBooking = await Booking.create({
       userId,
       bookingDetails,
@@ -29,18 +26,16 @@ export const processPayment = async (req, res) => {
         amount,
         paymentType,
         status: 'PAID',
-        transactionId: `TXN-${Date.now()}`, // Dummy ID (Stripe ID in real app)
+        transactionId: `TXN-${Date.now()}`,
         paidAt: Date.now()
       }
     });
 
-    // 2. Get User Email
+    // 2. Get User Details for Email ✅
     const customer = await Customer.findById(userId);
-    if (!customer) return res.status(404).json("User not found");
+    if (!customer) throw new Error("User not found");
 
-    // 3. Send Confirmation Email
-    const transporter = createTransporter();
-    
+    // 3. Send Confirmation Email ✅
     const htmlContent = `
       <div style="font-family: 'Georgia', serif; padding: 30px; max-width: 600px; margin: 0 auto; border: 1px solid #eaddca; border-radius: 15px; background: #faf9f6;">
         <div style="text-align: center; margin-bottom: 30px;">
@@ -75,19 +70,22 @@ export const processPayment = async (req, res) => {
       html: htmlContent
     });
 
+    console.log(`📧 Email sent to ${customer.email}`);
+
+    // 4. Return Success Response ✅
     res.status(200).json({ 
       success: true, 
-      bookingId: newBooking._id,
-      message: "Booking confirmed & email sent!"
+      message: "Booking confirmed & email sent!",
+      bookingId: newBooking._id
     });
 
   } catch (err) {
     console.error("Payment Error:", err);
-    res.status(500).json("Payment processing failed");
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
-// --- GET USER BOOKINGS ---
+// Get User Bookings
 export const getUserBookings = async (req, res) => {
   try {
     const { userId } = req.params;
