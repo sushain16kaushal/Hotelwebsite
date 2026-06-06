@@ -11,6 +11,7 @@ import passport from "passport";
 import jwt from 'jsonwebtoken';
 import Customer from "../Models/Customer.js";
 import { custlogin,signup,forgotPassword,resetPassword } from "../Controllers/authController.js";
+import { processPayment,getUserBookings } from "../Controllers/bookingController.js";
 /*const data=JSON.parse(
     fs.readFileSync(new URL("../data.json",import.meta.url),"utf-8")
 )*/
@@ -155,6 +156,7 @@ router.get('/auth/google/callback',
     // Redirect to Frontend LoginSuccess Page
     res.redirect(`${process.env.PRODUCTIONURL}/login-success?token=${token}&details=${userData}`);
 });
-
+router.post('/process-payment', processPayment);
+router.get('/user/:userId', getUserBookings);
 
 export default router;
