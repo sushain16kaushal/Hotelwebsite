@@ -38,6 +38,7 @@ export const BookingBar = ({
                     <DatePicker
                         selected={bookingDates.startDate}
                         minDate={minDate} // Validation: Past dates blocked
+                        filterDate={(date) => date >= minDate}
                         onChange={(date: Date | null) => {
                           if(date) {
                             setBookingDates(prev => ({ 
