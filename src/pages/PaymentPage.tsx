@@ -156,11 +156,8 @@ const PaymentPage = () => {
       navigate('/booking-summary');
     }
     
-    if (!user) {
-      toast.error("Please login first!");
-      navigate('/auth');
-    }
-  }, [totalAmount, navigate, user]);
+   
+  }, [totalAmount, navigate]);
 
   const calculatedAmount = useMemo(() => {
     return paymentType === 'PARTIAL' 
