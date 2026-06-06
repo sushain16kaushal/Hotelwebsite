@@ -1,8 +1,8 @@
-import  { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 
 // --- TYPES ---
@@ -28,7 +28,6 @@ interface HotelData {
 const AdminDashboard = () => {
   const [data, setData] = useState<{ hotels: HotelData[], dinings: any[] } | null>(null);
   const [loading, setLoading] = useState(true);
-  // ADDED 'analytics' TAB
   const [activeTab, setActiveTab] = useState<'hotels' | 'dining' | 'analytics'>('hotels'); 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
@@ -76,33 +75,40 @@ const AdminDashboard = () => {
     }
   };
 
-  // --- ANALYTICS DATA PREPARATION ---
+  // --- UPGRADED ANALYTICS DATA PREPARATION ---
   const analyticsData = useMemo(() => {
     if (!data?.hotels || data.hotels.length === 0) return [];
 
     return data.hotels.map((hotel) => {
-      let minPrice = 0;
-      let maxPrice = 0;
+      let standardMinPrice = 0;
+      let premiumMaxPrice = 0;
       let totalFeatures = 0;
-      let roomOptionsCount = 0;
 
       hotel.roomCategories.forEach((cat) => {
         cat.options.forEach((opt) => {
-          roomOptionsCount++;
           totalFeatures += opt.features.length;
-          if (minPrice === 0 || opt.pricePerNight < minPrice) minPrice = opt.pricePerNight;
-          if (opt.pricePerNight > maxPrice) maxPrice = opt.pricePerNight;
+          
+          // Logic to differentiate Standard vs Premium packages safely
+          const planName = opt.type.toLowerCase();
+          if (planName.includes('premium') || planName.includes('luxury') || planName.includes('suite')) {
+            if (opt.pricePerNight > premiumMaxPrice) premiumMaxPrice = opt.pricePerNight;
+          } else {
+            if (standardMinPrice === 0 || opt.pricePerNight < standardMinPrice) {
+              standardMinPrice = opt.pricePerNight;
+            }
+          }
         });
       });
 
+      // Fallback fallback condition if types are not distinct string values
+      if (premiumMaxPrice === 0) premiumMaxPrice = standardMinPrice * 1.5;
+      if (standardMinPrice === 0) standardMinPrice = premiumMaxPrice * 0.6;
+
       return {
-        name: hotel.hotelName.length > 15 ? hotel.hotelName.substring(0, 15) + '...' : hotel.hotelName,
-        // Main Price Metrics
-        minPrice,
-        maxPrice,
-        // Feature Metrics
+        name: hotel.hotelName.length > 18 ? hotel.hotelName.substring(0, 18) + '...' : hotel.hotelName,
+        standardPrice: Math.round(standardMinPrice),
+        premiumPrice: Math.round(premiumMaxPrice),
         amenities: totalFeatures,
-        optionVariety: roomOptionsCount,
       };
     });
   }, [data]);
@@ -123,7 +129,7 @@ const AdminDashboard = () => {
         <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-[#4a3f35] text-2xl">☰</button>
       </header>
 
-      {/* SIDEBAR - Soft White with Delicate Borders */}
+      {/* SIDEBAR */}
       <aside className={`
         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
         fixed md:relative md:translate-x-0 z-40
@@ -147,7 +153,6 @@ const AdminDashboard = () => {
             >
               🥘 Dining Venues
             </div>
-            {/* NEW ANALYTICS TAB BUTTON */}
             <div 
               onClick={() => { setActiveTab('analytics'); setIsSidebarOpen(false); }}
               className={`p-4 rounded-2xl font-bold text-xs uppercase tracking-widest cursor-pointer transition-all duration-300 ${activeTab === 'analytics' ? 'bg-[#4a3f35] text-white shadow-lg' : 'hover:bg-[#f5f1ea] text-[#8c7e6d]'}`}
@@ -162,7 +167,7 @@ const AdminDashboard = () => {
         </button>
       </aside>
 
-      {/* MAIN CONTENT - Clean & Spacious */}
+      {/* MAIN CONTENT */}
       <main className="flex-1 p-6 md:p-10 overflow-y-auto">
         <div className="flex justify-between items-center mb-10">
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-[#4a3f35]">
@@ -173,74 +178,72 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* --- CONDITIONAL RENDERING BASED ON TAB --- */}
+        {/* --- CONDITIONAL RENDERING --- */}
         
         {activeTab === 'analytics' ? (
-            /* --- ANALYTICS CHARTS VIEW --- */
-            <div className="space-y-10 animate-in fade-in duration-500">
-                {analyticsData.length > 0 ? (
-                    <>
-                        {/* Chart 1: Price Comparison */}
-                        <div className="bg-white p-8 rounded-[30px] border border-[#eaddca] shadow-xl">
-                            <h2 className="text-xl font-serif font-bold text-[#4a3f35] mb-6">Price Range Comparison (INR)</h2>
-                            <div className="h-80 w-full">
-                                <ResponsiveContainer width="100%" height="100%">
-                                    <BarChart data={analyticsData} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
-                                        <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#eaddca" />
-                                        <XAxis type="number" tick={{fill: '#4a3f35'}} />
-                                        <YAxis dataKey="name" type="category" width={100} tick={{fontSize: 11, fill: '#4a3f35'}} />
-                                        <Tooltip 
-                                            cursor={{fill: '#f5f1ea'}}
-                                            contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
-                                        />
-                                        <Legend />
-                                        <Bar dataKey="minPrice" name="Base Price" fill="#bc9a7c" radius={[0, 4, 4, 0]} barSize={20} />
-                                        <Bar dataKey="maxPrice" name="Peak Price" fill="#4a3f35" radius={[0, 4, 4, 0]} barSize={20} />
-                                    </BarChart>
-                                </ResponsiveContainer>
-                            </div>
-                        </div>
+          <div className="space-y-10">
+            {analyticsData.length > 0 ? (
+              <>
+                {/* UPGRADED: Price Tier Comparison (Vertical Visual Split) */}
+                <div className="bg-white p-8 rounded-[30px] border border-[#eaddca] shadow-xl">
+                  <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-2">
+                    <div>
+                      <h2 className="text-xl font-serif font-bold text-[#4a3f35]">Pricing Strategy Matrix</h2>
+                      <p className="text-xs text-[#8c7e6d] italic mt-0.5">Comparing entry-level Standard rates vs high-tier Premium plans.</p>
+                    </div>
+                    <div className="flex gap-4 text-xs font-semibold">
+                      <span className="flex items-center gap-1.5"><span className="w-3 h-3 bg-[#bc9a7c] rounded-sm"></span> Standard Pack</span>
+                      <span className="flex items-center gap-1.5"><span className="w-3 h-3 bg-[#4a3f35] rounded-sm"></span> Premium Pack</span>
+                    </div>
+                  </div>
+                  
+                  <div className="h-96 w-full">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={analyticsData} margin={{ top: 20, right: 30, left: 10, bottom: 5 }}>
+                        <CartesianGrid strokeDasharray="4 4" vertical={false} stroke="#eaddca" opacity={0.6} />
+                        <XAxis dataKey="name" tick={{fill: '#4a3f35', fontSize: 11, fontWeight: 500}} tickLine={false} />
+                        <YAxis tick={{fill: '#4a3f35', fontSize: 12}} axisLine={false} tickLine={false} tickFormatter={(value) => `₹${value}`} />
+                        <Tooltip 
+                          cursor={{fill: '#f5f1ea', opacity: 0.5}}
+                          contentStyle={{ borderRadius: '15px', backgroundColor: '#fff', border: '1px solid #eaddca', boxShadow: '0 10px 25px -5px rgba(74, 63, 53, 0.1)' }}
+                          formatter={(value) => [`₹${Number(value).toLocaleString('en-IN')}`]}
+                        />
+                        <Bar dataKey="standardPrice" name="Standard Base Rate" fill="#bc9a7c" radius={[6, 6, 0, 0]} maxBarSize={35} />
+                        <Bar dataKey="premiumPrice" name="Premium Peak Rate" fill="#4a3f35" radius={[6, 6, 0, 0]} maxBarSize={35} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
 
-                        {/* Chart 2: Features vs Options Count */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="bg-white p-8 rounded-[30px] border border-[#eaddca] shadow-xl">
-                                <h2 className="text-xl font-serif font-bold text-[#4a3f35] mb-6">Amenities Richness</h2>
-                                <div className="h-64 w-full">
-                                    <ResponsiveContainer width="100%" height="100%">
-                                        <BarChart data={analyticsData}>
-                                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eaddca" />
-                                            <XAxis dataKey="name" tick={{fill: '#4a3f35', fontSize: 10}} />
-                                            <YAxis tick={{fill: '#4a3f35'}} />
-                                            <Tooltip contentStyle={{ borderRadius: '12px' }} />
-                                            <Bar dataKey="amenities" name="Total Amenities" fill="#bc9a7c" radius={[4, 4, 0, 0]} />
-                                        </BarChart>
-                                    </ResponsiveContainer>
-                                </div>
-                            </div>
-
-                            <div className="bg-white p-8 rounded-[30px] border border-[#eaddca] shadow-xl">
-                                <h2 className="text-xl font-serif font-bold text-[#4a3f35] mb-6">Room Variety Options</h2>
-                                <div className="h-64 w-full">
-                                    <ResponsiveContainer width="100%" height="100%">
-                                        <LineChart data={analyticsData}>
-                                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eaddca" />
-                                            <XAxis dataKey="name" tick={{fill: '#4a3f35', fontSize: 10}} />
-                                            <YAxis tick={{fill: '#4a3f35'}} />
-                                            <Tooltip contentStyle={{ borderRadius: '12px' }} />
-                                            <Line type="monotone" dataKey="optionVariety" stroke="#4a3f35" strokeWidth={3} dot={{fill: '#bc9a7c', r: 4}} />
-                                        </LineChart>
-                                    </ResponsiveContainer>
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                ) : (
-                    <div className="text-center p-10 font-serif text-xl opacity-50">No Hotel Data available to generate charts.</div>
-                )}
-            </div>
+                {/* UPGRADED: Features/Amenities Horizontal Density Bar */}
+                <div className="bg-white p-8 rounded-[30px] border border-[#eaddca] shadow-xl">
+                  <div>
+                    <h2 className="text-xl font-serif font-bold text-[#4a3f35]">Feature & Amenity Density</h2>
+                    <p className="text-xs text-[#8c7e6d] italic mt-0.5 mb-6">Total number of curated luxury offerings integrated per hotel database.</p>
+                  </div>
+                  <div className="h-80 w-full">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={analyticsData} layout="vertical" margin={{ top: 5, right: 30, left: 30, bottom: 5 }}>
+                        <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#eaddca" />
+                        <XAxis type="number" tick={{fill: '#4a3f35'}} axisLine={false} />
+                        <YAxis dataKey="name" type="category" width={120} tick={{fontSize: 12, fill: '#4a3f35', fontWeight: 500}} axisLine={false} tickLine={false} />
+                        <Tooltip 
+                          cursor={{fill: '#f5f1ea', opacity: 0.7}}
+                          contentStyle={{ borderRadius: '12px', border: '1px solid #eaddca' }}
+                        />
+                        <Bar dataKey="amenities" name="Integrated Amenities" fill="#bc9a7c" radius={[0, 6, 6, 0]} barSize={18} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="text-center p-10 font-serif text-xl opacity-50">No Hotel Data available to generate analytics.</div>
+            )}
+          </div>
         ) : (
-            /* --- DYNAMIC TABLE VIEW (HOTELS & DINING) --- */
-            <div className="bg-white rounded-[30px] border border-[#eaddca] overflow-hidden shadow-xl shadow-[#4a3f35]/5">
+          /* --- DYNAMIC TABLE VIEW --- */
+          <div className="bg-white rounded-[30px] border border-[#eaddca] overflow-hidden shadow-xl shadow-[#4a3f35]/5">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-[#fcfaf7] text-[#bc9a7c] uppercase text-[10px] tracking-[2px]">
@@ -276,7 +279,6 @@ const AdminDashboard = () => {
               </tbody>
             </table>
           
-            {/* Empty State Check */}
             {((activeTab === 'hotels' && data?.hotels.length === 0) || (activeTab === 'dining' && data?.dinings.length === 0)) && (
               <div className="p-20 text-center text-[#8c7e6d] italic font-serif">
                 No {activeTab} listed yet. Add your first property to begin.
