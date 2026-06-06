@@ -14,7 +14,7 @@ const BookingPage = () => {
 
   // --- 1. DYNAMIC COMBINED CALCULATIONS FOR ORDER SUMMARY ---
   const roomsSubtotal = roomBookings.reduce((acc, item) => acc + (item.price || 0), 0);
-  const diningSubtotal = diningBookings.reduce((acc, item) => acc + (item.price || 0), 0); 
+  const diningSubtotal = diningBookings.length * 1500; 
   const offersSubtotal = offerBookings.reduce((acc, item) => acc + (Number(item.price) || 0), 0);
 
   const overallSubtotal = roomsSubtotal + diningSubtotal + offersSubtotal;
@@ -150,6 +150,7 @@ const BookingPage = () => {
                             <button onClick={() => dispatch(removeDiningBooking(item.id))} className="text-[10px] font-bold text-red-400 hover:text-red-600 transition-colors uppercase tracking-widest cursor-pointer flex items-center gap-1.5">
                               Cancel Slot
                             </button>
+                            <span className="text-sm font-bold text-[#4a3f35]">₹1,500</span>
                             {item.price && item.price > 0 && <span className="text-sm font-bold text-[#4a3f35]">₹{item.price}</span>}
                           </div>
                         </div>
