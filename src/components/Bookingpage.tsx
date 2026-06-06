@@ -11,7 +11,20 @@ const BookingPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [viewingDetails, setViewingDetails] = useState<any>(null);
-
+// Component ke andar:
+const groupedDining = useMemo(() => {
+  return diningBookings.reduce((acc: any, curr: any) => {
+    const existing = acc.find((item: any) => item.name === curr.name);
+    if (existing) {
+      existing.tables = (existing.tables || 1) + (curr.tables || 1);
+      // Optional: Agar aap saari original IDs rakhna chahte hain
+      existing.allIds = [...(existing.allIds || [existing.id]), curr.id]; 
+    } else {
+      acc.push({ ...curr, allIds: [curr.id] });
+    }
+    return acc;
+  }, []);
+}, [diningBookings]);
   // --- 1. DYNAMIC COMBINED CALCULATIONS FOR ORDER SUMMARY ---
   const roomsSubtotal = roomBookings.reduce((acc, item) => acc + (item.price || 0), 0);
  
@@ -62,20 +75,7 @@ const BookingPage = () => {
       </button>
     </motion.div>
   );
-// Component ke andar:
-const groupedDining = useMemo(() => {
-  return diningBookings.reduce((acc: any, curr: any) => {
-    const existing = acc.find((item: any) => item.name === curr.name);
-    if (existing) {
-      existing.tables = (existing.tables || 1) + (curr.tables || 1);
-      // Optional: Agar aap saari original IDs rakhna chahte hain
-      existing.allIds = [...(existing.allIds || [existing.id]), curr.id]; 
-    } else {
-      acc.push({ ...curr, allIds: [curr.id] });
-    }
-    return acc;
-  }, []);
-}, [diningBookings]);
+
   return (
     <div className="min-h-screen bg-[#f5f1ea] p-4 md:p-12 pb-32 relative">
       <div className="max-w-6xl mx-auto">
@@ -176,7 +176,7 @@ const groupedDining = useMemo(() => {
               </span>
               <span className="text-sm font-bold text-[#4a3f35]">
                 {/* 1500 is the rate per table */}
-                ₹{( (item.tables || 1) ).toLocaleString('en-IN')}
+                ₹{( (item.tables * 1500) ).toLocaleString('en-IN')}
               </span>
             </div>
                           </div>
