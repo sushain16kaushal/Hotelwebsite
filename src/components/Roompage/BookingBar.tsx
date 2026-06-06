@@ -60,6 +60,7 @@ export const BookingBar = ({
                     <span className="text-[#eaddca]">|</span>
                     <DatePicker
                         selected={bookingDates.endDate}
+                        
                         onChange={(date: Date | null) => {
                           if(date) setBookingDates(prev => ({ ...prev, endDate: date }));
                         }}
