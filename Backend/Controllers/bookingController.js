@@ -1,7 +1,7 @@
 // controllers/bookingController.js
 
-import Booking from '../models/Booking.js';
-import Customer from '../models/Customer.js';
+import Booking from '../Models/Booking.js'
+import Customer from '../Models/Customer.js';
 import nodemailer from 'nodemailer';
 
 // Nodemailer Transporter
@@ -15,21 +15,27 @@ const transporter = nodemailer.createTransport({
 
 // Process Payment
 export const processPayment = async (req, res) => {
+     console.log('📥 Payment request received:', req.body); 
   const { userId, amount, paymentType, bookingDetails } = req.body;
 
   try {
     // 1. Save Booking to Database ✅
-    const newBooking = await Booking.create({
-      userId,
-      bookingDetails,
-      paymentInfo: {
-        amount,
-        paymentType,
-        status: 'PAID',
-        transactionId: `TXN-${Date.now()}`,
-        paidAt: Date.now()
-      }
-    });
+    
+   const newBooking = await Booking.create({
+  userId,
+  bookingDetails: {
+    hotels: bookingDetails.hotels || [],
+    dining: bookingDetails.dining || [],
+    offers: bookingDetails.offers || []
+  },
+  paymentInfo: {
+    amount,
+    paymentType,
+    status: 'PAID',
+    transactionId: `TXN-${Date.now()}`,
+    paidAt: new Date() // Date.now() ki jagah new Date() use karein standard formatting ke liye
+  }
+});
 
     // 2. Get User Details for Email ✅
     const customer = await Customer.findById(userId);
