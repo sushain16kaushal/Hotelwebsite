@@ -85,7 +85,7 @@ const [bookingDetails, setBookingDetails] = useState<{
   </div>
 
   <div className="flex flex-col gap-1 w-full md:w-auto">
-    <label className="text-[10px] uppercase tracking-[0.2em] text-[#bc9a7c] font-bold ml-1">Guests/Tables</label>
+    <label className="text-[10px] uppercase tracking-[0.2em] text-[#bc9a7c] font-bold ml-1">No of Tables</label>
     <input 
       type="number" 
       min="1" 
