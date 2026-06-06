@@ -44,7 +44,7 @@ const Header = ({ hero }: { hero: Herodata }): JSX.Element => {
             >
               {isScrolled && (
                 <div className="text-white">
-                  {isOpen ? <X size={20} /> : (user?.profilePic ? <img src={user.profilePic} className="w-8 h-8 rounded-full border border-amber-500" /> : <Menu size={20} />)}
+                  {isOpen ? <X size={20} /> : (user?.profilePic ? <img src={user.profilePic} className="w-15 h-15 rounded-full border border-amber-500" /> : <Menu size={20} />)}
                 </div>
               )}
 
@@ -84,7 +84,7 @@ const Header = ({ hero }: { hero: Herodata }): JSX.Element => {
                 {/* User Profile in Dropdown */}
                 {user && (
                   <div className="flex items-center gap-3 p-3 mb-2 bg-stone-50 rounded-2xl border border-stone-100">
-                    <img src={user.profilePic} className="w-20 h-20 rounded-full border border-amber-500" />
+                    <img src={user.profilePic} className="w-10 h-10 rounded-full border border-amber-500" />
                     <div className="overflow-hidden">
                       <p className="text-[10px] font-bold text-stone-900 truncate">{user.name}</p>
                       <p className="text-[8px] text-stone-500 truncate uppercase tracking-tighter">Verified Guest</p>
