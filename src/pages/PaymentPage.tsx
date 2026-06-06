@@ -49,7 +49,7 @@ const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FU
       await new Promise(resolve => setTimeout(resolve, 2000));
 
       // Call Backend API - NOW USING paymentType ✅
-      const response = await fetch('http://localhost:5000/api/booking/process-payment', {
+      const response = await fetch('`https://hotelapp-tiof.onrender.com/api/process-payment', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ const PaymentPage = () => {
     
     if (!user) {
       toast.error("Please login first!");
-      navigate('/login');
+      navigate('/auth');
     }
   }, [totalAmount, navigate, user]);
 
