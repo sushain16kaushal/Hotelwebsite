@@ -20,7 +20,6 @@ const BookingPage = () => {
         existing.tables = (existing.tables || 1) + (curr.tables || 1);
         existing.allIds = [...(existing.allIds || [existing.id]), curr.id]; 
       } else {
-        // Fallback or explicit check ensuring current tables default to 1 if missing
         acc.push({ ...curr, allIds: [curr.id], tables: curr.tables || 1 });
       }
       return acc;
@@ -30,9 +29,8 @@ const BookingPage = () => {
   // --- 2. DYNAMIC COMBINED CALCULATIONS FOR ORDER SUMMARY ---
   const roomsSubtotal = roomBookings.reduce((acc, item) => acc + (item.price || 0), 0);
   
-  // Fixed: Dining calculations grouped list se fetch hogi to ensure sync accuracy
-  const diningSubtotal = groupedDining.reduce((acc, item) => {
-    const tableCount = item.tables || 1; 
+  const diningSubtotal = groupedDining.reduce((acc:any, item:any) => {
+    const tableCount = Number(item.tables) || 1; 
     return acc + (tableCount * 1500);
   }, 0);
 
@@ -40,7 +38,6 @@ const BookingPage = () => {
 
   const overallSubtotal = roomsSubtotal + diningSubtotal + offersSubtotal;
   
-  // Luxury Slab Rule: If subtotal > 7500, GST is 18%, else 12%
   const gstRate = overallSubtotal > 7500 ? 0.18 : 0.12;
   const totalGST = overallSubtotal * gstRate;
   const serviceCharge = overallSubtotal * 0.05;
@@ -86,10 +83,8 @@ const BookingPage = () => {
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-[#4a3f35] mt-2">Booking Summary</h1>
         </header>
 
-        {/* Outer Layout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
           
-          {/* LEFT 2 COLUMNS: ALL ACTIVE SECTIONS */}
           <div className="lg:col-span-2 space-y-16">
             
             {/* --- ROOMS SECTION --- */}
@@ -163,21 +158,20 @@ const BookingPage = () => {
                             </div>
                             <div className="bg-[#4a3f35]/5 px-4 py-2 rounded-2xl border border-[#4a3f35]/10 text-right">
                               <p className="text-[8px] uppercase text-[#bc9a7c] font-extrabold tracking-tighter">ID</p>
-                              <p className="text-[10px] font-bold text-[#4a3f35] font-mono">#EPH-{item.id.toString().slice(-4)}</p>
+                              <p className="text-[10px] font-bold text-[#4a3f35] font-mono">#EPH-{item.id ? item.id.toString().slice(-4) : '0000'}</p>
                             </div>
                           </div>
                           <div className="mt-4 flex items-center justify-between pt-4 border-t border-[#eaddca]/40">
-                            <button onClick={() => item.allIds.forEach((id: any) => dispatch(removeDiningBooking(id)))} className="text-[10px] font-bold text-red-400 hover:text-red-600 transition-colors uppercase tracking-widest cursor-pointer flex items-center gap-1.5">
-                              Cancel All ({item.tables} Tables)
+                            <button onClick={() => item.allIds?.forEach((id: any) => dispatch(removeDiningBooking(id)))} className="text-[10px] font-bold text-red-400 hover:text-red-600 transition-colors uppercase tracking-widest cursor-pointer flex items-center gap-1.5">
+                              Cancel All ({item.tables || 1} Tables)
                             </button>
                             
-                            {/* FIXED PRICE DISPLAY SECTION */}
                             <div className="flex flex-col items-end">
                               <span className="text-[10px] text-[#8c7e6d] font-bold">
-                                {item.tables} Table(s)
+                                {item.tables || 1} Table(s)
                               </span>
                               <span className="text-sm font-bold text-[#4a3f35]">
-                                ₹{((item.tables || 1) * 1500).toLocaleString('en-IN')}
+                                ₹{((Number(item.tables) || 1) * 1500).toLocaleString('en-IN')}
                               </span>
                             </div>
                           </div>
@@ -243,13 +237,12 @@ const BookingPage = () => {
                 <span className="font-mono">₹{roomsSubtotal.toLocaleString('en-IN')}</span>
               </div>
               
-              {/* FIXED DINING BILL BLOCK */}
               {diningSubtotal > 0 && (
                 <div className="flex justify-between">
                   <span className="opacity-70">
                     Dining 
                     <span className="ml-1 text-[9px] bg-white/10 px-1.5 py-0.5 rounded">
-                      ({groupedDining.reduce((sum, item) => sum + (item.tables || 1), 0)} Tables)
+                      ({groupedDining.reduce((sum:any, item:any) => sum + (Number(item.tables) || 1), 0)} Tables)
                     </span>
                   </span>
                   <span className="font-mono">₹{diningSubtotal.toLocaleString('en-IN')}</span>
@@ -280,7 +273,6 @@ const BookingPage = () => {
                 <span className="font-mono">₹{Math.round(serviceCharge).toLocaleString('en-IN')}</span>
               </div>
               
-              {/* Grand Total Execution */}
               <div className="pt-6 mt-6 border-t border-white/20 flex flex-col gap-1">
                 <span className="text-[9px] uppercase tracking-widest font-bold opacity-60">Total Amount Payable</span>
                 <span className="text-3xl font-serif text-[#bc9a7c] font-bold">
