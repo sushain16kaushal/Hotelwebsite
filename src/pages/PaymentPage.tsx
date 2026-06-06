@@ -53,7 +53,7 @@ const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FU
       const userId = user?._id || 'demo_user_id';
       const authToken = token || 'demo_token';
 
-      const response = await fetch('https://hotelapp-tiof.onrender.com/api/process-payment', {
+      const response = await fetch(`https://hotelapp-tiof.onrender.com/api/process-payment`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
