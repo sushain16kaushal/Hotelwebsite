@@ -48,7 +48,7 @@ const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FU
       await new Promise(resolve => setTimeout(resolve, 2000));
 
       // Call Backend API - NOW USING paymentType ✅
-      const response = await fetch('`https://hotelapp-tiof.onrender.com/api/process-payment', {
+      const response = await fetch('https://hotelapp-tiof.onrender.com/api/process-payment', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
