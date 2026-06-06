@@ -37,7 +37,7 @@ const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FU
     
     if (!user || !user._id || !token) {
       toast.error("Please login to complete payment!");
-      navigate('/login');
+      navigate('/auth');
       return;
     }
     
