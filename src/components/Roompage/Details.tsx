@@ -22,14 +22,16 @@ interface CartItem {
   checkIn: Date | string;
   checkOut: Date | string;
 }
-const getTodayDate = () => {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const day = String(today.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
 
+// Details.tsx ke andar ye update karein:
+
+const today = new Date();
+today.setHours(0, 0, 0, 0); // Time ko reset kar do taaki sirf date matter kare
+
+const [bookingDates, setBookingDates] = useState({ 
+  startDate: today, 
+  endDate: new Date(today.getTime() + 86400000) 
+});
 const Details = () => {
   const data = useOutletContext<ContentData>();
   const { id } = useParams<{ id: string }>();
@@ -223,7 +225,7 @@ console.log("Auth Token Value:", token);
       </section>
 
       {/* Booking Bar with Props */}
-      <BookingBar rooms={rooms} setRooms={setRooms} bookingDates={bookingDates} setBookingDates={setBookingDates} minDate={new Date()} />
+      <BookingBar rooms={rooms} setRooms={setRooms} bookingDates={bookingDates} setBookingDates={setBookingDates} minDate={today} />
 
       <div className="max-w-6xl mx-auto px-6 mt-10">
         <header className="mb-12">
