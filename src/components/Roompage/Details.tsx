@@ -22,6 +22,13 @@ interface CartItem {
   checkIn: Date | string;
   checkOut: Date | string;
 }
+const getTodayDate = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 const Details = () => {
   const data = useOutletContext<ContentData>();
@@ -216,7 +223,7 @@ console.log("Auth Token Value:", token);
       </section>
 
       {/* Booking Bar with Props */}
-      <BookingBar rooms={rooms} setRooms={setRooms} bookingDates={bookingDates} setBookingDates={setBookingDates} />
+      <BookingBar rooms={rooms} setRooms={setRooms} bookingDates={bookingDates} setBookingDates={setBookingDates} minDate={new Date()} />
 
       <div className="max-w-6xl mx-auto px-6 mt-10">
         <header className="mb-12">

@@ -16,13 +16,15 @@ interface BookingBarProps {
     startDate: Date;
     endDate: Date;
   }>>;
+  minDate: Date; // Added prop
 }
 
 export const BookingBar = ({ 
   rooms, 
   setRooms,
-  bookingDates, // Parent se aa rahi state
-  setBookingDates // Parent ka setter function
+  bookingDates, 
+  setBookingDates, 
+  minDate // Accessing prop
 }: BookingBarProps) => {
     const [showGuestModal, setShowGuestModal] = useState(false);
 
@@ -34,9 +36,18 @@ export const BookingBar = ({
                 <div className="flex items-center gap-2 bg-white p-3 rounded-xl border border-[#eaddca] shadow-inner">
                     <span className="text-[#bc9a7c] text-[10px] uppercase font-bold px-2">Dates</span>
                     <DatePicker
-                        selected={bookingDates.startDate} // LOCAL NAI, PARENT USE KARO
+                        selected={bookingDates.startDate}
+                        minDate={minDate} // Validation: Past dates blocked
                         onChange={(date: Date | null) => {
-                          if(date) setBookingDates(prev => ({ ...prev, startDate: date }));
+                          if(date) {
+                            setBookingDates(prev => ({ 
+                              ...prev, 
+                              startDate: date,
+                              // Agar naye check-in date, purane end-date se zyada hai, 
+                              // toh end-date ko bhi update karo
+                              endDate: date > prev.endDate ? date : prev.endDate 
+                            }));
+                          }
                         }}
                         selectsStart
                         startDate={bookingDates.startDate}
@@ -47,14 +58,14 @@ export const BookingBar = ({
                     />
                     <span className="text-[#eaddca]">|</span>
                     <DatePicker
-                        selected={bookingDates.endDate} // LOCAL NAI, PARENT USE KARO
+                        selected={bookingDates.endDate}
                         onChange={(date: Date | null) => {
                           if(date) setBookingDates(prev => ({ ...prev, endDate: date }));
                         }}
                         selectsEnd
                         startDate={bookingDates.startDate}
                         endDate={bookingDates.endDate}
-                        minDate={bookingDates.startDate}
+                        minDate={bookingDates.startDate} // End date hamesha start date ke baad hogi
                         dateFormat="dd MMM yyyy"
                         className="bg-transparent text-[#4a3f35] text-sm outline-none w-28 cursor-pointer font-medium"
                         placeholderText="Check Out"

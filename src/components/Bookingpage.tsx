@@ -279,7 +279,7 @@ const BookingPage = () => {
             <motion.div initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.9, opacity: 0, y: 20 }} className="relative w-full max-w-lg bg-[#faf9f6] rounded-[3rem] shadow-2xl overflow-hidden border border-[#dcd0c0]">
               <div className="relative h-56 bg-[#4a3f35]">
                 <img src={`https://ik.imagekit.io/y4ytihgqk/${viewingDetails.image}?tr=w-800,h-500`} className="w-full h-full object-cover opacity-80" alt="" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#4a3f35] to-transparent"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-[#4a3f35] to-transparent"></div>
                 <button onClick={() => setViewingDetails(null)} className="absolute top-6 right-6 bg-white/20 backdrop-blur-lg p-2 rounded-full hover:bg-white/40 transition-colors cursor-pointer"><svg width="20" height="20" fill="none" stroke="white" strokeWidth="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
                 <div className="absolute bottom-6 left-8 text-white">
                   <p className="text-[10px] uppercase tracking-[3px] font-bold opacity-80 mb-1">Reservation Detail</p>
