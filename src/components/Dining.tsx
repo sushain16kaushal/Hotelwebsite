@@ -57,7 +57,7 @@ const [bookingDetails, setBookingDetails] = useState<{
       },
     });
   };
-setBookingDetails({ restaurant: null, date: "", time: "", tables: 1 });
+
   const getGoogleMapsUrl = (address: string) => {
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
   };
@@ -65,7 +65,12 @@ setBookingDetails({ restaurant: null, date: "", time: "", tables: 1 });
   return (
     <div className="mt-2 flex flex-wrap bg-[#f5f1ea] p-2 md:p-6 min-h-screen relative">
       <Toaster /> {/* Toast Container */}
-      
+      {/* --- ADD INPUTS FOR BOOKING --- */}
+      <div className="w-full bg-white p-6 rounded-2xl mb-6 shadow-sm flex flex-wrap gap-4 items-center">
+        <input type="date" className="p-2 border rounded" onChange={(e) => setBookingDetails(prev => ({...prev, date: e.target.value}))} />
+        <input type="time" className="p-2 border rounded" onChange={(e) => setBookingDetails(prev => ({...prev, time: e.target.value}))} />
+        <input type="number" min="1" placeholder="Tables" className="p-2 border rounded w-20" onChange={(e) => setBookingDetails(prev => ({...prev, tables: Number(e.target.value)}))} />
+      </div>
       {data.dinings.map((item, index) => (
         <div key={index} className="w-full md:w-1/2 p-3">
           <div className="group relative flex flex-col lg:flex-row border border-[#dcd0c0] p-6 rounded-[2.5rem] bg-[#faf9f6] shadow-sm transition-all duration-500 hover:shadow-2xl hover:border-[#bc9a7c]/40 hover:-translate-y-1 h-full overflow-hidden">
