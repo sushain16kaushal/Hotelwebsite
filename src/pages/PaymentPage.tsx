@@ -1,4 +1,4 @@
-// src/pages/PaymentPage.tsx - Debug Version
+// src/pages/PaymentPage.tsx - Simple Version (Login Check Removed)
 
 import React, { useState, useMemo, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearBookings } from '../store/bookingSlice';
-import { FaLock, FaCreditCard, FaSpinner } from 'react-icons/fa';
+import { FaLock, FaCreditCard } from 'react-icons/fa';
 import type { RootState } from '../store/store';
 import type { User } from '../types/content';
 
@@ -20,6 +20,7 @@ const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FU
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
+  // User & Token directly from Redux
   const user = useSelector((state: RootState) => state.auth?.user as User | null);
   const token = useSelector((state: RootState) => state.auth?.token as string | null);
   
@@ -29,69 +30,34 @@ const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FU
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [cardComplete, setCardComplete] = useState(false);
-
-  // Debug: Check stripe status
-  useEffect(() => {
-    console.log('Stripe initialized:', !!stripe);
-    console.log('Elements initialized:', !!elements);
-    console.log('User:', user);
-    console.log('Token exists:', !!token);
-  }, [stripe, elements, user, token]);
 
   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    console.log('Button clicked!');
-    console.log('Stripe:', stripe);
-    console.log('Elements:', elements);
-    console.log('Amount:', amount);
-    
-    if (!stripe || !elements) {
-      const err = "Payment system not loaded. Please refresh.";
-      setError(err);
-      toast.error(err);
-      return;
-    }
-    
-    // Check login (simplified - just show error)
-    if (!user || !token) {
-      toast.error("Please login first!");
-      return;
-    }
+    if (!stripe || !elements) return;
+    if (!user || !token) return;
     
     setLoading(true);
     setError(null);
-    console.log('Starting payment process...');
 
     try {
-      // Get card element
+      // 1. Get Card Element
       const cardElement = elements.getElement(CardElement);
       if (!cardElement) {
-        throw new Error("Card details not entered");
+        throw new Error("Please enter card details");
       }
 
-      // Create payment method (this validates the card)
-      console.log('Validating card...');
-      
+      // 2. Create Payment Method (Card Validation)
       const { error: stripeError, paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
         card: cardElement,
       });
 
       if (stripeError) {
-        console.error('Stripe Error:', stripeError);
         throw new Error(stripeError.message);
       }
 
-      console.log('Payment Method Created:', paymentMethod?.id);
-
-      // Simulate server processing
-      console.log('Processing payment on server...');
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
-      // Call Backend API
-      console.log('Calling backend API...');
+      // 3. Call Backend API
       const response = await fetch('https://hotelapp-tiof.onrender.com/api/process-payment', {
         method: 'POST',
         headers: { 
@@ -112,7 +78,6 @@ const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FU
       });
 
       const data = await response.json();
-      console.log('API Response:', data);
 
       if (data.success) {
         dispatch(clearBookings());
@@ -146,33 +111,30 @@ const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FU
       )}
       
       <div className="bg-white p-6 rounded-2xl border border-[#dcd0c0] shadow-sm">
-        <label className=" text-xs font-bold text-[#4a3f35] uppercase tracking-widest mb-3 flex items-center gap-2">
+        <label className="block text-xs font-bold text-[#4a3f35] uppercase tracking-widest mb-3 flex items-center gap-2">
           <FaCreditCard className="text-[#bc9a7c]" /> Card Details
         </label>
         <div className="p-4 bg-[#f9f9f9] rounded-xl border border-[#eaddca]">
-          <CardElement 
-            onChange={(e) => setCardComplete(e.complete)}
-            options={{
-              style: {
-                base: {
-                  fontSize: '16px',
-                  color: '#4a3f35',
-                  fontFamily: '"Serif", serif',
-                },
+          <CardElement options={{
+            style: {
+              base: {
+                fontSize: '16px',
+                color: '#4a3f35',
+                fontFamily: '"Serif", serif',
               },
-            }} 
-          />
+            },
+          }} />
         </div>
       </div>
 
       <button 
         type="submit"
-        disabled={!stripe || loading || !cardComplete}
+        disabled={!stripe || loading}
         className="w-full py-5 bg-[#bc9a7c] text-white rounded-2xl font-bold uppercase tracking-[3px] text-[12px] shadow-xl hover:bg-[#a88969] transition-all active:scale-95 flex justify-center items-center gap-3 disabled:opacity-70"
       >
         {loading ? (
           <div className="flex items-center gap-2">
-            <FaSpinner className="animate-spin" />
+            <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
             <span>Processing...</span>
           </div>
         ) : (
@@ -181,12 +143,6 @@ const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FU
           </span>
         )}
       </button>
-      
-      {!cardComplete && !loading && (
-        <p className="text-center text-[10px] text-orange-500">
-          ⚠️ Please enter complete card details
-        </p>
-      )}
       
       <p className="text-center text-[10px] text-[#8c7e6d]">
         🔒 Secured by Stripe Test Mode
@@ -202,10 +158,7 @@ const PaymentPage = () => {
   const totalAmount = location.state?.total || 0; 
   const [paymentType, setPaymentType] = useState<'FULL' | 'PARTIAL'>('FULL');
 
-  const user = useSelector((state: RootState) => state.auth?.user as User | null);
-
   useEffect(() => {
-    console.log('Total Amount:', totalAmount);
     if (!totalAmount || totalAmount === 0) {
       toast.error("Your cart is empty!");
       navigate('/booking-summary');
@@ -228,12 +181,6 @@ const PaymentPage = () => {
         <div className="bg-[#4a3f35] p-8 text-center">
           <h2 className="text-2xl font-serif font-bold text-white">Secure Checkout</h2>
           <p className="text-[10px] text-[#bc9a7c] uppercase tracking-widest mt-1">Euphoria, Shimla</p>
-          
-          {user && (
-            <p className="text-[10px] text-white/70 mt-2">
-              Paying as: {user.email}
-            </p>
-          )}
         </div>
 
         <div className="p-8">
