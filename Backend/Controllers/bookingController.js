@@ -4,14 +4,8 @@ import Booking from '../Models/Booking.js'
 import Customer from '../Models/Customer.js';
 import nodemailer from 'nodemailer';
 import mongoose from 'mongoose';
-// Nodemailer Transporter
-const transporter = nodemailer.createTransport({
-  service:'Gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
+import { Resend } from 'resend';
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Process Payment
 export const processPayment = async (req, res) => {
@@ -77,14 +71,12 @@ console.log("STEP 2 - Booking Saved");
       </div>
     `;
 console.log("STEP 4 - Sending Email");
-  transporter.sendMail({
-  from: process.env.EMAIL_USER,
+ await resend.emails.send({
+  from: `${process.env.EMAIL_USER}`,
   to: customer.email,
   subject: '🎉 Booking Confirmed! - Euphoria, Shimla',
-  html: htmlContent
-})
-.then(() => console.log("Email sent"))
-.catch(err => console.error("Mail Error:", err));
+  html: htmlContent,
+});
     // 4. Return Success Response ✅
   return res.status(200).json({ 
       success: true, 
