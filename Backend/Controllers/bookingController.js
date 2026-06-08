@@ -27,7 +27,7 @@ export const processPayment = async (req, res) => {
   }
   try {
     // 1. Save Booking to Database ✅
-    
+    console.log("STEP 1 - Booking Save Start");
    const newBooking = await Booking.create({
   userId,
   bookingDetails: {
@@ -43,9 +43,10 @@ export const processPayment = async (req, res) => {
     paidAt: new Date() // Date.now() ki jagah new Date() use karein standard formatting ke liye
   }
 });
-
+console.log("STEP 2 - Booking Saved");
     // 2. Get User Details for Email ✅
     const customer = await Customer.findById(userId);
+    console.log("STEP 3 - Customer Found");
     if (!customer) throw new Error("User not found");
 
     // 3. Send Confirmation Email ✅
@@ -75,7 +76,7 @@ export const processPayment = async (req, res) => {
         </p>
       </div>
     `;
-
+console.log("STEP 4 - Sending Email");
     await transporter.sendMail({
       from: '"Euphoria Hotels" <noreply@euphoriahotel.com>',
       to: customer.email,
