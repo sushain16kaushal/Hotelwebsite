@@ -4,29 +4,24 @@ import Booking from '../Models/Booking.js'
 import Customer from '../Models/Customer.js';
 import nodemailer from 'nodemailer';
 import mongoose from 'mongoose';
-// Nodemailer Transporter
-const transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: { 
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
+import { Resend } from 'resend';
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Process Payment
 export const processPayment = async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
-  return res.status(400).json({
-    success: false,
-    message: "Invalid User ID"
-  });
-}
+  
      console.log('📥 Payment request received:', req.body); 
   const { userId, amount, paymentType, bookingDetails } = req.body;
-
+  // UserId validation
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid User ID"
+    });
+  }
   try {
     // 1. Save Booking to Database ✅
-    
+    console.log("STEP 1 - Booking Save Start");
    const newBooking = await Booking.create({
   userId,
   bookingDetails: {
@@ -42,9 +37,10 @@ export const processPayment = async (req, res) => {
     paidAt: new Date() // Date.now() ki jagah new Date() use karein standard formatting ke liye
   }
 });
-
+console.log("STEP 2 - Booking Saved");
     // 2. Get User Details for Email ✅
     const customer = await Customer.findById(userId);
+    console.log("STEP 3 - Customer Found");
     if (!customer) throw new Error("User not found");
 
     // 3. Send Confirmation Email ✅
@@ -74,18 +70,15 @@ export const processPayment = async (req, res) => {
         </p>
       </div>
     `;
-
-    await transporter.sendMail({
-      from: '"Euphoria Hotels" <noreply@euphoriahotel.com>',
-      to: customer.email,
-      subject: '🎉 Booking Confirmed! - Euphoria, Shimla',
-      html: htmlContent
-    });
-
-    console.log(`📧 Email sent to ${customer.email}`);
-
+console.log("STEP 4 - Sending Email");
+ await resend.emails.send({
+  from: `Euphoria Shimla <onboarding@resend.dev>`,
+  to: customer.email,
+  subject: '🎉 Booking Confirmed! - Euphoria, Shimla',
+  html: htmlContent,
+});
     // 4. Return Success Response ✅
-    res.status(200).json({ 
+  return res.status(200).json({ 
       success: true, 
       message: "Booking confirmed & email sent!",
       bookingId: newBooking._id

@@ -147,6 +147,7 @@ router.get('/auth/google/callback',
       { expiresIn: '7d' }
     );
     const userData = encodeURIComponent(JSON.stringify({
+        _id: req.user._id,
         name: req.user.name,
         email: req.user.email,
         profilePic: req.user.profilePic,
