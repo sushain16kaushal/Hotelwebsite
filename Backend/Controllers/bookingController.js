@@ -72,7 +72,7 @@ console.log("STEP 2 - Booking Saved");
     `;
 console.log("STEP 4 - Sending Email");
  await resend.emails.send({
-  from: `${process.env.EMAIL_USER}`,
+  from: `Euphoria Shimla <onboarding@resend.dev>`,
   to: customer.email,
   subject: '🎉 Booking Confirmed! - Euphoria, Shimla',
   html: htmlContent,
