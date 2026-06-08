@@ -10,7 +10,10 @@ const transporter = nodemailer.createTransport({
   auth: { 
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
-  }
+  },
+   connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000
 });
 
 // Process Payment
@@ -77,17 +80,23 @@ console.log("STEP 2 - Booking Saved");
       </div>
     `;
 console.log("STEP 4 - Sending Email");
-    await transporter.sendMail({
-      from: `${process.env.EMAIL_USER}`,
-      to: customer.email,
-      subject: '🎉 Booking Confirmed! - Euphoria, Shimla',
-      html: htmlContent
-    });
+  try {
+  const info = await transporter.sendMail({
+    from: process.env.EMAIL_USER,
+    to: customer.email,
+    subject: '🎉 Booking Confirmed! - Euphoria, Shimla',
+    html: htmlContent
+  });
 
-    console.log(`📧 Email sent to ${customer.email}`);
+  console.log("📧 Email sent successfully");
+  console.log("Message ID:", info.messageId);
+
+} catch (mailErr) {
+  console.error("❌ EMAIL ERROR:", mailErr);
+}
 
     // 4. Return Success Response ✅
-    res.status(200).json({ 
+  return res.status(200).json({ 
       success: true, 
       message: "Booking confirmed & email sent!",
       bookingId: newBooking._id
