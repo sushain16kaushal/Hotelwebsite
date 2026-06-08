@@ -140,7 +140,7 @@ const AdminDashboard = () => {
           <h2 className="hidden md:block text-[#4a3f35] text-2xl font-serif mb-10 font-bold border-b border-[#f5f1ea] pb-4">
             Euphoria <span className="text-[#bc9a7c]">Admin</span>
           </h2>
-          <nav className="space-y-3">
+          <nav className="space-y-6">
             <div 
               onClick={() => { setActiveTab('hotels'); setIsSidebarOpen(false); }}
               className={`p-4 rounded-2xl font-bold text-xs uppercase tracking-widest cursor-pointer transition-all duration-300 ${activeTab === 'hotels' ? 'bg-[#4a3f35] text-white shadow-lg' : 'hover:bg-[#f5f1ea] text-[#8c7e6d]'}`}
