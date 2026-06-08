@@ -6,9 +6,7 @@ import nodemailer from 'nodemailer';
 import mongoose from 'mongoose';
 // Nodemailer Transporter
 const transporter = nodemailer.createTransport({
-   host: "74.125.69.108",
-  port: 587,
-  secure: false,
+  service:'Gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
@@ -81,7 +79,6 @@ console.log("STEP 2 - Booking Saved");
 console.log("STEP 4 - Sending Email");
   try {
   const info = await transporter.sendMail({
-    from: process.env.EMAIL_USER,
     to: customer.email,
     subject: '🎉 Booking Confirmed! - Euphoria, Shimla',
     html: htmlContent
