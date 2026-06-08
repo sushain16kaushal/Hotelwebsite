@@ -6,7 +6,7 @@ import nodemailer from 'nodemailer';
 import mongoose from 'mongoose';
 // Nodemailer Transporter
 const transporter = nodemailer.createTransport({
- host: "smtp.gmail.com",
+   host: "74.125.69.108",
   port: 587,
   secure: false,
   auth: {
