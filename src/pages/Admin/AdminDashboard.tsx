@@ -8,7 +8,8 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip
+  Tooltip,
+  LabelList
 } from 'recharts';
 
 // --- TYPES ---
@@ -316,98 +317,72 @@ const AdminDashboard = () => {
 
                 {/* UPGRADED: Features/Amenities Horizontal Density Bar */}
               <div className="bg-linear-to-br from-white to-[#faf5ee] p-10 rounded-[36px] border border-[#eaddca] shadow-[0_20px_60px_rgba(74,63,53,0.08)]">
-  
-  <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-4 mb-8">
-    
-    <div>
-      <h2 className="text-2xl font-serif font-bold text-[#4a3f35]">
-        Pricing Strategy Matrix
-      </h2>
 
-      <p className="text-sm text-[#8c7e6d] mt-1 italic">
-        Comparing standard room pricing against premium luxury offerings.
-      </p>
+  <div className="mb-8">
+    <h2 className="text-2xl font-serif font-bold text-[#4a3f35]">
+      Feature & Amenity Density
+    </h2>
 
-      <div className="flex flex-wrap gap-2 mt-4">
-        <span className="px-3 py-1 bg-[#f5f1ea] rounded-full text-xs font-medium text-[#4a3f35]">
-          Dynamic Pricing
-        </span>
-
-        <span className="px-3 py-1 bg-[#f5f1ea] rounded-full text-xs font-medium text-[#4a3f35]">
-          Revenue Analysis
-        </span>
-
-        <span className="px-3 py-1 bg-[#f5f1ea] rounded-full text-xs font-medium text-[#4a3f35]">
-          Hotel Intelligence
-        </span>
-      </div>
-    </div>
-
-    <div className="flex gap-5 text-sm font-semibold">
-      <span className="flex items-center gap-2">
-        <span className="w-4 h-4 rounded bg-[#bc9a7c]"></span>
-        Standard
-      </span>
-
-      <span className="flex items-center gap-2">
-        <span className="w-4 h-4 rounded bg-[#4a3f35]"></span>
-        Premium
-      </span>
-    </div>
+    <p className="text-sm text-[#8c7e6d] italic mt-1">
+      Total luxury amenities and premium experiences available per hotel.
+    </p>
   </div>
 
-  <div className="h-125 w-full">
+  <div className="h-112.5 w-full">
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
         data={analyticsData}
+        layout="vertical"
         margin={{
           top: 20,
-          right: 30,
-          left: 10,
+          right: 60,
+          left: 80,
           bottom: 20
         }}
       >
         <defs>
-          <linearGradient id="standardGradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#d3b292" />
-            <stop offset="100%" stopColor="#bc9a7c" />
-          </linearGradient>
-
-          <linearGradient id="premiumGradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#4a3f35" />
-            <stop offset="100%" stopColor="#6d5f53" />
+          <linearGradient
+            id="amenityGradient"
+            x1="0"
+            y1="0"
+            x2="1"
+            y2="0"
+          >
+            <stop offset="0%" stopColor="#bc9a7c" />
+            <stop offset="100%" stopColor="#4a3f35" />
           </linearGradient>
         </defs>
 
         <CartesianGrid
-          strokeDasharray="2 8"
-          vertical={false}
+          strokeDasharray="3 6"
+          horizontal={false}
           stroke="#efe5d8"
         />
 
         <XAxis
-          dataKey="name"
-          tick={{
-            fill: '#4a3f35',
-            fontSize: 12
-          }}
+          type="number"
+          tick={{ fill: '#4a3f35' }}
+          axisLine={false}
           tickLine={false}
         />
 
         <YAxis
+          dataKey="name"
+          type="category"
+          width={140}
           tick={{
             fill: '#4a3f35',
-            fontSize: 12
+            fontSize: 12,
+            fontWeight: 600
           }}
           axisLine={false}
           tickLine={false}
-          tickFormatter={(value) => `₹${value}`}
         />
 
         <Tooltip
           cursor={{
             fill: '#f5f1ea',
-            opacity: 0.4
+            opacity: 0.5
           }}
           contentStyle={{
             borderRadius: '20px',
@@ -415,24 +390,23 @@ const AdminDashboard = () => {
             background: '#faf9f6',
             boxShadow: '0 20px 40px rgba(0,0,0,0.08)'
           }}
-          formatter={(value) => [
-            `₹${Number(value).toLocaleString('en-IN')}`
-          ]}
         />
 
         <Bar
-          dataKey="standardPrice"
-          fill="url(#standardGradient)"
-          radius={[12, 12, 0, 0]}
-          maxBarSize={55}
-        />
-
-        <Bar
-          dataKey="premiumPrice"
-          fill="url(#premiumGradient)"
-          radius={[12, 12, 0, 0]}
-          maxBarSize={55}
-        />
+          dataKey="amenities"
+          fill="url(#amenityGradient)"
+          radius={[0, 14, 14, 0]}
+          barSize={28}
+        >
+          <LabelList
+            dataKey="amenities"
+            position="right"
+            style={{
+              fill: '#4a3f35',
+              fontWeight: 700
+            }}
+          />
+        </Bar>
       </BarChart>
     </ResponsiveContainer>
   </div>
