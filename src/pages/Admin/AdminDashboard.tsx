@@ -316,23 +316,20 @@ const AdminDashboard = () => {
 </div>
 
                 {/* UPGRADED: Features/Amenities Horizontal Density Bar */}
-             <div className="bg-linear-to-br from-[#fffdfa] via-[#faf6f0] to-[#f4eee4] p-10 rounded-[36px] border border-[#e4dcce] shadow-[0_24px_70px_rgba(43,35,27,0.06)] relative overflow-hidden">
+             <div className="bg-white/95 backdrop-blur-md p-10 rounded-[36px] border border-[#e2f1f5] shadow-[0_24px_60px_rgba(15,43,53,0.06)] relative overflow-hidden font-sans">
       
-      {/* प्रीमियम टॉप एक्सेंट लाइन */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-[#e5c199] via-[#c5a27d] to-[#3e3025]" />
-
       <div className="mb-8 flex justify-between items-start">
         <div>
-          <h2 className="text-2xl font-serif font-black tracking-tight text-[#2d2219]">
+          <h2 className="text-3xl font-serif font-bold tracking-tight text-[#0f3443]">
             Feature & Amenity Density
           </h2>
-          <p className="text-sm text-[#8a7d6e] font-medium italic mt-1">
+          <p className="text-sm text-[#547b8a] italic mt-1 font-medium">
             Total luxury amenities and premium experiences available per hotel.
           </p>
         </div>
         
-        {/* विज़ुअल एनहांसमेंट के लिए छोटा लग्ज़री बैज */}
-        <span className="text-[11px] font-sans font-bold tracking-widest uppercase bg-[#3e3025] text-[#fffdfa] px-3 py-1 rounded-full shadow-sm">
+        {/* इमेज जैसा लाइट ब्लू "Live Analytics" बैज */}
+        <span className="text-[12px] font-sans font-semibold tracking-wide bg-[#def7fc] text-[#126e82] px-3 py-1 rounded-xl shadow-sm">
           Live Analytics
         </span>
       </div>
@@ -344,36 +341,36 @@ const AdminDashboard = () => {
             layout="vertical"
             margin={{
               top: 10,
-              right: 50,
-              left: 10,
+              right: 40,
+              left: 20,
               bottom: 10
             }}
           >
             <defs>
-              {/* चमकदार मैटेलिक गोल्ड-ब्रॉन्ज ग्रेडिएंट */}
-              <linearGradient id="amenityGradient" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#e5c199" />
-                <stop offset="40%" stopColor="#c5a27d" />
-                <stop offset="100%" stopColor="#3e3025" />
+              {/* इमेज की तरह Aquamarine से Deep Ocean Blue का चमकदार ग्रेडिएंट */}
+              <linearGradient id="oceanGradient" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#7bf0e3" />
+                <stop offset="35%" stopColor="#5ccadc" />
+                <stop offset="100%" stopColor="#4f8cd9" />
               </linearGradient>
 
-              {/* बार्स के लिए सॉफ्ट 3D शैडो फ़िल्टर */}
-              <filter id="barShadow" x="-10%" y="-10%" width="130%" height="130%">
-                <feDropShadow dx="3" dy="3" stdDeviation="5" floodColor="#2d2219" floodOpacity="0.12" />
+              {/* टूलटिप और बार्स के लिए सॉफ्ट ग्लेशियर शैडो */}
+              <filter id="softGlow" x="-10%" y="-10%" width="120%" height="120%">
+                <feDropShadow dx="2" dy="4" stdDeviation="6" floodColor="#0f3443" floodOpacity="0.08" />
               </filter>
             </defs>
 
-            {/* क्लीनर और लाइट ग्रिड लाइन्स */}
+            {/* वर्टिकल ग्रिड लाइन्स (इमेज की तरह लाइट सियान/ब्लू शेड में) */}
             <CartesianGrid
-              strokeDasharray="4 4"
+              strokeDasharray="0 0"
               horizontal={false}
-              stroke="#e8e1d5"
+              stroke="#def2f6"
             />
 
             <XAxis
               type="number"
-              tick={{ fill: '#5c4d3e', fontSize: 12, fontWeight: 600 }}
-              axisLine={false}
+              tick={{ fill: '#457283', fontSize: 13, fontWeight: 500 }}
+              axisLine={{ stroke: '#def2f6', strokeWidth: 1 }}
               tickLine={false}
             />
 
@@ -382,51 +379,51 @@ const AdminDashboard = () => {
               type="category"
               width={150}
               tick={{
-                fill: '#2d2219',          // डार्क और क्रिस्प कलर ताकि साफ़ दिखे
-                fontSize: 13,             // थोड़ा बड़ा साइज़
-                fontWeight: 700,          // बोल्ड लुक
-                fontFamily: 'serif',      // एलिगेंट सेरिफ़ फ़ॉन्ट
-                letterSpacing: '0.02em'
+                fill: '#0f3443',         // डीप एलिगेंट डार्क ब्लू टोन होटल नेम्स के लिए
+                fontSize: 14,            // साफ़ और विज़ुअल टेक्स्ट आकार
+                fontWeight: 600,         // सेमी-बोल्ड रिच लुक
+                fontFamily: 'serif',     // इमेज की तरह क्लासिक फॉन्ट
+                letterSpacing: '0.01em'
               }}
-              axisLine={false}
+              axisLine={{ stroke: '#def2f6', strokeWidth: 1 }}
               tickLine={false}
             />
 
-            {/* प्रीमियम मॉडर्न ग्लास-लुक टूलटिप */}
+            {/* इमेज जैसा ग्लासमोर्फिक एक्वा टूलटिप */}
             <Tooltip
               cursor={{
-                fill: '#3e3025',
-                opacity: 0.04
+                fill: '#e8f7fa',
+                opacity: 0.4
               }}
               contentStyle={{
-                borderRadius: '20px',
-                border: '1px solid #e4dcce',
-                background: 'rgba(255, 253, 250, 0.95)',
-                backdropFilter: 'blur(12px)',
-                boxShadow: '0 20px 40px rgba(43,35,27,0.12)',
-                padding: '14px 18px'
+                borderRadius: '16px',
+                border: '1px solid #bce6ee',
+                background: 'rgba(222, 247, 252, 0.95)',
+                backdropFilter: 'blur(8px)',
+                boxShadow: '0 12px 30px rgba(15,43,53,0.1)',
+                padding: '10px 16px'
               }}
-              itemStyle={{ color: '#2d2219', fontWeight: 700 }}
-              labelStyle={{ color: '#8a7d6e', fontWeight: 600, fontSize: 12, marginBottom: 4 }}
+              itemStyle={{ color: '#0f3443', fontWeight: 700, fontSize: 13 }}
+              labelStyle={{ color: '#126e82', fontWeight: 600, fontSize: 12, marginBottom: 2 }}
             />
 
             <Bar
               dataKey="amenities"
-              fill="url(#amenityGradient)"
-              radius={[0, 16, 16, 0]}
-              barSize={26}
-              background={{ fill: '#f5efe2', radius: 16}} // मॉडर्न बैकग्राउंड ट्रैक
-              filter="url(#barShadow)"                                  // 3D इफ़ेक्ट लागू किया
+              fill="url(#oceanGradient)"
+              radius={[12, 12, 12, 12] as const} // TypeScript एरर फिक्स करने के लिए 'as const' लगाया
+              barSize={24}
+              // पीछे का सॉफ्ट ट्रैक (इमेज की तरह)
+              background={{ fill: '#eff9fb', radius: 12  }}
             >
-              {/* बार के आगे तैरते हुए नंबर्स की स्टाइलिंग */}
+              {/* बार के दाईं तरफ साफ़ तैरता हुआ नंबर */}
               <LabelList
                 dataKey="amenities"
                 position="right"
-                offset={12}
+                offset={10}
                 style={{
-                  fill: '#2d2219',
-                  fontWeight: 800,
-                  fontSize: 14,
+                  fill: '#0f3443',
+                  fontWeight: 700,
+                  fontSize: 13,
                   fontFamily: 'sans-serif'
                 }}
               />
@@ -435,6 +432,7 @@ const AdminDashboard = () => {
         </ResponsiveContainer>
       </div>
     </div>
+  
               </>
             ) : (
               <div className="text-center p-10 font-serif text-xl opacity-50">No Hotel Data available to generate analytics.</div>
