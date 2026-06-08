@@ -78,7 +78,7 @@ console.log("STEP 2 - Booking Saved");
     `;
 console.log("STEP 4 - Sending Email");
     await transporter.sendMail({
-      from: '"Euphoria Hotels" <noreply@euphoriahotel.com>',
+      from: `${process.env.EMAIL_USER}`,
       to: customer.email,
       subject: '🎉 Booking Confirmed! - Euphoria, Shimla',
       html: htmlContent
