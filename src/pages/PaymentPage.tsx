@@ -55,15 +55,26 @@ const token = reduxToken || localToken;
       });
 
       if (stripeError) throw new Error(stripeError.message);
+const localUserData = JSON.parse(
+  localStorage.getItem("customerDetails") || "{}"
+);
 
-     if (!user?._id) {
-  toast.error("Please login first");
+const userId =
+  user?._id ||
+  user?.id ||
+  localUserData?._id ||
+  localUserData?.id;
+
+if (!userId) {
+  console.log("Redux User:", user);
+  console.log("Local User:", localUserData);
+
+  toast.error("User ID not found");
   setLoading(false);
-  navigate('/auth');
   return;
 }
 
-const userId = user._id;
+
 const authToken = token;
 console.log("User Object:", user);
 console.log("User ID:", user?._id);
