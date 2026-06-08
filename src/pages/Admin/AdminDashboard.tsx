@@ -2,14 +2,14 @@ import { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
-  ResponsiveContainer,
   BarChart,
   Bar,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  LabelList
+  LabelList,
+  ResponsiveContainer
 } from 'recharts';
 
 // --- TYPES ---
@@ -316,101 +316,125 @@ const AdminDashboard = () => {
 </div>
 
                 {/* UPGRADED: Features/Amenities Horizontal Density Bar */}
-              <div className="bg-linear-to-br from-white to-[#faf5ee] p-10 rounded-[36px] border border-[#eaddca] shadow-[0_20px_60px_rgba(74,63,53,0.08)]">
+             <div className="bg-linear-to-br from-[#fffdfa] via-[#faf6f0] to-[#f4eee4] p-10 rounded-[36px] border border-[#e4dcce] shadow-[0_24px_70px_rgba(43,35,27,0.06)] relative overflow-hidden">
+      
+      {/* प्रीमियम टॉप एक्सेंट लाइन */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-[#e5c199] via-[#c5a27d] to-[#3e3025]" />
 
-  <div className="mb-8">
-    <h2 className="text-2xl font-serif font-bold text-[#4a3f35]">
-      Feature & Amenity Density
-    </h2>
+      <div className="mb-8 flex justify-between items-start">
+        <div>
+          <h2 className="text-2xl font-serif font-black tracking-tight text-[#2d2219]">
+            Feature & Amenity Density
+          </h2>
+          <p className="text-sm text-[#8a7d6e] font-medium italic mt-1">
+            Total luxury amenities and premium experiences available per hotel.
+          </p>
+        </div>
+        
+        {/* विज़ुअल एनहांसमेंट के लिए छोटा लग्ज़री बैज */}
+        <span className="text-[11px] font-sans font-bold tracking-widest uppercase bg-[#3e3025] text-[#fffdfa] px-3 py-1 rounded-full shadow-sm">
+          Live Analytics
+        </span>
+      </div>
 
-    <p className="text-sm text-[#8c7e6d] italic mt-1">
-      Total luxury amenities and premium experiences available per hotel.
-    </p>
-  </div>
-
-  <div className="h-112.5 w-full">
-    <ResponsiveContainer width="100%" height="100%">
-      <BarChart
-        data={analyticsData}
-        layout="vertical"
-        margin={{
-          top: 20,
-          right: 60,
-          left: 80,
-          bottom: 20
-        }}
-      >
-        <defs>
-          <linearGradient
-            id="amenityGradient"
-            x1="0"
-            y1="0"
-            x2="1"
-            y2="0"
-          >
-            <stop offset="0%" stopColor="#bc9a7c" />
-            <stop offset="100%" stopColor="#4a3f35" />
-          </linearGradient>
-        </defs>
-
-        <CartesianGrid
-          strokeDasharray="3 6"
-          horizontal={false}
-          stroke="#efe5d8"
-        />
-
-        <XAxis
-          type="number"
-          tick={{ fill: '#4a3f35' }}
-          axisLine={false}
-          tickLine={false}
-        />
-
-        <YAxis
-          dataKey="name"
-          type="category"
-          width={140}
-          tick={{
-            fill: '#4a3f35',
-            fontSize: 12,
-            fontWeight: 600
-          }}
-          axisLine={false}
-          tickLine={false}
-        />
-
-        <Tooltip
-          cursor={{
-            fill: '#f5f1ea',
-            opacity: 0.5
-          }}
-          contentStyle={{
-            borderRadius: '20px',
-            border: '1px solid #eaddca',
-            background: '#faf9f6',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.08)'
-          }}
-        />
-
-        <Bar
-          dataKey="amenities"
-          fill="url(#amenityGradient)"
-          radius={[0, 14, 14, 0]}
-          barSize={28}
-        >
-          <LabelList
-            dataKey="amenities"
-            position="right"
-            style={{
-              fill: '#4a3f35',
-              fontWeight: 700
+      <div className="h-125 w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={analyticsData}
+            layout="vertical"
+            margin={{
+              top: 10,
+              right: 50,
+              left: 10,
+              bottom: 10
             }}
-          />
-        </Bar>
-      </BarChart>
-    </ResponsiveContainer>
-  </div>
-</div>
+          >
+            <defs>
+              {/* चमकदार मैटेलिक गोल्ड-ब्रॉन्ज ग्रेडिएंट */}
+              <linearGradient id="amenityGradient" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#e5c199" />
+                <stop offset="40%" stopColor="#c5a27d" />
+                <stop offset="100%" stopColor="#3e3025" />
+              </linearGradient>
+
+              {/* बार्स के लिए सॉफ्ट 3D शैडो फ़िल्टर */}
+              <filter id="barShadow" x="-10%" y="-10%" width="130%" height="130%">
+                <feDropShadow dx="3" dy="3" stdDeviation="5" floodColor="#2d2219" floodOpacity="0.12" />
+              </filter>
+            </defs>
+
+            {/* क्लीनर और लाइट ग्रिड लाइन्स */}
+            <CartesianGrid
+              strokeDasharray="4 4"
+              horizontal={false}
+              stroke="#e8e1d5"
+            />
+
+            <XAxis
+              type="number"
+              tick={{ fill: '#5c4d3e', fontSize: 12, fontWeight: 600 }}
+              axisLine={false}
+              tickLine={false}
+            />
+
+            <YAxis
+              dataKey="name"
+              type="category"
+              width={150}
+              tick={{
+                fill: '#2d2219',          // डार्क और क्रिस्प कलर ताकि साफ़ दिखे
+                fontSize: 13,             // थोड़ा बड़ा साइज़
+                fontWeight: 700,          // बोल्ड लुक
+                fontFamily: 'serif',      // एलिगेंट सेरिफ़ फ़ॉन्ट
+                letterSpacing: '0.02em'
+              }}
+              axisLine={false}
+              tickLine={false}
+            />
+
+            {/* प्रीमियम मॉडर्न ग्लास-लुक टूलटिप */}
+            <Tooltip
+              cursor={{
+                fill: '#3e3025',
+                opacity: 0.04
+              }}
+              contentStyle={{
+                borderRadius: '20px',
+                border: '1px solid #e4dcce',
+                background: 'rgba(255, 253, 250, 0.95)',
+                backdropFilter: 'blur(12px)',
+                boxShadow: '0 20px 40px rgba(43,35,27,0.12)',
+                padding: '14px 18px'
+              }}
+              itemStyle={{ color: '#2d2219', fontWeight: 700 }}
+              labelStyle={{ color: '#8a7d6e', fontWeight: 600, fontSize: 12, marginBottom: 4 }}
+            />
+
+            <Bar
+              dataKey="amenities"
+              fill="url(#amenityGradient)"
+              radius={[0, 16, 16, 0]}
+              barSize={26}
+              background={{ fill: '#f5efe2', radius: 16}} // मॉडर्न बैकग्राउंड ट्रैक
+              filter="url(#barShadow)"                                  // 3D इफ़ेक्ट लागू किया
+            >
+              {/* बार के आगे तैरते हुए नंबर्स की स्टाइलिंग */}
+              <LabelList
+                dataKey="amenities"
+                position="right"
+                offset={12}
+                style={{
+                  fill: '#2d2219',
+                  fontWeight: 800,
+                  fontSize: 14,
+                  fontFamily: 'sans-serif'
+                }}
+              />
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
               </>
             ) : (
               <div className="text-center p-10 font-serif text-xl opacity-50">No Hotel Data available to generate analytics.</div>
