@@ -3,7 +3,7 @@
 import Booking from '../Models/Booking.js'
 import Customer from '../Models/Customer.js';
 import nodemailer from 'nodemailer';
-
+import mongoose from 'mongoose';
 // Nodemailer Transporter
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -15,6 +15,12 @@ const transporter = nodemailer.createTransport({
 
 // Process Payment
 export const processPayment = async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+  return res.status(400).json({
+    success: false,
+    message: "Invalid User ID"
+  });
+}
      console.log('📥 Payment request received:', req.body); 
   const { userId, amount, paymentType, bookingDetails } = req.body;
 
