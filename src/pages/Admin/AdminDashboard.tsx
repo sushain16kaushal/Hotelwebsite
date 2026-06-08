@@ -162,7 +162,7 @@ const AdminDashboard = () => {
           </nav>
         </div>
         
-        <button onClick={handleLogout} className="w-full p-4 border border-red-200 text-red-400 hover:bg-red-50 hover:text-white rounded-2xl transition-all text-[10px] font-bold uppercase tracking-[2px]">
+        <button onClick={handleLogout} className="w-full p-4 mt-4 border border-red-200 text-red-400 hover:bg-red-50 hover:text-white rounded-2xl transition-all text-[10px] font-bold uppercase tracking-[2px]">
           Logout Session 🔒
         </button>
       </aside>
