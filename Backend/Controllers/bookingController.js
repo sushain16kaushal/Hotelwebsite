@@ -77,20 +77,14 @@ console.log("STEP 2 - Booking Saved");
       </div>
     `;
 console.log("STEP 4 - Sending Email");
-  try {
-  const info = await transporter.sendMail({
-    to: customer.email,
-    subject: '🎉 Booking Confirmed! - Euphoria, Shimla',
-    html: htmlContent
-  });
-
-  console.log("📧 Email sent successfully");
-  console.log("Message ID:", info.messageId);
-
-} catch (mailErr) {
-  console.error("❌ EMAIL ERROR:", mailErr);
-}
-
+  transporter.sendMail({
+  from: process.env.EMAIL_USER,
+  to: customer.email,
+  subject: '🎉 Booking Confirmed! - Euphoria, Shimla',
+  html: htmlContent
+})
+.then(() => console.log("Email sent"))
+.catch(err => console.error("Mail Error:", err));
     // 4. Return Success Response ✅
   return res.status(200).json({ 
       success: true, 
