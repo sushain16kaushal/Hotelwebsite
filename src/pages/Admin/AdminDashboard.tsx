@@ -198,11 +198,11 @@ const AdminDashboard = () => {
     
     <div>
       <h2 className="text-2xl font-serif font-bold text-[#4a3f35]">
-        Pricing Strategy Matrix
+        Room Upgrade & Price Progression
       </h2>
 
       <p className="text-sm text-[#8c7e6d] mt-1 italic">
-        Comparing standard room pricing against premium luxury offerings.
+       Analyzing the pricing jump from entry-level Single rooms to premium Family luxury suites.
       </p>
 
       <div className="flex flex-wrap gap-2 mt-4">
