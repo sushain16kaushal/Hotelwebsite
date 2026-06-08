@@ -18,7 +18,7 @@ const ForgotPassword = () => {
 
     return (
         <div className="min-h-screen bg-[#1c1c1c] flex items-center justify-center p-4">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-[400px] bg-[#2a2a2a] border border-white/10 p-8 rounded-3xl text-center">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-100 bg-[#2a2a2a] border border-white/10 p-8 rounded-3xl text-center">
                 <h2 className="text-[#c5a059] text-2xl font-serif tracking-widest mb-4">RESET ACCESS</h2>
                 <p className="text-gray-400 text-xs mb-6 tracking-wider">Enter your email to receive a recovery link.</p>
                 

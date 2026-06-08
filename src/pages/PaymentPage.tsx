@@ -20,8 +20,14 @@ const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FU
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-  const user = useSelector((state: RootState) => state.auth?.user as User | null);
-  const token = useSelector((state: RootState) => state.auth?.token as string | null);
+ const reduxUser = useSelector((state: RootState) => state.auth?.user as User | null);
+const reduxToken = useSelector((state: RootState) => state.auth?.token as string | null);
+
+const localUser = localStorage.getItem("customerDetails");
+const localToken = localStorage.getItem("customerToken");
+
+const user = reduxUser || (localUser ? JSON.parse(localUser) : null);
+const token = reduxToken || localToken;
   
   const roomBookings = useSelector((state: RootState) => state.booking?.roomBookings || []);
   const diningBookings = useSelector((state: RootState) => state.booking?.diningBookings || []);
@@ -50,9 +56,18 @@ const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FU
 
       if (stripeError) throw new Error(stripeError.message);
 
-      const userId = user?._id || 'demo_user_id';
-      const authToken = token || 'demo_token';
+     if (!user?._id) {
+  toast.error("Please login first");
+  setLoading(false);
+  navigate('/auth');
+  return;
+}
 
+const userId = user._id;
+const authToken = token;
+console.log("User Object:", user);
+console.log("User ID:", user?._id);
+console.log("Token:", token);
       const response = await fetch(`https://hotelapp-tiof.onrender.com/api/process-payment`, {
         method: 'POST',
         headers: { 
@@ -94,12 +109,8 @@ const PaymentForm = ({ amount, paymentType }: { amount: number; paymentType: 'FU
       }
 
     } catch (err: any) {
-      console.error('Error:', err);
-      
-      // Fallback: Still clear cart for demo
-      dispatch(clearBookings());
-      toast.success("✅ Payment Successful! (Demo Mode)");
-      navigate('/');
+        console.error('Error:', err);
+  toast.error(err.message || "Payment Failed");
       
     } finally {
       setLoading(false);
