@@ -67,7 +67,7 @@ const [bookingDetails, setBookingDetails] = useState<{
   return (
     <div className="mt-2 flex flex-wrap bg-[#f5f1ea] p-2 md:p-6 min-h-screen relative">
       <Toaster /> {/* Toast Container */}
-      <div className="w-full bg-[#faf9f6] p-6 md:p-8 rounded-[2rem] mb-8 shadow-sm border border-[#eaddca]/60 flex flex-wrap gap-4 items-center justify-between">
+      <div className="w-full bg-[#faf9f6] p-6 md:p-8 rounded-4xl mb-8 shadow-sm border border-[#eaddca]/60 flex flex-wrap gap-4 items-center justify-between">
   <div className="flex flex-col gap-1 w-full md:w-auto">
     <label className="text-[10px] uppercase tracking-[0.2em] text-[#bc9a7c] font-bold ml-1">Reservation Date</label>
     <input 
