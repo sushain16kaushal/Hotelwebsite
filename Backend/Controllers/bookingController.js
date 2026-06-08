@@ -15,15 +15,16 @@ const transporter = nodemailer.createTransport({
 
 // Process Payment
 export const processPayment = async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
-  return res.status(400).json({
-    success: false,
-    message: "Invalid User ID"
-  });
-}
+  
      console.log('📥 Payment request received:', req.body); 
   const { userId, amount, paymentType, bookingDetails } = req.body;
-
+  // UserId validation
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid User ID"
+    });
+  }
   try {
     // 1. Save Booking to Database ✅
     
