@@ -17,6 +17,13 @@ app.use(cors({
 passportConfig(passport);
 app.use(passport.initialize());
 app.use(express.json());
+
+// Health check route — UptimeRobot/monitoring services ke liye
+// Render free tier pe cold start avoid karne ke liye yeh route ping karo
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 app.use('/api',routes);
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.689oscc.mongodb.net/Hotel?retryWrites=true&w=majority`)
   .then(() => console.log("Connected to Hotel Database"))

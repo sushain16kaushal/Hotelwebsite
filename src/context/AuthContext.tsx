@@ -36,8 +36,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <AuthContext.Provider value={{ user, setUser, logout, loading }}>
-            {/* Jab tak check ho raha hai, tab tak loading screen dikha sakte ho */}
-            {!loading && children}
+            {/* Auth localStorage se instantly hota hai, isliye block karne ki zaroorat nahi */}
+            {children}
         </AuthContext.Provider>
     );
 };

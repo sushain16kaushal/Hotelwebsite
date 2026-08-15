@@ -26,6 +26,10 @@ router.get("/all-content", async (req, res) => {
     const dinings = await Dining.find();
     const config = await SiteConfig.findOne();
 
+    // CDN (Vercel) aur browser mein 5 min cache karwa do
+    // stale-while-revalidate: user ko purana data dikhao, background mein update lo
+    res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
+
     // Wahi structure wapas bhejenge jo Frontend expect kar raha hai
     res.status(200).json({
       ...config._doc,
