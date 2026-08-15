@@ -2,7 +2,14 @@ import { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  LabelList,
+  ResponsiveContainer
 } from 'recharts';
 
 // --- TYPES ---
@@ -140,7 +147,7 @@ const AdminDashboard = () => {
           <h2 className="hidden md:block text-[#4a3f35] text-2xl font-serif mb-10 font-bold border-b border-[#f5f1ea] pb-4">
             Euphoria <span className="text-[#bc9a7c]">Admin</span>
           </h2>
-          <nav className="space-y-3">
+          <nav className="space-y-6">
             <div 
               onClick={() => { setActiveTab('hotels'); setIsSidebarOpen(false); }}
               className={`p-4 rounded-2xl font-bold text-xs uppercase tracking-widest cursor-pointer transition-all duration-300 ${activeTab === 'hotels' ? 'bg-[#4a3f35] text-white shadow-lg' : 'hover:bg-[#f5f1ea] text-[#8c7e6d]'}`}
@@ -162,7 +169,7 @@ const AdminDashboard = () => {
           </nav>
         </div>
         
-        <button onClick={handleLogout} className="w-full p-4 border border-red-200 text-red-400 hover:bg-red-50 hover:text-white rounded-2xl transition-all text-[10px] font-bold uppercase tracking-[2px]">
+        <button onClick={handleLogout} className="w-full p-4 mt-4 border border-red-200 text-red-400 hover:bg-red-50 hover:text-white rounded-2xl transition-all text-[10px] font-bold uppercase tracking-[2px]">
           Logout Session 🔒
         </button>
       </aside>
@@ -185,57 +192,247 @@ const AdminDashboard = () => {
             {analyticsData.length > 0 ? (
               <>
                 {/* UPGRADED: Price Tier Comparison (Vertical Visual Split) */}
-                <div className="bg-white p-8 rounded-[30px] border border-[#eaddca] shadow-xl">
-                  <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-2">
-                    <div>
-                      <h2 className="text-xl font-serif font-bold text-[#4a3f35]">Pricing Strategy Matrix</h2>
-                      <p className="text-xs text-[#8c7e6d] italic mt-0.5">Comparing entry-level Standard rates vs high-tier Premium plans.</p>
-                    </div>
-                    <div className="flex gap-4 text-xs font-semibold">
-                      <span className="flex items-center gap-1.5"><span className="w-3 h-3 bg-[#bc9a7c] rounded-sm"></span> Standard Pack</span>
-                      <span className="flex items-center gap-1.5"><span className="w-3 h-3 bg-[#4a3f35] rounded-sm"></span> Premium Pack</span>
-                    </div>
-                  </div>
-                  
-                  <div className="h-96 w-full">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={analyticsData} margin={{ top: 20, right: 30, left: 10, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="4 4" vertical={false} stroke="#eaddca" opacity={0.6} />
-                        <XAxis dataKey="name" tick={{fill: '#4a3f35', fontSize: 11, fontWeight: 500}} tickLine={false} />
-                        <YAxis tick={{fill: '#4a3f35', fontSize: 12}} axisLine={false} tickLine={false} tickFormatter={(value) => `₹${value}`} />
-                        <Tooltip 
-                          cursor={{fill: '#f5f1ea', opacity: 0.5}}
-                          contentStyle={{ borderRadius: '15px', backgroundColor: '#fff', border: '1px solid #eaddca', boxShadow: '0 10px 25px -5px rgba(74, 63, 53, 0.1)' }}
-                          formatter={(value) => [`₹${Number(value).toLocaleString('en-IN')}`]}
-                        />
-                        <Bar dataKey="standardPrice" name="Standard Base Rate" fill="#bc9a7c" radius={[6, 6, 0, 0]} maxBarSize={35} />
-                        <Bar dataKey="premiumPrice" name="Premium Peak Rate" fill="#4a3f35" radius={[6, 6, 0, 0]} maxBarSize={35} />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
+               <div className="bg-linear-to-br from-white to-[#faf5ee] p-10 rounded-[36px] border border-[#eaddca] shadow-[0_20px_60px_rgba(74,63,53,0.08)]">
+  
+  <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-4 mb-8">
+    
+    <div>
+      <h2 className="text-2xl font-serif font-bold text-[#4a3f35]">
+        Room Upgrade & Price Progression
+      </h2>
+
+      <p className="text-sm text-[#8c7e6d] mt-1 italic">
+       Analyzing the pricing jump from entry-level Single rooms to premium Family luxury suites.
+      </p>
+
+      <div className="flex flex-wrap gap-2 mt-4">
+        <span className="px-3 py-1 bg-[#f5f1ea] rounded-full text-xs font-medium text-[#4a3f35]">
+          Dynamic Pricing
+        </span>
+
+        <span className="px-3 py-1 bg-[#f5f1ea] rounded-full text-xs font-medium text-[#4a3f35]">
+          Revenue Analysis
+        </span>
+
+        <span className="px-3 py-1 bg-[#f5f1ea] rounded-full text-xs font-medium text-[#4a3f35]">
+          Hotel Intelligence
+        </span>
+      </div>
+    </div>
+
+    <div className="flex gap-5 text-sm font-semibold">
+      <span className="flex items-center gap-2">
+        <span className="w-4 h-4 rounded bg-[#bc9a7c]"></span>
+        Standard
+      </span>
+
+      <span className="flex items-center gap-2">
+        <span className="w-4 h-4 rounded bg-[#4a3f35]"></span>
+        Premium
+      </span>
+    </div>
+  </div>
+
+  <div className="h-125 w-full">
+    <ResponsiveContainer width="100%" height="100%">
+      <BarChart
+        data={analyticsData}
+        margin={{
+          top: 20,
+          right: 30,
+          left: 10,
+          bottom: 20
+        }}
+      >
+        <defs>
+          <linearGradient id="standardGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#d3b292" />
+            <stop offset="100%" stopColor="#bc9a7c" />
+          </linearGradient>
+
+          <linearGradient id="premiumGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#4a3f35" />
+            <stop offset="100%" stopColor="#6d5f53" />
+          </linearGradient>
+        </defs>
+
+        <CartesianGrid
+          strokeDasharray="2 8"
+          vertical={false}
+          stroke="#efe5d8"
+        />
+
+        <XAxis
+          dataKey="name"
+          tick={{
+            fill: '#4a3f35',
+            fontSize: 12
+          }}
+          tickLine={false}
+        />
+
+        <YAxis
+          tick={{
+            fill: '#4a3f35',
+            fontSize: 12
+          }}
+          axisLine={false}
+          tickLine={false}
+          tickFormatter={(value) => `₹${value}`}
+        />
+
+        <Tooltip
+          cursor={{
+            fill: '#f5f1ea',
+            opacity: 0.4
+          }}
+          contentStyle={{
+            borderRadius: '20px',
+            border: '1px solid #eaddca',
+            background: '#faf9f6',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.08)'
+          }}
+          formatter={(value) => [
+            `₹${Number(value).toLocaleString('en-IN')}`
+          ]}
+        />
+
+        <Bar
+          dataKey="standardPrice"
+          fill="url(#standardGradient)"
+          radius={[12, 12, 0, 0]}
+          maxBarSize={55}
+        />
+
+        <Bar
+          dataKey="premiumPrice"
+          fill="url(#premiumGradient)"
+          radius={[12, 12, 0, 0]}
+          maxBarSize={55}
+        />
+      </BarChart>
+    </ResponsiveContainer>
+  </div>
+</div>
 
                 {/* UPGRADED: Features/Amenities Horizontal Density Bar */}
-                <div className="bg-white p-8 rounded-[30px] border border-[#eaddca] shadow-xl">
-                  <div>
-                    <h2 className="text-xl font-serif font-bold text-[#4a3f35]">Feature & Amenity Density</h2>
-                    <p className="text-xs text-[#8c7e6d] italic mt-0.5 mb-6">Total number of curated luxury offerings integrated per hotel database.</p>
-                  </div>
-                  <div className="h-80 w-full">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={analyticsData} layout="vertical" margin={{ top: 5, right: 30, left: 30, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#eaddca" />
-                        <XAxis type="number" tick={{fill: '#4a3f35'}} axisLine={false} />
-                        <YAxis dataKey="name" type="category" width={120} tick={{fontSize: 12, fill: '#4a3f35', fontWeight: 500}} axisLine={false} tickLine={false} />
-                        <Tooltip 
-                          cursor={{fill: '#f5f1ea', opacity: 0.7}}
-                          contentStyle={{ borderRadius: '12px', border: '1px solid #eaddca' }}
-                        />
-                        <Bar dataKey="amenities" name="Integrated Amenities" fill="#bc9a7c" radius={[0, 6, 6, 0]} barSize={18} />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
+             <div className="bg-white/95 backdrop-blur-md p-10 rounded-[36px] border border-[#e2f1f5] shadow-[0_24px_60px_rgba(15,43,53,0.06)] relative overflow-hidden font-sans">
+      
+      <div className="mb-8 flex justify-between items-start">
+        <div>
+          <h2 className="text-3xl font-serif font-bold tracking-tight text-[#0f3443]">
+            Feature & Amenity Density
+          </h2>
+          <p className="text-sm text-[#547b8a] italic mt-1 font-medium">
+            Total luxury amenities and premium experiences available per hotel.
+          </p>
+        </div>
+        
+        {/* इमेज जैसा लाइट ब्लू "Live Analytics" बैज */}
+        <span className="text-[12px] font-sans font-semibold tracking-wide bg-[#def7fc] text-[#126e82] px-3 py-1 rounded-xl shadow-sm">
+          Live Analytics
+        </span>
+      </div>
+
+      <div className="h-125 w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={analyticsData}
+            layout="vertical"
+            margin={{
+              top: 10,
+              right: 40,
+              left: 20,
+              bottom: 10
+            }}
+          >
+            <defs>
+              {/* इमेज की तरह Aquamarine से Deep Ocean Blue का चमकदार ग्रेडिएंट */}
+              <linearGradient id="oceanGradient" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#7bf0e3" />
+                <stop offset="35%" stopColor="#5ccadc" />
+                <stop offset="100%" stopColor="#4f8cd9" />
+              </linearGradient>
+
+              {/* टूलटिप और बार्स के लिए सॉफ्ट ग्लेशियर शैडो */}
+              <filter id="softGlow" x="-10%" y="-10%" width="120%" height="120%">
+                <feDropShadow dx="2" dy="4" stdDeviation="6" floodColor="#0f3443" floodOpacity="0.08" />
+              </filter>
+            </defs>
+
+            {/* वर्टिकल ग्रिड लाइन्स (इमेज की तरह लाइट सियान/ब्लू शेड में) */}
+            <CartesianGrid
+              strokeDasharray="0 0"
+              horizontal={false}
+              stroke="#def2f6"
+            />
+
+            <XAxis
+              type="number"
+              tick={{ fill: '#457283', fontSize: 13, fontWeight: 500 }}
+              axisLine={{ stroke: '#def2f6', strokeWidth: 1 }}
+              tickLine={false}
+            />
+
+            <YAxis
+              dataKey="name"
+              type="category"
+              width={150}
+              tick={{
+                fill: '#0f3443',         // डीप एलिगेंट डार्क ब्लू टोन होटल नेम्स के लिए
+                fontSize: 14,            // साफ़ और विज़ुअल टेक्स्ट आकार
+                fontWeight: 600,         // सेमी-बोल्ड रिच लुक
+                fontFamily: 'serif',     // इमेज की तरह क्लासिक फॉन्ट
+                letterSpacing: '0.01em'
+              }}
+              axisLine={{ stroke: '#def2f6', strokeWidth: 1 }}
+              tickLine={false}
+            />
+
+            {/* इमेज जैसा ग्लासमोर्फिक एक्वा टूलटिप */}
+            <Tooltip
+              cursor={{
+                fill: '#e8f7fa',
+                opacity: 0.4
+              }}
+              contentStyle={{
+                borderRadius: '16px',
+                border: '1px solid #bce6ee',
+                background: 'rgba(222, 247, 252, 0.95)',
+                backdropFilter: 'blur(8px)',
+                boxShadow: '0 12px 30px rgba(15,43,53,0.1)',
+                padding: '10px 16px'
+              }}
+              itemStyle={{ color: '#0f3443', fontWeight: 700, fontSize: 13 }}
+              labelStyle={{ color: '#126e82', fontWeight: 600, fontSize: 12, marginBottom: 2 }}
+            />
+
+            <Bar
+              dataKey="amenities"
+              fill="url(#oceanGradient)"
+              radius={[12, 12, 12, 12] as const} // TypeScript एरर फिक्स करने के लिए 'as const' लगाया
+              barSize={24}
+              // पीछे का सॉफ्ट ट्रैक (इमेज की तरह)
+              background={{ fill: '#eff9fb', radius: 12  }}
+            >
+              {/* बार के दाईं तरफ साफ़ तैरता हुआ नंबर */}
+              <LabelList
+                dataKey="amenities"
+                position="right"
+                offset={10}
+                style={{
+                  fill: '#0f3443',
+                  fontWeight: 700,
+                  fontSize: 13,
+                  fontFamily: 'sans-serif'
+                }}
+              />
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  
               </>
             ) : (
               <div className="text-center p-10 font-serif text-xl opacity-50">No Hotel Data available to generate analytics.</div>
